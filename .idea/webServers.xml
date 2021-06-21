@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="52a731c1-d9ce-4e77-8e2c-35effaed3b21" name="hitribe" url="http://labmm.clients.ua.pt/deca_20L4/deca_20L4_34/">
+        <fileTransfer rootFolder="/deca_20L4_34" host="labmm.clients.ua.pt" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

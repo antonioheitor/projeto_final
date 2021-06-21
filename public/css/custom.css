@@ -1,0 +1,220 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+html, main {
+    background-color: #f5f5f5;
+}
+
+nav {
+    background-color: #087F7B;
+    padding-top: 20px; !important;
+    padding-bottom: 0; !important;
+}
+
+.nav_baixo {
+    border-radius: 1rem 1rem 0 0 ;
+}
+
+.nav_cima {
+    border-radius: 0 0 1rem 1rem ;
+}
+
+/*HOMEPAGE*/
+
+.borda_post {
+    background-color: white;
+    border-radius: 1.25rem ;
+}
+
+/*NÃO SEI ONDE PERTENCE ESTE */
+.iconechat {
+    position: relative;
+    top: -8px;
+    left: 14px;
+}
+
+.icones {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.bordermodal {
+    border-radius: 50px;
+}
+
+.margemmodal {
+    padding: 0 !important;
+}
+
+/*CHAT*/
+.avatar {
+    float: left;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 1rem;
+}
+.outgoing_msg{
+    overflow:hidden;
+    margin:26px 0 26px;
+}
+.sent_msg {
+    float: right;
+    width: 46%;
+}
+
+.borda {
+     border: 2px solid black;
+     border-top: none;
+     border-left: none;
+     border-right: none;
+     background-color: white;
+ }
+
+.mensagem{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    padding: 10px;
+    position: relative;
+    width: 80%;
+}
+.msgenviada {
+    background-color: #087F7B;
+}
+.background {
+    background-color: #f5f5f5;
+}
+
+/*FILTROS*/
+.filtros {
+    background-color: white;
+    height: 130px;
+    border-radius: 1.25rem;
+    margin: auto;
+    text-align: center;
+    padding-top: 55px;
+}
+
+
+/*PESQUISA*/
+.galeria { margin: -10px; }
+.redondo {
+    border-radius: 1.5rem;
+}
+.overlay {
+    position: relative;
+    padding: 0;
+    background-color: rgba(00,00,00, 0.3);
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    color: white;
+    font-size: 17px;
+}
+
+
+input[type=text], select {
+     width: 100%;
+     padding: 12px 20px;
+     margin: 8px 0;
+     display: block;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     box-sizing: border-box;
+ }
+
+/*LOGIN*/
+.btnlogin {
+    background-color: #087F7B;
+    width: 30%;
+    color: white;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+}
+
+/*PERFIL TRIBO*/
+.esq {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.dto {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/*CONVERSAS*/
+.h {
+    letter-spacing: 15px;
+    color: #087F7B;
+    text-transform: uppercase;
+    font-size: 3rem;
+}
+
+.h_pequeno {
+    letter-spacing: 8px;
+    color: #087F7B;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+}
+
+.borda_caixa {
+    border-radius: 20px;
+    background-color: #f5f5f5;
+}
+
+/*PERFIL*/
+.perfil {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-top: 4rem;
+}
+
+.conteudo_perfil {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0px 4px 0px 4px;
+}
+
+.tamanhoimg {
+    width: 720px;
+    height: 720px;
+}
+
+.no-gutters {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+
+.cor {
+    color: #087F7B;
+}
+
+/*DEFINIÇÕES*/
+.h_definicoes {
+    letter-spacing: 4px;
+    color: black;
+    font-size: 1.5rem;
+}
+
+/* REGISTO  */
+
+.inputs {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.inputdescricao {
+    height: 70px;
+    font-size: 13px;
+}
