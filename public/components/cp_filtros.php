@@ -1,7 +1,11 @@
 <main class="container-fluid">
-    <section class="row justify-content-center pt-3">
-        <form class="col-11">
-            <input type="text" id="procura" class="shadow-sm" name="procura" placeholder="Procurar">
+    <section class="row justify-content-center pt-3 mb-3">
+        <form class="col-11 mt-lg-4">
+            <div class="row">
+                <input type="text" id="procura" class="shadow-sm col-11" name="procura" placeholder="Desporto">
+                <button type="submit" class="col-1 btn btn-outline-none p-0"><i class="fas fa-search
+                fa-2x"></i></button>
+            </div>
         </form>
     </section>
 
