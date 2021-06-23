@@ -34,8 +34,6 @@
 
         while (mysqli_stmt_fetch($stmt)) { ?>
 
-
-
                             <article class="col-6 col-lg-4 my-3">
                                 <section class="row">
 
@@ -48,11 +46,6 @@
                                     </article>
                                 </section>
                             </article>
-
-
-
-
-
 
 
         <?php }
