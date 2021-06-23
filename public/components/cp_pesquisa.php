@@ -1,4 +1,3 @@
-<body>
 <main class="container-fluid mt-lg-5">
     <section class="row justify-content-center pt-3 mb-3">
         <form class="col-11 mt-lg-4">
@@ -13,4 +12,3 @@
             </a>
         </div>
 </main>
-</body>
