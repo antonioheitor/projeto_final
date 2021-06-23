@@ -26,7 +26,7 @@
             <div class="m-1 m-sm-3">
                 <img src="images/rock.jpg" class="img-fluid rounded mt-3">
                 <h5 class="mt-2">Tribo do Rock</h5>
-                <a href="#" class="cor text-decoration-none">Entra na conversa</a>
+                <a href="cp_conversas.php" class="cor text-decoration-none">Entra na conversa</a>
             </div>
 
         </article>
