@@ -20,8 +20,7 @@
 
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <form method="post">
-                    <p class="ml-3 mt-3 text-center">Titulo da publicação</p><input class="w-50 mx-auto"
-                                                                                    name="titulopost" type="text">
+                    <p class="ml-3 mt-3 text-center">Titulo da publicação</p><input class="w-50 mx-auto" name="titulopost" type="text">
                     <div class="modal-body text-center">
                         <p class="text-center">Escreve o post :)</p>
                         <textarea class="w-50" name="descpost" type="text"></textarea>
