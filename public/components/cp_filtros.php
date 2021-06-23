@@ -5,20 +5,59 @@
         </form>
     </section>
 
-
     <section class="col-12">
         <div class="row">
-            <article class="col-6 col-lg-4 my-3">
-                <section class="row">
-                    <article class="col-11 filtros shadow">
-                        <a href="pesquisa.php">
-                            <h4 class="d-sm-block d-none">Desporto</h4>
-                            <h6 class="d-sm-none">Desporto</h6>
-                        </a>
-                    </article>
-                </section>
-            </article>
 
+
+    <?php
+
+    require_once "connections/connection.php";
+
+
+    $link = new_db_connection();
+    $stmt = mysqli_stmt_init($link);
+    $query = "SELECT" .
+        " id_areas," .
+        " nome_areas" .
+        " FROM areas";
+
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $id_areas, $nome_areas);
+
+        while (mysqli_stmt_fetch($stmt)) { ?>
+
+
+
+                            <article class="col-6 col-lg-4 my-3">
+                                <section class="row">
+
+
+                                    <article class="col-11 filtros shadow">
+                                        <a href="pesquisa.php?area=<?=$id_areas?>">
+                                            <h4 class="d-sm-block d-none"><?= $nome_areas ?></h4>
+                                            <h6 class="d-sm-none"><?= $nome_areas ?></h6>
+                                        </a>
+                                    </article>
+                                </section>
+                            </article>
+
+
+
+
+
+
+
+        <?php }
+        mysqli_stmt_close($stmt);
+    }
+    mysqli_close($link);
+
+
+    ?>
         </div>
     </section>
 
