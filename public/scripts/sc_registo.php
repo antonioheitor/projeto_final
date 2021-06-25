@@ -72,15 +72,15 @@ if (isset($_POST["nome_user"]) && isset($_POST["email_user"]) && isset($_POST["p
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             // Acção de sucesso
-            //header("Location: ../login.php");
+            header("Location: ../login.php?msg=1#login");
         } else {
             // Acção de erro
-            //header("Location: ../register.php");
+            header("Location: ../register.php?msg=0#login");
             echo "Error:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        //header("Location: ../register.php");
+        header("Location: ../register.php?msg=0#login");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
