@@ -7,7 +7,7 @@
 </head>
 <body>
 <!-- Navigation-->
-<?php include_once "components/cp_navigation.php"; ?>
+
 
 <!-- Page Content-->
 <?php include_once "components/cp_login.php"; ?>

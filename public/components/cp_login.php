@@ -47,17 +47,19 @@
         }
         ?>
     </section>
-    <section class="row justify-content-center mt-5">
+    <section class="row justify-content-center mt-3">
         <div class="col-10">
-            <form method="post" role="form" id="login-form" action="scripts/sc_login.php">
+            <form method="post" class="justify-content-center" role="form" id="login-form" action="scripts/sc_login.php">
                 <div class="form-group rounded text-center">
-                    <input type="email" aria-describedby="email" name="email_users" placeholder="Email">
+                    <input type="email" class="px-5 py-3 border-0" aria-describedby="email" name="email_users" placeholder="Email">
                 </div>
 
                 <div class="form-group rounded text-center">
-                    <input type="password" aria-describedby="password" name="password" placeholder="Palavra-Passe">
+                    <input type="password" class="px-5 py-3 border-0" aria-describedby="password" name="password" placeholder="Palavra-Passe">
                 </div>
-                <button type="submit">Entrar</button>
+                <section class="row justify-content-center mt-5">
+                <button class="btnlogin py-3 mx-auto text-light mx-auto" type="submit">Entrar</button>
+                </section>
             </form>
         </div>
     </section>

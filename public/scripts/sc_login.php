@@ -16,14 +16,15 @@ if (isset($_POST["email_users"]) && isset($_POST["password"]) ) {
 
         if (mysqli_stmt_execute($stmt)) {
 
-            mysqli_stmt_bind_result($stmt, $nome_users ,$id_utilizador, $password_hash, $perfil);
+            mysqli_stmt_bind_result($stmt ,$id_utilizador, $nome_users, $password_hash, $perfil);
 
             if (mysqli_stmt_fetch($stmt)) {
                 if (password_verify($password, $password_hash)) {
                     // Guardar sessão de utilizador
                     session_start();
-                    $_SESSION["nome"] = $nome_users;
+
                     $_SESSION["id"] = $id_utilizador;
+                    $_SESSION["nome"] = $nome_users;
                     $_SESSION["role"] = $perfil;
 
                     // Feedback de sucesso

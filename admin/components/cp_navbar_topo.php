@@ -7,7 +7,7 @@ session_start();
 if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] == null)) {
 
 
-    header('Location: ../public/index.php');
+    header('Location: ../public/homepage.php');
 
 
 }
@@ -103,13 +103,13 @@ if (isset($_SESSION["role"])) {
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="../public/index.php">
+                <a class="dropdown-item" href="../public/homepage.php">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Parte Pública
                 </a>
 
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../public/scripts/sc_user_logout.php">
+                <a class="dropdown-item" href="../public/scripts/sc_logout.php">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Logout
                 </a>

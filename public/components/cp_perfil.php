@@ -1,4 +1,5 @@
 <main class="container-fluid">
+
     <section class="row mt-lg-5 pt-lg-5">
         <article class="col-12 pt-3">
             <a href="definicoes.php"><i class="fas fa-cog fa-2x fa-lg-3x float-right"></i></a>

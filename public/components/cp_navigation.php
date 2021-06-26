@@ -24,8 +24,9 @@ if (isset($_SESSION["role"])) {
 
 <nav class="fixed-bottom navbar-expand navbar-dark py-2 d-lg-none nav_baixo">
     <ul class="navbar-nav justify-content-center">
+
         <?php
-        if ($USER_ROLE == "2") {
+        if ($USER_ROLE == "1") {
             echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -39,31 +40,9 @@ if (isset($_SESSION["role"])) {
         <li class="icones">
             <a class="nav-link" href="conversas.php"><i class="far fa-2x fa-comments"></i></a>
         </li>
-
-        <?php
-
-
-
-        if (isset($USER_NAME)){
-            echo "<li class='nav-item dropdown'>                                                              
-                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'> $USER_NAME    
-                                  <span class='caret'></span></a>                                                     
-                              <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'> 
-                                <li><a class='dropdown-item' href='minha_conta.php'>A tua conta</a></li>                     
-                                  <li><a class='dropdown-item' href='scripts/sc_user_logout.php'>Logout</a></li>           
-                              </ul>                                                                                   
-                          </li>                                                                                       
-                         ";
-
-        }  else {
-
-            echo "<li class='icones'>
-            <a class='nav-link' href='perfil.php' tabindex=''-1' aria-disabled='true'><i class='far fa-2x fa-user'></i></a>
-        </li>";
-        }
-
-
-        ?>
+        <li class="icones">
+            <a class="nav-link" href="perfil.php"><i class="far fa-2x fa-comments"></i></a>
+        </li>
 
     </ul>
 </nav>
@@ -71,8 +50,8 @@ if (isset($_SESSION["role"])) {
 <nav class="fixed-top navbar-expand navbar-dark d-none d-lg-block nav_cima">
     <ul class="navbar-nav">
         <?php
-        if ($USER_ROLE == "2") {
-            echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+        if ($USER_ROLE == "1") {
+            echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
         ?>
@@ -91,11 +70,11 @@ if (isset($_SESSION["role"])) {
 
         if (isset($USER_NAME)){
             echo "<li class='nav-item dropdown'>                                                              
-                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'> $USER_NAME    
+                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" . $_SESSION["id"] ."   
                                   <span class='caret'></span></a>                                                     
                               <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'> 
-                                <li><a class='dropdown-item' href='minha_conta.php'>A tua conta</a></li>                     
-                                  <li><a class='dropdown-item' href='scripts/sc_user_logout.php'>Logout</a></li>           
+                                <li><a class='dropdown-item' href='perfil.php'>A tua conta</a></li>                     
+                                  <li><a class='dropdown-item' href='scripts/sc_logout.php'>Logout</a></li>           
                               </ul>                                                                                   
                           </li>                                                                                       
                          ";
@@ -103,7 +82,7 @@ if (isset($_SESSION["role"])) {
         }  else {
 
             echo "<li class='mx-3'>
-            <a class='nav-link' href='perfil.php''>Perfil</a>
+            <a class='nav-link' href='login.php'>Perfil</a>
         </li>";
         }
 
