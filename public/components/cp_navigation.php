@@ -70,7 +70,7 @@ if (isset($_SESSION["role"])) {
 
         if (isset($USER_NAME)){
             echo "<li class='nav-item dropdown'>                                                              
-                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" . $_SESSION["id"] ."   
+                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" . $USER_NAME ."   
                                   <span class='caret'></span></a>                                                     
                               <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'> 
                                 <li><a class='dropdown-item' href='perfil.php'>A tua conta</a></li>                     

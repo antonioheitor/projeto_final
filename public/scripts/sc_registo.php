@@ -58,7 +58,7 @@ if (isset($_POST["nome_user"]) && isset($_POST["email_user"]) && isset($_POST["p
     $password_hash = password_hash($_POST['password_user'], PASSWORD_DEFAULT);
     $descricao_users = $_POST['descricao_users'];
     $imagem_user =  $target_file;
-    $roles_plataforma_id_roles_plataforma = 2;
+    $roles_plataforma_id_roles_plataforma = 4;
 
     $link = new_db_connection();
 

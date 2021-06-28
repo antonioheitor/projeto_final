@@ -11,7 +11,7 @@
 <?php include_once "components/cp_navigation.php"; ?>
 
 <!-- Page Content-->
-<?php include_once "components/cp_perfil.php"; ?>
+<?php include_once "components/cp_membros.php"; ?>
 
 <?php include_once "helpers/help_scripts.php"; ?>
 </body>

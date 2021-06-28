@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+if (isset($_SESSION["nome"])) {
+    $USER_NAME = $_SESSION["nome"];
+
+}
+
+if (isset($_SESSION["id"])) {
+    $USER_ID = $_SESSION["id"];
+
+}
+
+if (isset($_SESSION["role"])) {
+    $USER_ROLE = $_SESSION["role"];
+
+}
+?>
+
 <main class="container-fluid">
 
     <section class="row mt-lg-5 pt-lg-5">
@@ -18,7 +37,7 @@
     </section>
 
     <article class="col-12 text-center mb-5">
-        <h1 class="mt-3"> Sebastião Lemos </h1>
+        <h1 class="mt-3"><?= $USER_NAME ?></h1>
         <h2 class="mt-1">Gestão, UA</h2>
     </article>
 
