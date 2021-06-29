@@ -76,7 +76,7 @@ if ($uploadOk == 0) {
 
 
 
-if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) ) {
+if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) && isset($_POST["sedes_id_sede_grupo"]) && isset($_POST["temas_id_temas"]) ) {
     $nome_grupo = $_POST['nome_tribo'];
     $descricao_grupo = $_POST['descricao_tribo'];
 

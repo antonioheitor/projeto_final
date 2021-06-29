@@ -178,7 +178,8 @@ WHERE users_id_users = ?;";
             </div>
 
             </div>
-        </article><?php }
+        </article>
+        <?php }
                     mysqli_stmt_close($stmt);
                 }
                 mysqli_close($link);

@@ -1,9 +1,42 @@
+<?php
+require_once "connections/connection.php";
+
+if (isset($_GET["id"])) {
+    $grupo_id_grupo = $_GET["id"];
+}
+
+
+$link = new_db_connection();
+
+$stmt = mysqli_stmt_init($link);
+
+
+$stmt = mysqli_stmt_init($link);
+$query = "SELECT grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE grupo_id_grupo = ? ;";
+
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+    mysqli_stmt_bind_param($stmt, 'i', $grupo_id_grupo);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $grupo_id_grupo, $nome_grupo);
+
+    if (!mysqli_stmt_fetch($stmt)) {
+
+        header("Location: users.php");
+
+    }
+}?>
+
+
+
 <main class="container-fluid background">
     <section class="row sticky-top">
         <div class="col-12 text-center background">
             <a id="fechar" href="conversas.php" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
-            <p class="pt-5 pb-1 d-md-block d-none h">Tribo de Skate</p>
-            <p class="pt-5 pb-1 d-md-none h_pequeno">Tribo de Skate</p>
+            <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo  ?></p>
+            <p class="pt-5 pb-1 d-md-none h_pequeno">Tribo de <?= $nome_grupo  ?></p>
         </div>
     </section>
 

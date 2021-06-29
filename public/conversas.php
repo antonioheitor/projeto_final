@@ -5,8 +5,9 @@
     <?php include_once "helpers/help_css.php"?>
 </head>
 <body>
-<?php include_once "components/cp_navigation.php"; ?>
+<?php include_once "components/cp_navigation.php" ?>
 <?php include_once "components/cp_conversas.php" ?>
 
+<?php include_once "helpers/help_scripts.php"; ?>
 </body>
 </html>

@@ -1,37 +1,4 @@
-<?php
-require_once "connections/connection.php";
 
-$link = new_db_connection();
-
-$stmt = mysqli_stmt_init($link);
-
-$query = "SELECT sedes_id_sede_grupo, temas_id_temas FROM grupo;";
-
-
-if (mysqli_stmt_prepare($stmt, $query)) {
-
-
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_bind_result($stmt,  $sedes_id_sede_grupo, $temas_id_temas);
-
-    if (!mysqli_stmt_fetch($stmt)) {
-
-        header("Location: users.php");
-
-    }
-
-
-} else {
-
-    echo "ERRORRRRR: " . mysqli_error($link);
-}
-mysqli_stmt_close($stmt);
-
-
-
-
-?>
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
@@ -126,12 +93,15 @@ mysqli_stmt_close($stmt);
                             <select class="form-control" name="sedes_id_sede_grupo">
                                 <?php
 
+                                require_once "connections/connection.php";
+
+                                $link = new_db_connection();
 
 
                                 $stmt = mysqli_stmt_init($link);
 
 
-                                $query = "SELECT id_sede_grupo, nome_sede FROM sedes;";
+                                $query = "SELECT id_sede_grupo, nome_sede FROM sedes ORDER BY nome_sede;";
 
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -175,7 +145,7 @@ mysqli_stmt_close($stmt);
                                 $stmt = mysqli_stmt_init($link);
 
 
-                                $query = "SELECT id_temas, nome_tema FROM temas;";
+                                $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema;";
 
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -187,12 +157,12 @@ mysqli_stmt_close($stmt);
 
 
                                     while (mysqli_stmt_fetch($stmt)) {
-                                        $selected1 = "";
+                                        $selected2 = "";
                                         if ($temas_id_temas == $id_temas) {
-                                            $selected1 = "selected";
+                                            $selected2 = "selected";
                                         }
 
-                                        echo "<option value='$id_temas' $selected1>$nome_tema</option>";
+                                        echo "<option value='$id_temas' $selected2>$nome_tema</option>";
                                     }
 
 

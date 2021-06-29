@@ -42,13 +42,43 @@ if (isset($_SESSION["role"])) {
     </article>
 
     <section class="row justify-content-center">
+        <?php
+        require_once "connections/connection.php";
+
+
+
+
+        $link = new_db_connection();
+
+        $stmt = mysqli_stmt_init($link);
+
+
+        $stmt = mysqli_stmt_init($link);
+        $query = "SELECT imagem_grupo, grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE users_id_users = ? ;";
+
+
+        if (mysqli_stmt_prepare($stmt, $query)) {
+
+        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $imagem_grupo, $grupo_id_grupo, $nome_grupo );
+
+        while (mysqli_stmt_fetch($stmt)) { ?>
         <article class="col-6 col-md-4 borda_post text-center mx-5 my-3 shadow">
             <div class="m-1 m-sm-3">
                 <img src="images/rock.jpg" class="img-fluid rounded mt-3">
-                <h5 class="mt-2">Tribo do Rock</h5>
-                <a href="cp_conversas.php" class="cor text-decoration-none">Entra na conversa</a>
+                <h5 class="mt-2"><?= $nome_grupo ?></h5>
+                <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Entra na conversa</a>
             </div>
 
         </article>
+        <?php }
+            mysqli_stmt_close($stmt);
+        }
+        mysqli_close($link);
+
+
+        ?>
     </section>
 </main>

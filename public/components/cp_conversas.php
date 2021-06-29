@@ -6,40 +6,50 @@
         </div>
     </section>
 
+
     <section class="row my-3  justify-content-center">
-        <article class="col-11 borda_post shadow my-3 p-4">
-            <div class="row">
-                <div class="col-10">
-                    <h1 class="mb-0 py-3">Tribo de Animes </h1>
-                </div>
-                <div class="col-2 my-auto">
-                    <i class="far fa-comment-dots fa-3x float-right"></i>
-                </div>
-            </div>
-        </article>
+<?php
+require_once "connections/connection.php";
+
+
+
+
+$link = new_db_connection();
+
+$stmt = mysqli_stmt_init($link);
+
+
+$stmt = mysqli_stmt_init($link);
+$query = "SELECT grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE users_id_users = ? ;";
+
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+    mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt,  $grupo_id_grupo, $nome_grupo );
+
+    while (mysqli_stmt_fetch($stmt)) { ?>
+
 
         <article class="col-11 borda_post shadow my-3 p-4">
             <div class="row">
                 <div class="col-10">
-                    <a href="chat.php" class="text-decoration-none">
-                        <h1 class="mb-0 py-3">Tribo de Skate </h1>
-                    </a>
+                    <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="text-decoration-none"><h1 class="mb-0 py-3">Tribo de <?= $nome_grupo ?></h1></a>
                 </div>
                 <div class="col-2 my-auto">
                     <i class="far fa-comment-dots fa-3x float-right"></i>
                 </div>
             </div>
         </article>
+    <?php }
+    mysqli_stmt_close($stmt);
+}
+mysqli_close($link);
 
-        <article class="col-11 borda_post shadow my-3 p-4">
-            <div class="row">
-                <div class="col-10">
-                    <h1 class="mb-0 py-3">Tribo de Rock </h1>
-                </div>
-                <div class="col-2 my-auto">
-                    <i class="far fa-comment-dots fa-3x float-right"></i>
-                </div>
-            </div>
-        </article>
+
+?>
+
     </section>
 </main>
