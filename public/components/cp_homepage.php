@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+if (isset($_SESSION["nome"])) {
+    $USER_NAME = $_SESSION["nome"];
+
+}
+
+if (isset($_SESSION["id"])) {
+    $USER_ID = $_SESSION["id"];
+
+}
+
+if (isset($_SESSION["role"])) {
+    $USER_ROLE = $_SESSION["role"];
+
+}
+
+
+
+?>
+
+
+
 <main class="container-fluid mt-lg-5 pt-2">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
         <div class="col-11 shadow-sm borda_post rounded-pill py-3">
@@ -19,28 +43,72 @@
                 </div>
 
                 <!-- CABEÇALHO DO MODAL ######################### -->
-                <form method="post">
-                    <p class="ml-3 mt-3 text-center">Titulo da publicação</p><input class="w-50 mx-auto" name="titulopost" type="text">
+                <form method="post" role="form" id="post-form" action="scripts/sc_new_post.php" enctype="multipart/form-data">
+                    <div class="text-center">
+                    <label class="ml-3 mt-3 text-center">Titulo da publicação</label>
+                    </div>
+                    <input class="w-50 mx-auto" name="titulopost" type="text">
                     <div class="modal-body text-center">
-                        <p class="text-center">Escreve o post :)</p>
-                        <textarea class="w-50" name="descpost" type="text"></textarea>
+                        <label class="text-center">Escreve o post :)</label>
+                        <input class="w-50 mx-auto" name="descpost" type="text">
                         <p class="text-center mt-4">Selecione imagem</p>
-                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" id="customFile"/>
+                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload" id="customFile"/>
                         <div class="dropdown text-center mt-4">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Escolha a tua tribo
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Tribo do Skate</a>
-                                <a class="dropdown-item" href="#">Tribo de Anime</a>
-                                <a class="dropdown-item" href="#">Tribo do Rock</a>
-                            </div>
+                            <label>Escolhe a tua tribo</label>
+                            <select class="form-control" name="grupo_id_grupo">
+                                <?php
+                                require_once "connections/connection.php";
+
+
+
+
+                                $link = new_db_connection();
+
+                                $stmt = mysqli_stmt_init($link);
+
+
+                                $query = "SELECT grupo_id_grupo, id_grupo, nome_grupo FROM users_has_grupo 
+INNER JOIN grupo
+ON grupo_id_grupo = id_grupo 
+WHERE users_id_users = ?;";
+
+
+                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+                                    mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+
+                                    mysqli_stmt_execute($stmt);
+
+                                    mysqli_stmt_bind_result($stmt, $grupo_id_grupo, $id_grupo, $nome_grupo);
+
+
+                                    while (mysqli_stmt_fetch($stmt)) {
+                                        $selected1 = "";
+                                        if ($grupo_id_grupo == $id_grupo) {
+                                            $selected1 = "selected";
+                                        }
+
+                                        echo "<option value='$id_grupo' $selected1>$nome_grupo</option>";
+                                    }
+
+
+                                } else {
+
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                }
+                                //close connection
+
+                                mysqli_stmt_close($stmt);
+
+
+
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
+                        <button class="btnlogin w-50 text-center col-4"type="submit">
+                            Submeter Dados
                         </button>
                     </div>
                 </form>
@@ -59,15 +127,33 @@
     </div>
     <!-- Fim Modal -->
 
-    <section class="row my-4 justify-content-center ">
-        <article class="col-11 borda_post shadow">
+    <section class="row my-4 justify-content-center">
+        <?php
+        $stmt = mysqli_stmt_init($link);
+        $query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users, nome_grupo, grupo_id_grupo FROM posts 
+INNER JOIN grupo
+ON grupo_id_grupo = id_grupo
+WHERE users_id_users = ?;";
+
+
+        if (mysqli_stmt_prepare($stmt, $query)) {
+
+        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $users_id_users, $nome_grupo, $grupo_id_grupo );
+
+        while (mysqli_stmt_fetch($stmt)) { ?>
+        <article class="col-11 borda_post shadow mb-4">
             <div class="row mt-1">
+
+
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/1.jpeg" class="img-fluid rounded-circle p-sm-1 border border-success">
+                    <img src="../uploads/<?= $imagem_post ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Sara Rocha</h4>
-                    <p>Tribo do Skate * 13/05/2021</p>
+                    <h4 class="pt-3"><?= $USER_NAME ?></h4>
+                    <p>Tribo de <?= $nome_grupo ?> * <?= $data_criacao_post ?></p>
                 </div>
                 <div class="col-2 col-lg-3 text-right my-auto">
                     <div class="dropdown show">
@@ -81,51 +167,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
             <div class="pt-2">
-                <p>Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está classificado como o 6º
-                    melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!
-                </p>
+                <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
+                <img class="text-center" src="<?= $imagem_post ?>">
+                <p class="pl-5"><?= $conteudo_post ?></p>
                 <div class="float-right pb-2">
                     <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
                 </div>
             </div>
-        </article>
+
+            </div>
+        </article><?php }
+                    mysqli_stmt_close($stmt);
+                }
+                mysqli_close($link);
+
+
+                ?>
     </section>
 
-    <section class="row my-4 justify-content-center ">
-        <article class="borda_post shadow col-11">
-            <div class="row mt-1">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/4.jpg" class="img-fluid rounded-circle p-sm-1">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Ana Pedro</h4>
-                    <p>Tribo do Skate * 12/05/2021</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="dropdown show">
-                        <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="pt-2">
-                <img src="images/3.jpg" class="img-fluid col-12 ">
-                <div class="text-right py-2">
-                    <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
-                </div>
-            </div>
-        </article>
-    </section>
 
     <!-- COMENTÁRIOS -->
     <!-- Button trigger modal -->
