@@ -2,10 +2,10 @@
 
 session_start();
 
-if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] == null)) {
+if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
 
-    header('Location: ../public/index.php');
+    header('Location: ../public/homepage.php');
 
 
 }

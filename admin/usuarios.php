@@ -2,7 +2,7 @@
 
 session_start();
 
-if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] == null)) {
+if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
 
     header('Location: ../public/homepage.php');
@@ -82,7 +82,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_visitantes, nome_visitante, email_visitante, idade_visitante, localidades_id_localidades, roles_id_roles, nome_localidades, desc_role FROM visitantes INNER JOIN localidades ON localidades_id_localidades = id_localidades INNER JOIN roles ON roles_id_roles = id_roles ORDER BY id_visitantes";
+                    $query = "SELECT id_users, nome_users, email_users, descricao_users, imagem_user, roles_plataforma_id_roles_plataforma, data_user, role_plataforma FROM users INNER JOIN roles_plataforma ON roles_plataforma_id_roles_plataforma = id_roles_plataforma  ORDER BY id_users";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -92,7 +92,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
 
                         mysqli_stmt_execute($stmt);
 
-                        mysqli_stmt_bind_result($stmt, $id_visitantes, $nome_visitante, $email_visitante, $idade_visitante, $localidades_id_localidades, $roles_id_roles, $nome_localidades, $desc_role);
+                        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $email_users, $descricao_users, $imagem_user, $roles_plataforma_id_roles_plataforma, $data_user, $role_plataforma);
 
 
                     } else {
@@ -113,8 +113,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
                                             <th>ID</th>
                                             <th>Username</th>
                                             <th>Email</th>
-                                            <th>Idade</th>
-                                            <th>Localidade</th>
+                                            <th>Descrição</th>
+                                            <th>Imagem</th>
                                             <th>Role</th>
                                             <th>Editar</th>
                                         </tr>
@@ -125,13 +125,13 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
                                     ?>
                                     <tbody>
                                         <tr>
-                                            <td><?= $id_visitantes ?></td>
-                                            <td><?= $nome_visitante ?></td>
-                                            <td><?= $email_visitante ?></td>
-                                            <td><?= $idade_visitante ?></td>
-                                            <td><?= $nome_localidades ?></td>
-                                            <td><?= $desc_role ?></td>
-                                            <td><a href='usuarios_edit.php?id=<?= $id_visitantes ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                            <td><?= $id_users ?></td>
+                                            <td><?= $nome_users ?></td>
+                                            <td><?= $email_users ?></td>
+                                            <td><?= $descricao_users ?></td>
+                                            <td><?= $imagem_user ?></td>
+                                            <td><?= $role_plataforma ?></td>
+                                            <td><a href='usuarios_edit.php?id=<?= $id_users ?>'><i class="fa fa-edit fa-fw"></a></td>
                                         </tr>
 
                                     </tbody>

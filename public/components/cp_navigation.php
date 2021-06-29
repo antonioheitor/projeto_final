@@ -26,7 +26,7 @@ if (isset($_SESSION["role"])) {
     <ul class="navbar-nav justify-content-center">
 
         <?php
-        if ($USER_ROLE == "1") {
+        if ($USER_ROLE == "3") {
             echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -50,7 +50,7 @@ if (isset($_SESSION["role"])) {
 <nav class="fixed-top navbar-expand navbar-dark d-none d-lg-block nav_cima">
     <ul class="navbar-nav">
         <?php
-        if ($USER_ROLE == "1") {
+        if ($USER_ROLE == "3") {
             echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 

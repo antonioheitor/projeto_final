@@ -8,9 +8,9 @@ function new_db_connection()
     // Variables for the database connection
     if ($env == "labmm") {
         $hostname = 'labmm.clients.ua.pt';
-        $username = "deca_20L4_11_web";
-        $password = "K173023o";
-        $dbname = "deca_20L4_11";
+        $username = "deca_20L4_34_web";
+        $password = "ObKz1s1Q";
+        $dbname = "deca_20L4_34";
     }
     if ($env == "localhost") {
         $hostname = 'localhost';

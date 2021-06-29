@@ -2,10 +2,10 @@
 
 session_start();
 
-if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] == null)) {
+if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
 
-    header('Location: ../public/index.php');
+    header('Location: ../public/homepage.php');
 
 
 }
@@ -80,7 +80,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
                     require_once "connections/connection.php";
 
                     if (isset($_GET["id"])) {
-                        $id_visitantes = $_GET["id"];
+                        $id_users = $_GET["id"];
                     }
 
 
@@ -88,17 +88,17 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_visitantes, nome_visitante, email_visitante, idade_visitante, localidades_id_localidades, roles_id_roles FROM visitantes WHERE id_visitantes = ?";
+                    $query = "SELECT id_users, nome_users, email_users, descricao_users, imagem_user, roles_plataforma_id_roles_plataforma FROM users WHERE id_users = ?";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-                        mysqli_stmt_bind_param($stmt, 'i', $id_visitantes);
+                        mysqli_stmt_bind_param($stmt, 'i', $id_users);
 
                        if (mysqli_stmt_execute($stmt)) {
 
-                        mysqli_stmt_bind_result($stmt, $id_visitantes, $nome_visitante, $email_visitante, $idade_visitante, $localidades_id_localidades, $roles_id_roles);
+                        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $email_users, $descricao_users, $imagem_user, $roles_plataforma_id_roles_plataforma);
 
                         if (!mysqli_stmt_fetch($stmt)) {
 
@@ -106,7 +106,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
 
                         }
 
-                        $_SESSION["id_users"] = $id_visitantes;
+                        $_SESSION["id_users"] = $id_users;
 
                     } else {
 
@@ -131,33 +131,36 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <form role="form" method="post" action="scripts/sc_update_users.php">
-                                        <input type="hidden" name="id_visitantes" value='<?= $id_visitantes ?>'>
+                                        <input type="hidden" name="id_visitantes" value='<?= $id_users ?>'>
                                         <div class="form-group">
                                             <label>ID do utilizador</label>
-                                            <p class="form-control-static"><?= $id_visitantes ?></p>
+                                            <p class="form-control-static"><?= $id_users ?></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Username</label>
-                                            <input class="form-control" name="username" type="text" value="<?= $nome_visitante ?>">
+                                            <input class="form-control" name="username" type="text" value="<?= $nome_users ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input class="form-control" type="email" name="email"
-                                                   value="<?= $email_visitante ?>">
+                                                   value="<?= $email_users ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label>Idade</label>
-                                            <p class="form-control-static"><?= $idade_visitante ?></p>
+                                            <label>Descrição do User</label>
+                                            <input class="form-control" type="text" name="descricao" value="<?= $descricao_users ?>">
                                         </div>
-
                                         <div class="form-group">
-                                            <label>Roles</label>
-                                            <select class="form-control" name="roles_id_roles">
+                                            <label>Imagem</label>
+                                            <input class="form-control" type="text" name="imagem" value="<?= $imagem_user ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Role</label>
+                                            <select class="form-control" name="roles_plataforma_id_roles_plataforma">
                                                 <?php
 
                                                 $stmt = mysqli_stmt_init($link);
 
-                                                $query = "SELECT id_roles, desc_role FROM roles ORDER BY desc_role";
+                                                $query = "SELECT id_roles_plataforma, role_plataforma FROM roles_plataforma ORDER BY role_plataforma";
 
 
                                                 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -165,16 +168,16 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
 
                                                     mysqli_stmt_execute($stmt);
 
-                                                    mysqli_stmt_bind_result($stmt, $id_roles, $desc_role);
+                                                    mysqli_stmt_bind_result($stmt, $id_roles_plataforma, $role_plataforma);
 
 
                                                     while (mysqli_stmt_fetch($stmt)) {
                                                         $selected1 = "";
-                                                        if ($roles_id_roles == $id_roles) {
+                                                        if ($roles_plataforma_id_roles_plataforma == $id_roles_plataforma) {
                                                             $selected1 = "selected";
                                                         }
 
-                                                        echo "<option value='$id_roles' $selected1>$desc_role</option>";
+                                                        echo "<option value='$id_roles_plataforma' $selected1>$role_plataforma</option>";
                                                     }
 
 

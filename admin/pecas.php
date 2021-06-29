@@ -3,10 +3,10 @@
 
 session_start();
 
-if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] == null)) {
+if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
 
-    header('Location: ../public/index.php');
+    header('Location: ../public/homepage.php');
 
 
 }
@@ -25,7 +25,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 2) || ($_SESSION["role"] =
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Peças Admin</title>
+    <title>Temas Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
