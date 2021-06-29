@@ -1,3 +1,37 @@
+<?php
+require_once "connections/connection.php";
+
+$link = new_db_connection();
+
+$stmt = mysqli_stmt_init($link);
+
+$query = "SELECT sedes_id_sede_grupo, temas_id_temas FROM grupo;";
+
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt,  $sedes_id_sede_grupo, $temas_id_temas);
+
+    if (!mysqli_stmt_fetch($stmt)) {
+
+        header("Location: users.php");
+
+    }
+
+
+} else {
+
+    echo "ERRORRRRR: " . mysqli_error($link);
+}
+mysqli_stmt_close($stmt);
+
+
+
+
+?>
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
@@ -79,40 +113,106 @@
                 </div>
 
                 <!-- CABEÇALHO DO MODAL ######################### -->
-                <form method="post">
-                    <p class="ml-3 mt-3 text-center">Nome da Tribo</p><input class="w-50 mx-auto"
-                                                                             name="nome_tribo" type="text">
+                <form method="post" role="form" id="new-tribe-form" action="scripts/sc_new_tribo.php" enctype="multipart/form-data">
+                    <p class="ml-3 mt-3 text-center">Nome da Tribo</p>
+                    <input class="w-50 mx-auto" name="nome_tribo" type="text">
                     <div class="modal-body">
-                        <p class="text-center">Descrição da Tribo</p><input class="w-50 mx-auto" name="descricao_tribo"
-                                                                            type="text">
+                        <p class="text-center">Descrição da Tribo</p>
+                        <input class="w-50 mx-auto" name="descricao_tribo" type="text">
                         <p class="text-center mt-4">Selecione imagem para a Tribo</p>
-                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" id="customFile1"/>
+                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload" id="customFile1"/>
                         <div class="dropdown text-center mt-4">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Sede da Tribo
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <a class="dropdown-item" href="#">Parque da Macaca</a>
-                                <a class="dropdown-item" href="#">Parque dos Drinks</a>
-                                <a class="dropdown-item" href="#">Skate Park</a>
-                            </div>
+                            <label>Sede da Tribo</label>
+                            <select class="form-control" name="sedes_id_sede_grupo">
+                                <?php
+
+
+
+                                $stmt = mysqli_stmt_init($link);
+
+
+                                $query = "SELECT id_sede_grupo, nome_sede FROM sedes;";
+
+
+                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+
+                                    mysqli_stmt_execute($stmt);
+
+                                    mysqli_stmt_bind_result($stmt,  $id_sede_grupo, $nome_sede);
+
+
+                                    while (mysqli_stmt_fetch($stmt)) {
+                                        $selected1 = "";
+                                        if ($sedes_id_sede_grupo == $id_sede_grupo) {
+                                            $selected1 = "selected";
+                                        }
+
+                                        echo "<option value='$id_sede_grupo' $selected1>$nome_sede</option>";
+                                    }
+
+
+                                } else {
+
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                }
+                                //close connection
+
+                                mysqli_stmt_close($stmt);
+
+
+
+                                ?>
+                            </select>
                         </div>
                         <div class="dropdown text-center mt-4">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tema da Tribo
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <a class="dropdown-item" href="#">Desporto</a>
-                                <a class="dropdown-item" href="#">Musica</a>
-                                <a class="dropdown-item" href="#">Comida</a>
-                            </div>
+                            <label>Tema da Tribo</label>
+                            <select class="form-control" name="$temas_id_temas">
+                                <?php
+
+
+                                $stmt = mysqli_stmt_init($link);
+
+
+                                $query = "SELECT id_temas, nome_tema FROM temas;";
+
+
+                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                                    mysqli_stmt_execute($stmt);
+
+                                    mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema);
+
+
+                                    while (mysqli_stmt_fetch($stmt)) {
+                                        $selected1 = "";
+                                        if ($temas_id_temas == $id_temas) {
+                                            $selected1 = "selected";
+                                        }
+
+                                        echo "<option value='$id_temas' $selected1>$nome_tema</option>";
+                                    }
+
+
+                                } else {
+
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                }
+                                //close connection
+
+                                mysqli_stmt_close($stmt);
+
+
+
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
+                        <button class="btnlogin w-50 text-center col-4" type="submit">
+                            Submeter Dados
                         </button>
                     </div>
                 </form>
