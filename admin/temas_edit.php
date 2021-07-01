@@ -73,14 +73,14 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Peças</h1>
-                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das peças registadas no website MAAC.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Temas</h1>
+                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca dos temas registados.</p>
                     <?php
 
                     require_once "connections/connection.php";
 
                     if (isset($_GET["id"])) {
-                        $id_pecas = $_GET["id"];
+                        $id_temas = $_GET["id"];
                     }
 
 
@@ -88,17 +88,18 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_pecas, nome_peca, descricao_peca, ano_peca, imagem_peca, exposicoes_id_exposicoes FROM pecas WHERE id_pecas = ?";
+                    $query = "SELECT id_temas, nome_tema, areas_id_areas, nome_areas FROM temas INNER JOIN areas 
+ON areas_id_areas = id_areas WHERE id_temas = ?";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-                        mysqli_stmt_bind_param($stmt, 'i', $id_pecas);
+                        mysqli_stmt_bind_param($stmt, 'i', $id_temas);
 
                        if (mysqli_stmt_execute($stmt)) {
 
-                        mysqli_stmt_bind_result($stmt, $id_pecas, $nome_peca, $descricao_peca, $ano_peca, $imagem_peca, $exposicoes_id_exposicoes);
+                        mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $areas_id_areas, $nome_areas);
 
                         if (!mysqli_stmt_fetch($stmt)) {
 
@@ -106,7 +107,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                         }
 
-                        $_SESSION["id_pecas"] = $id_pecas;
+                        $_SESSION["id_pecas"] = $id_temas;
 
                     } else {
 
@@ -126,41 +127,29 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Edição da peça
+                                    Edição do Tema
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <form role="form" method="post" action="scripts/sc_update_pecas.php">
-                                        <input type="hidden" name="id_visitantes" value='<?= $id_pecas ?>'>
+                                        <input type="hidden" name="id_visitantes" value='<?= $id_temas ?>'>
                                         <div class="form-group">
-                                            <label>ID da peça</label>
-                                            <p class="form-control-static"><?= $id_pecas ?></p>
+                                            <label>ID do tema</label>
+                                            <p class="form-control-static"><?= $id_temas ?></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Nome</label>
-                                            <input class="form-control" type="text" name="name" value="<?= $nome_peca ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Descrição</label>
-                                            <input class="form-control" type="text" name="descricao" value="<?= $descricao_peca ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ano</label>
-                                            <input class="form-control" type="number" name="ano" value="<?= $ano_peca ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Imagem</label>
-                                            <input class="form-control" type="text" name="imagem" value="<?= $imagem_peca ?>">
+                                            <label>Nome do Tema</label>
+                                            <input class="form-control" type="text" name="name" value="<?= $nome_tema ?>">
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Exposicoes</label>
-                                            <select class="form-control" name="exposicoes_id_exposicoes">
+                                            <label>Área do Tema</label>
+                                            <select class="form-control" name="areas_id_areas">
                                                 <?php
 
                                                 $stmt = mysqli_stmt_init($link);
 
-                                                $query = "SELECT id_exposicoes, nome_exposicao FROM exposicoes ORDER BY nome_exposicao";
+                                                $query = "SELECT id_areas, nome_areas FROM areas ORDER BY nome_areas";
 
 
                                                 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -168,16 +157,16 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                                                     mysqli_stmt_execute($stmt);
 
-                                                    mysqli_stmt_bind_result($stmt, $id_exposicoes, $nome_exposicao);
+                                                    mysqli_stmt_bind_result($stmt, $id_areas, $nome_areas);
 
 
                                                     while (mysqli_stmt_fetch($stmt)) {
                                                         $selected1 = "";
-                                                        if ($exposicoes_id_exposicoes == $id_exposicoes) {
+                                                        if ($areas_id_areas == $id_areas) {
                                                             $selected1 = "selected";
                                                         }
 
-                                                        echo "<option value='$id_exposicoes' $selected1>$nome_exposicao</option>";
+                                                        echo "<option value='$id_areas' $selected1>$nome_areas</option>";
                                                     }
 
 

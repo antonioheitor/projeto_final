@@ -1,8 +1,9 @@
 
 
+
 <?php
 
-session_start();
+
 
 if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
@@ -12,29 +13,22 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
 }
 
-?>
-
-<?php
-
-session_start();
-
-if (isset($_SESSION["username"])) {
-    $nome_visitante = $_SESSION["username"];
+if (isset($_SESSION["nome"])) {
+    $USER_NAME = $_SESSION["nome"];
 
 }
-header("Location : public/index.php");
 
+if (isset($_SESSION["id"])) {
+    $USER_ID = $_SESSION["id"];
 
+}
 
 if (isset($_SESSION["role"])) {
-    $perfil = $_SESSION["role"];
+    $USER_ROLE = $_SESSION["role"];
 
 }
-
-    header("Location : public/index.php");
-
-
 ?>
+
 
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -96,7 +90,7 @@ if (isset($_SESSION["role"])) {
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $nome_visitante ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $USER_NAME ?></span>
                 <img class="img-profile rounded-circle"
                      src="img/undraw_profile.svg">
             </a>

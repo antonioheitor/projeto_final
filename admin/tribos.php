@@ -72,8 +72,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     <!-- Page Heading -->
 
-                        <h1 class="h3 mb-2 text-gray-800">Exposições</h1>
-                        <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das exposições no website MAAC.</p>
+                        <h1 class="h3 mb-2 text-gray-800">Tribos</h1>
+                        <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das tribos criadas no website.</p>
                     <?php
 
                     require_once "connections/connection.php";
@@ -83,7 +83,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_exposicoes, nome_exposicao, data_inicio, data_final, imagem_exposicao, descricao_exposicao FROM exposicoes";
+                    $query = "SELECT id_grupo, nome_grupo, data_criacao_grupo, descricao_grupo, imagem_grupo, nome_sede, sedes_id_sede_grupo, nome_tema, temas_id_temas FROM grupo INNER JOIN sedes ON id_sede_grupo = sedes_id_sede_grupo INNER JOIN temas ON id_temas = temas_id_temas;";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -93,7 +93,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                         mysqli_stmt_execute($stmt);
 
-                        mysqli_stmt_bind_result($stmt, $id_exposicoes, $nome_exposicao, $data_inicio, $data_final, $imagem_exposicao, $descricao_exposicao);
+                        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $data_criacao_grupo, $descricao_grupo, $imagem_grupo, $nome_sede, $sedes_id_sede_grupo, $nome_tema, $temas_id_temas);
 
 
                     } else {
@@ -105,7 +105,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Exposições</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Tribos</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -113,11 +113,12 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Data Inicio</th>
-                                        <th>Data Final</th>
+                                        <th>Nome da Tribo</th>
+                                        <th>Data de criação da Tribo</th>
+                                        <th>Descrição</th>
                                         <th>Imagem</th>
-                                        <th>Descricao</th>
+                                        <th>Sede</th>
+                                        <th>Tema</th>
                                         <th>Editar</th>
 
                                     </tr>
@@ -128,13 +129,14 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                     ?>
                                     <tbody>
                                     <tr>
-                                        <td><?= $id_exposicoes ?></td>
-                                        <td><?= $nome_exposicao ?></td>
-                                        <td><?= $data_inicio ?></td>
-                                        <td><?= $data_final ?></td>
-                                        <td><?= $imagem_exposicao ?></td>
-                                        <td><?= $descricao_exposicao ?></td>
-                                        <td><a href='exposicoes_edit.php?id=<?= $id_exposicoes ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                        <td><?= $id_grupo ?></td>
+                                        <td><?= $nome_grupo ?></td>
+                                        <td><?= $data_criacao_grupo ?></td>
+                                        <td><?= $descricao_grupo ?></td>
+                                        <td><?= $imagem_grupo ?></td>
+                                        <td><?= $nome_sede ?></td>
+                                        <td><?= $nome_tema ?></td>
+                                        <td><a href='tribos_edit.php?id=<?= $id_grupo ?>'><i class="fa fa-edit fa-fw"></a></td>
                                     </tr>
 
                                     </tbody>

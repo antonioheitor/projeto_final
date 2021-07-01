@@ -70,8 +70,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     <!-- Page Heading -->
 
-                        <h1 class="h3 mb-2 text-gray-800">Peças</h1>
-                        <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das peças no website MAAC.</p>
+                        <h1 class="h3 mb-2 text-gray-800">Temas</h1>
+                        <p class="mb-4">Aqui pode-se encontrar todas as informações sobre os temas criados.</p>
                     <?php
 
                     require_once "connections/connection.php";
@@ -81,8 +81,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_pecas, nome_peca, descricao_peca, ano_peca, imagem_peca, exposicoes_id_exposicoes, nome_exposicao FROM pecas INNER JOIN exposicoes 
-ON exposicoes_id_exposicoes = id_exposicoes";
+                    $query = "SELECT id_temas, nome_tema, areas_id_areas, nome_areas FROM temas INNER JOIN areas 
+ON areas_id_areas = id_areas";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -92,7 +92,7 @@ ON exposicoes_id_exposicoes = id_exposicoes";
 
                         mysqli_stmt_execute($stmt);
 
-                        mysqli_stmt_bind_result($stmt, $id_pecas, $nome_peca, $descricao_peca, $ano_peca, $imagem_peca, $exposicoes_id_exposicoes, $nome_exposicao);
+                        mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $areas_id_areas, $nome_areas);
 
 
                     } else {
@@ -112,11 +112,8 @@ ON exposicoes_id_exposicoes = id_exposicoes";
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nome Peça</th>
-                                        <th>Descrição</th>
-                                        <th>Ano</th>
-                                        <th>Imagem</th>
-                                        <th>Exposição a que pertence</th>
+                                        <th>Nome do Tema</th>
+                                        <th>Área do Tema</th>
                                         <th>Editar</th>
                                     </tr>
                                     </thead>
@@ -126,13 +123,10 @@ ON exposicoes_id_exposicoes = id_exposicoes";
                                     ?>
                                     <tbody>
                                     <tr>
-                                        <td><?= $id_pecas ?></td>
-                                        <td><?= $nome_peca ?></td>
-                                        <td><?= $descricao_peca ?></td>
-                                        <td><?= $ano_peca ?></td>
-                                        <td><?= $imagem_peca ?></td>
-                                        <td><?= $nome_exposicao ?></td>
-                                        <td><a href='pecas_edit.php?id=<?= $id_pecas ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                        <td><?= $id_temas ?></td>
+                                        <td><?= $nome_tema ?></td>
+                                        <td><?= $nome_areas ?></td>
+                                        <td><a href='temas_edit.php?id=<?= $id_temas ?>'><i class="fa fa-edit fa-fw"></a></td>
                                     </tr>
 
                                     </tbody>

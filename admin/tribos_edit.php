@@ -80,7 +80,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                     require_once "connections/connection.php";
 
                     if (isset($_GET["id"])) {
-                        $id_exposicoes = $_GET["id"];
+                        $id_grupo = $_GET["id"];
                     }
 
 
@@ -88,7 +88,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_exposicoes, nome_exposicao, descricao_exposicao, imagem_exposicao FROM exposicoes WHERE id_exposicoes = ?";
+                    $query = "SELECT id_exposicoes, nome_exposicao, descricao_exposicao, imagem_exposicao FROM exposicoes WHERE id_grupo = ?";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 
 if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] == null)) {
 
@@ -80,8 +80,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">opções de edição:</h6>
-                <a class="collapse-item" href="pecas.php">Peças</a>
-                <a class="collapse-item" href="exposicoes.php">Exposições</a>
+                <a class="collapse-item" href="tribos.php">Tribos Criadas</a>
+                <a class="collapse-item" href="temas.php">Temas Existentes</a>
 
             </div>
         </div>
@@ -91,7 +91,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
     <li class="nav-item">
         <a class="nav-link" href="donos_info.php">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Donos das peças</span></a>
+            <span>Outros</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
