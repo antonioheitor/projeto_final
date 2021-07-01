@@ -74,7 +74,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Utilizadores</h1>
-                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca dos utilizadores registados no website MAAC.</p>
+                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca dos utilizadores registados.</p>
                     <?php
 
                     require_once "connections/connection.php";
@@ -131,7 +131,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
                                     <form role="form" method="post" action="scripts/sc_update_users.php">
-                                        <input type="hidden" name="id_visitantes" value='<?= $id_users ?>'>
+                                        <input type="hidden" name="id_users" value='<?= $id_users ?>'>
                                         <div class="form-group">
                                             <label>ID do utilizador</label>
                                             <p class="form-control-static"><?= $id_users ?></p>

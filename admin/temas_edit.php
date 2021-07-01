@@ -107,7 +107,7 @@ ON areas_id_areas = id_areas WHERE id_temas = ?";
 
                         }
 
-                        $_SESSION["id_pecas"] = $id_temas;
+                        $_SESSION["id_temas"] = $id_temas;
 
                     } else {
 
@@ -131,7 +131,7 @@ ON areas_id_areas = id_areas WHERE id_temas = ?";
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <form role="form" method="post" action="scripts/sc_update_pecas.php">
+                                    <form role="form" method="post" action="scripts/sc_update_temas.php">
                                         <input type="hidden" name="id_visitantes" value='<?= $id_temas ?>'>
                                         <div class="form-group">
                                             <label>ID do tema</label>

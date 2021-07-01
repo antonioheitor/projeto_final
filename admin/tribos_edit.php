@@ -26,7 +26,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Exposições Edição</title>
+    <title>Tribos Edição</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -73,8 +73,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Exposições</h1>
-                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das exposições registadas no website MAAC.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Tribos</h1>
+                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das tribos registadas.</p>
                     <?php
 
                     require_once "connections/connection.php";
@@ -88,17 +88,17 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     $stmt = mysqli_stmt_init($link);
 
-                    $query = "SELECT id_exposicoes, nome_exposicao, descricao_exposicao, imagem_exposicao FROM exposicoes WHERE id_grupo = ?";
+                    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, nome_sede, temas_id_temas, nome_tema FROM grupo INNER JOIN sedes ON id_sede_grupo = sedes_id_sede_grupo INNER JOIN temas ON id_temas = temas_id_temas WHERE id_grupo = ?";
 
 
                     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-                        mysqli_stmt_bind_param($stmt, 'i', $id_exposicoes);
+                        mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
 
                        if (mysqli_stmt_execute($stmt)) {
 
-                        mysqli_stmt_bind_result($stmt, $id_exposicoes, $nome_exposicao, $descricao_exposicao, $imagem_exposicao);
+                        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
 
                         if (!mysqli_stmt_fetch($stmt)) {
 
@@ -106,7 +106,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                         }
 
-                        $_SESSION["id_exposi"] = $id_exposicoes;
+                        $_SESSION["id_grupo"] = $id_grupo;
 
                     } else {
 
@@ -126,29 +126,110 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Edição de exposição
+                                    Edição de Tribos
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <form role="form" method="post" action="scripts/sc_update_exposicoes.php">
-                                        <input type="hidden" name="id_exposicoes" value='<?= $id_exposicoes ?>'>
+                                    <form role="form" method="post" action="scripts/sc_update_tribos.php">
+                                        <input type="hidden" name="id_grupo" value='<?= $id_grupo ?>'>
                                         <div class="form-group">
-                                            <label>ID da exposição</label>
-                                            <p class="form-control-static"><?= $id_exposicoes ?></p>
+                                            <label>ID da Tribo</label>
+                                            <p class="form-control-static"><?= $id_grupo ?></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Nome</label>
-                                            <input class="form-control" name="nome" type="text" value="<?= $nome_exposicao ?>">
+                                            <input class="form-control" name="nome" type="text" value="<?= $nome_grupo ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Descrição</label>
-                                            <input class="form-control" type="text" name="descricao" value="<?= $descricao_exposicao ?>">
+                                            <input class="form-control" type="text" name="descricao" value="<?= $descricao_grupo ?>">
                                         </div>
                                         <div class="form-group">
                                             <label>Imagem</label>
-                                            <input class="form-control" type="text" name="imagem" value="<?= $imagem_exposicao ?>">
+                                            <input class="form-control" type="text" name="imagem" value="<?= $imagem_grupo ?>">
                                         </div>
+                                        <div class="form-group">
+                                                <label>Sede</label>
+                                            <select class="form-control" name="sedes_id_sede_grupo">
+                                                <?php
 
+                                                $stmt = mysqli_stmt_init($link);
+
+                                                $query = "SELECT id_sede_grupo, nome_sede FROM sedes ORDER BY nome_sede";
+
+
+                                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                                                    mysqli_stmt_execute($stmt);
+
+                                                    mysqli_stmt_bind_result($stmt, $id_sede_grupo, $nome_sede);
+
+
+                                                    while (mysqli_stmt_fetch($stmt)) {
+                                                        $selected1 = "";
+                                                        if ($sedes_id_sede_grupo == $id_sede_grupo) {
+                                                            $selected1 = "selected";
+                                                        }
+
+                                                        echo "<option value='$id_sede_grupo' $selected1>$nome_sede</option>";
+                                                    }
+
+
+                                                } else {
+
+                                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                                }
+                                                //close connection
+
+                                                mysqli_stmt_close($stmt);
+
+
+
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tema</label>
+                                            <select class="form-control" name="temas_id_temas">
+                                                <?php
+
+                                                $stmt = mysqli_stmt_init($link);
+
+                                                $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema";
+
+
+                                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                                                    mysqli_stmt_execute($stmt);
+
+                                                    mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema);
+
+
+                                                    while (mysqli_stmt_fetch($stmt)) {
+                                                        $selected2 = "";
+                                                        if ($temas_id_temas == $id_temas) {
+                                                            $selected2 = "selected";
+                                                        }
+
+                                                        echo "<option value='$id_temas' $selected2>$nome_tema</option>";
+                                                    }
+
+
+                                                } else {
+
+                                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                                }
+                                                //close connection
+
+                                                mysqli_stmt_close($stmt);
+                                                mysqli_close($link);
+
+
+                                                ?>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="btn btn-info">Submeter alterações</button>
                                     </form>
                                 </div>

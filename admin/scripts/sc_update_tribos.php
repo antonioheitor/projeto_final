@@ -2,8 +2,8 @@
 
 session_start();
 
-if (isset($_SESSION["id_exposi"])) {
-    $id_exposicoes = $_SESSION["id_exposi"];
+if (isset($_SESSION["id_grupo"])) {
+    $id_grupo = $_SESSION["id_grupo"];
 }
 
 
@@ -17,21 +17,22 @@ $link = new_db_connection();
 
 if (isset($_POST["nome"]) && ($_POST["nome"]) != "" && isset($_POST["descricao"]) && ($_POST["descricao"]) != "" ) {
 
-    $nome_exposicao = $_POST["nome"];
-    $descricao_exposicao = $_POST["descricao"];
-    $imagem_exposicao = $_POST["imagem"];
-
+    $nome_grupo = $_POST["nome"];
+    $descricao_grupo = $_POST["descricao"];
+    $imagem_grupo = $_POST["imagem"];
+    $sedes_id_sede_grupo= $_POST["sedes_id_sede_grupo"];
+    $temas_id_temas = $_POST["temas_id_temas"];
 
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "UPDATE exposicoes SET nome_exposicao = ?, descricao_exposicao = ?, imagem_exposicao = ? WHERE id_exposicoes = ?";
+    $query = "UPDATE grupo SET nome_grupo = ?, descricao_grupo = ?, imagem_grupo = ?, sedes_id_sede_grupo = ?, temas_id_temas = ? WHERE id_grupo = ?";
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-        mysqli_stmt_bind_param($stmt, 'sssi', $nome_exposicao, $descricao_exposicao, $imagem_exposicao, $id_exposicoes);
+        mysqli_stmt_bind_param($stmt, 'sssiii', $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas, $id_grupo);
 
         if (!mysqli_stmt_execute($stmt)) {
 
@@ -47,7 +48,7 @@ if (isset($_POST["nome"]) && ($_POST["nome"]) != "" && isset($_POST["descricao"]
     mysqli_stmt_close($stmt);
     mysqli_close($link);
 
-    header( "Location: ../exposicoes.php");
+    header( "Location: ../tribos.php");
 
 } else {
     header( "Location: ../index.php");

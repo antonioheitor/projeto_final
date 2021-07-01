@@ -72,7 +72,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Lista de Utilizadores</h1>
-                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca dos utilizadores registados no website MAAC.</p>
+                    <p class="mb-4">Aqui pode-se encontrar todas as informações acerca dos utilizadores registados.</p>
                     <?php
 
                     require_once "connections/connection.php";
