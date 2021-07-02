@@ -1,4 +1,3 @@
-
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
