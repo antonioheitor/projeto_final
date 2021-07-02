@@ -1,23 +1,16 @@
 <?php
-session_start();
 
 if (isset($_SESSION["nome"])) {
-    $USER_NAME = $_SESSION["nome"];
-
+    $user_name = $_SESSION["nome"];
 }
 
 if (isset($_SESSION["id"])) {
-    $USER_ID = $_SESSION["id"];
-
+    $user_id = $_SESSION["id"];
 }
 
 if (isset($_SESSION["role"])) {
-    $USER_ROLE = $_SESSION["role"];
-
+    $user_role = $_SESSION["role"];
 }
-
-
-
 ?>
 
 
@@ -26,7 +19,9 @@ if (isset($_SESSION["role"])) {
     <ul class="navbar-nav justify-content-center">
 
         <?php
-        if ($USER_ROLE == "3") {
+        echo $_SESSION["role"];
+
+        if ($user_role == "3") {
             echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -50,7 +45,7 @@ if (isset($_SESSION["role"])) {
 <nav class="fixed-top navbar-expand navbar-dark d-none d-lg-block nav_cima">
     <ul class="navbar-nav">
         <?php
-        if ($USER_ROLE == "3") {
+        if ($user_role == "3") {
             echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -68,9 +63,11 @@ if (isset($_SESSION["role"])) {
 
 
 
-        if (isset($USER_NAME)){
+        if (isset($user_name)){
             echo "<li class='nav-item dropdown'>                                                              
-                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" . $USER_NAME ."   
+                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" .
+                $user_name
+                ."   
                                   <span class='caret'></span></a>                                                     
                               <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'> 
                                 <li><a class='dropdown-item' href='perfil.php'>A tua conta</a></li>                     

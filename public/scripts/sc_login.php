@@ -26,7 +26,6 @@ if (isset($_POST["email_users"]) && isset($_POST["password"]) ) {
                     $_SESSION["id"] = $id_utilizador;
                     $_SESSION["nome"] = $nome_users;
                     $_SESSION["role"] = $perfil;
-
                     // Feedback de sucesso
                     header("Location: ../homepage.php");
                 } else {

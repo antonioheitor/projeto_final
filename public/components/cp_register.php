@@ -65,7 +65,8 @@
                 </div>
                 <div class="form-group rounded bg-light pb-4">
                     <p class="px-3 pt-3">Faz upload da tua foto de perfil!</p>
-                    <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="fileToUpload" id="customFile"/>
+                    <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="imgperfil"
+                           id="customFile"/>
                 </div>
                 <div class="row justify-content-center mb-5 mt-2">
                     <button class="btnlogin w-50 text-center col-4" data-dismiss="modal" type="submit">
