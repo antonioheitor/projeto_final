@@ -35,8 +35,8 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     <section class="row sticky-top">
         <div class="col-12 text-center background">
             <a id="fechar" href="conversas.php" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
-            <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo  ?></p>
-            <p class="pt-5 pb-1 d-md-none h_pequeno">Tribo de <?= $nome_grupo  ?></p>
+            <p class="pt-5 pb-1 d-md-block d-none h"><?= $nome_grupo  ?></p>
+            <p class="pt-5 pb-1 d-md-none h_pequeno"><?= $nome_grupo  ?></p>
         </div>
     </section>
 
