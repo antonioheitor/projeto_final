@@ -136,7 +136,7 @@
                             </select>
                         </div>
                         <div class="dropdown text-center mt-4">
-                            <label>Área da Tribo</label>
+                            <label>Tema da Tribo</label>
                             <select class="form-control" name="$temas_id_temas">
                                 <?php
 
@@ -144,7 +144,7 @@
                                 $stmt = mysqli_stmt_init($link);
 
 
-                                $query = "SELECT id_areas, nome_areas FROM areas ORDER BY nome_areas;";
+                                $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema;";
 
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -152,16 +152,16 @@
 
                                     mysqli_stmt_execute($stmt);
 
-                                    mysqli_stmt_bind_result($stmt, $id_areas, $nome_areas);
+                                    mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema);
 
 
                                     while (mysqli_stmt_fetch($stmt)) {
                                         $selected2 = "";
-                                        if ($temas_id_temas == $id_areas) {
+                                        if ($temas_id_temas == $id_temas) {
                                             $selected2 = "selected";
                                         }
 
-                                        echo "<option value='$id_areas' $selected2>$nome_areas</option>";
+                                        echo "<option value='$id_temas' $selected2>$nome_tema</option>";
                                     }
 
 
