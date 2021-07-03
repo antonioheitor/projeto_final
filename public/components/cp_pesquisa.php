@@ -1,4 +1,6 @@
-<?php require_once "../connections/connection.php";;
+<?php
+
+require_once "../connections/connection.php";
 
 $link = new_db_connection();
 

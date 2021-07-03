@@ -1,5 +1,5 @@
-<main class="container-fluid mt-4">
-    <section class="row justify-content-center pt-5 mb-3">
+<main class="container-fluid mt-lg-4">
+    <section class="row justify-content-center pt-lg-5 mb-4 pt-2">
         <form class="col-11 mt-lg-4" action="pesquisa.php">
             <div class="row">
                 <input type="text" id="procura" class="shadow-sm col-11" name="procura" placeholder="Pesquisa...">
