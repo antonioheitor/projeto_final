@@ -1,7 +1,7 @@
 <?php
 require_once "../connections/connection.php";
 
-if (isset($_POST["email_users"]) && isset($_POST["password"]) ) {
+if (isset($_POST["email_users"]) && isset($_POST["password"]) && $_POST["email_users"] != "" && $_POST["password"] != "" ) {
     $email_users = $_POST['email_users'];
     $password = $_POST['password'];
 
