@@ -57,13 +57,49 @@
             </div>
         </a>
 
-        <a href="login.php" class="text-decoration-none">
+        <a href="#" data-target="#myModal2" data-toggle="modal" class="text-decoration-none">
             <div class="row mb-2 py-4 border-top border-dark">
                 <i class="fas fa-sign-out-alt fa-2x"></i>
                 <p class="ml-3 h_definicoes">Terminar Sessão</p>
             </div>
         </a>
     </section>
+
+
+    <div class="modal show margemmodal" id="myModal2">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <!-- CONTEÚDO DO MODAL ######################### -->
+            <div class="modal-content bg-white text-dark bordermodal">
+
+                <!-- CABEÇALHO DO MODAL ######################### -->
+                <div class="modal-header mx-auto">
+                    <h3 class="text-center pt-3">Tens a certeza que queres sair?</h3>
+                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                </div>
+                <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
+                    <div class="row justify-content-center">
+                        <button class="btnlogin w-50 text-center col-4" type="submit">
+                            Submeter Dados
+                        </button>
+                    </div>
+                </form>
+                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                <!-- CORPO DO MODAL ######################### -->
+                <div class="modal-body mx-auto text-center bgdark">
+                </div>
+                <!-- RODAPÉ DO MODAL ######################### -->
+                <div class="modal-footer">
+                    <p class="small mx-auto">Hi-Tribe</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
     <?php
     require_once "connections/connection.php";
 

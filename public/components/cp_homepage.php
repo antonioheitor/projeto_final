@@ -76,7 +76,7 @@ WHERE users_id_users = ?;";
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center col-4"type="submit">
+                        <button class="btnlogin w-50 text-center col-4" type="submit">
                             Submeter Dados
                         </button>
                     </div>
