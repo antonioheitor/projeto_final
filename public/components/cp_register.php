@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="row justify-content-center mb-5 mt-3">
-                    <button class="btnlogin py-3 text-center col-4" data-dismiss="modal" type="submit">
+                    <button class="btnlogin py-3 text-center col-4" data-dismiss="modal">
                         <a href="login.php" class="text-white text-decoration-none">Já tens conta?</a>
                     </button>
                 </div>
