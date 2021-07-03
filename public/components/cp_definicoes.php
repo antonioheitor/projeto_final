@@ -64,7 +64,46 @@
             </div>
         </a>
     </section>
+    <?php
+    require_once "connections/connection.php";
 
+
+    $link = new_db_connection();
+
+    $stmt = mysqli_stmt_init($link);
+
+    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, temas_id_temas FROM grupo WHERE id_grupo = 4;";
+
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+
+    if (mysqli_stmt_execute($stmt)) {
+
+    mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
+
+    if (!mysqli_stmt_fetch($stmt)) {
+
+    header("Location: users.php");
+
+    }
+
+    $_SESSION["id_grupo"] = $id_grupo;
+
+    } else {
+
+    }
+    //mostrar o codigo a apresentar
+    } else {
+
+    echo "ERRORRRRR: " . mysqli_error($link);
+    }
+    mysqli_stmt_close($stmt);
+
+
+
+    ?>
 
     <!-- Modal da criacao de grupo -->
     <div class="modal show margemmodal" id="myModalgroup">
@@ -78,13 +117,12 @@
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
+
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <form method="post" role="form" id="new-tribe-form" action="scripts/sc_new_tribo.php" enctype="multipart/form-data">
-                    <p class="ml-3 mt-3 text-center">Nome da Tribo</p>
-                    <input class="w-50 mx-auto" name="nome_tribo" type="text">
+                    <input class="w-50 mx-auto" name="nome_tribo" type="text" placeholder="<?= $nome_grupo ?>">
                     <div class="modal-body">
-                        <p class="text-center">Descrição da Tribo</p>
-                        <input class="w-50 mx-auto" name="descricao_tribo" type="text">
+                        <input class="w-50 mx-auto" name="descricao_tribo" type="text" placeholder="<?= $descricao_grupo ?>">
                         <p class="text-center mt-4">Selecione imagem para a Tribo</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload" id="customFile1"/>
                         <div class="dropdown text-center mt-4">
@@ -92,9 +130,8 @@
                             <select class="form-control" name="sedes_id_sede_grupo">
                                 <?php
 
-                                require_once "connections/connection.php";
 
-                                $link = new_db_connection();
+
 
 
                                 $stmt = mysqli_stmt_init($link);
@@ -137,7 +174,7 @@
                         </div>
                         <div class="dropdown text-center mt-4">
                             <label>Tema da Tribo</label>
-                            <select class="form-control" name="$temas_id_temas">
+                            <select class="form-control" name="temas_id_temas">
                                 <?php
 
 

@@ -84,7 +84,7 @@ if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) && isset($_P
         $imagem_grupo = $target_file;
     }
 
-    $data_criacao_grupo = "2021-05-05";
+    $data_criacao_grupo = "2021-05-07";
 
     $sedes_id_sede_grupo = $_POST['sedes_id_sede_grupo'];
     $temas_id_temas = $_POST['temas_id_temas'];

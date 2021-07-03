@@ -63,7 +63,7 @@ mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
             while (mysqli_stmt_fetch($stmt2)) { ?>
                 <article class="col-6 col-md-4 borda_post text-center mx-5 my-3 shadow">
                     <div class="m-1 m-sm-3">
-                        <img src="images/rock.jpg" class="img-fluid rounded mt-3">
+                        <img src="../uploads/<?= $imagem_grupo ?>" class="img-fluid rounded mt-3">
                         <h5 class="mt-2"><?= $nome_grupo ?></h5>
                         <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Entra na
                             conversa</a>
