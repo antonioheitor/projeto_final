@@ -58,15 +58,13 @@
                     <input type="password" class="px-5 py-3 border-0" aria-describedby="password" name="password" placeholder="Palavra-Passe">
                 </div>
                 <section class="row justify-content-center mt-5">
-                <button class="btnlogin py-3 mx-auto text-light mx-auto" type="submit">Entrar</button>
+                    <button class="btnlogin py-3 mx-auto text-light mx-auto" type="submit">Entrar</button>
+                </section>
+
+                <section class="row justify-content-center pt-3">
+                    <button class="btnlogin py-3 mx-auto text-light" type="button"><a href="register.php" class="text-decoration-none text-white">Registar</a></button>
                 </section>
             </form>
         </div>
-    </section>
-
-
-
-    <section class="row justify-content-center pt-3">
-        <button class="btnlogin py-3 mx-auto text-light" type="button"><a href="register.php" class="text-decoration-none text-white">Registar</a></button>
     </section>
 </main>
