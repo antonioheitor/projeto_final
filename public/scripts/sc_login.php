@@ -50,7 +50,4 @@ if (isset($_POST["email_users"]) && isset($_POST["password"]) ) {
 }else {
     echo "Campos do formulário por preencher";
 }
-
-
-
 ?>
