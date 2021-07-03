@@ -29,8 +29,6 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     }
 }?>
 
-
-
 <main class="container-fluid background">
     <section class="row sticky-top">
         <div class="col-12 text-center background">

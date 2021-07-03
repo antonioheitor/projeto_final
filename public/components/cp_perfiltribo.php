@@ -1,4 +1,4 @@
-<main class="container-fluid container-md background">
+<main class="container-fluid background">
     <section class="row">
         <a href="pesquisa.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
         <a id="def" href="definicoestribo.php" class="m-3 dto"><i class="fas fa-cog fa-2x"></i></a>
