@@ -1,3 +1,54 @@
+<?php
+
+require_once "connections/connection.php";
+
+if (isset($_GET["id"])) {
+    $id_grupo = $_GET["id"];
+}
+
+
+$link = new_db_connection();
+
+$stmt = mysqli_stmt_init($link);
+
+$query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, nome_sede, temas_id_temas, nome_tema FROM grupo INNER JOIN sedes ON id_sede_grupo = sedes_id_sede_grupo INNER JOIN temas ON id_temas = temas_id_temas WHERE id_grupo = ?";
+
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+    mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
+
+    if (mysqli_stmt_execute($stmt)) {
+
+        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
+
+        if (!mysqli_stmt_fetch($stmt)) {
+
+            header("Location: users.php");
+
+        }
+
+        $_SESSION["id_grupo"] = $id_grupo;
+
+    } else {
+
+    }
+    //mostrar o codigo a apresentar
+} else {
+
+    echo "ERRORRRRR: " . mysqli_error($link);
+}
+mysqli_stmt_close($stmt);
+
+
+
+?>
+
+
+
+
+
 <main class="container-fluid background">
     <section class="row">
         <a href="pesquisa.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
@@ -5,22 +56,22 @@
     </section>
 
     <section class="row justify-content-center align-items-stretch">
-        <img src="images/perfil_tribo.jpg" alt="" class="w-100">
+        <img src="../uploads/<?= $imagem_grupo ?>" alt="" class="w-100">
     </section>
 
     <section class="row justify-content-center mt-5">
-        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de Skate</p>
-        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de Skate</p>
+        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo ?></p>
+        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
-        <p class="col-11 text-center font-weight-bold">Gostas de skatar? Anda daí partilhar os teus truques, aprender uns novos e conhecer malta fixe. Esta é a tua tribo!</p>
+        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
         <div class="col-8">
             <div class="row borda_post shadow-sm text-center pt-3 pb-2">
-                <h5 class="col-12 text-center"><b>Sede:</b> Skatepark, Parque da Macaca</h5>
+                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede ?></h5>
             </div>
         </div>
 
@@ -33,15 +84,40 @@
     </section>
 
     <span id="posts" class="mt-5">
+        <?php
+        $stmt = mysqli_stmt_init($link);
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
+INNER JOIN grupo
+ON grupo.id_grupo = posts.grupo_id_grupo
+INNER JOIN users
+ON users.id_users = posts.users_id_users
+WHERE id_grupo = ?";
+
+        /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
+        nome_grupo, grupo_id_grupo FROM posts
+INNER JOIN grupo
+ON grupo_id_grupo = id_grupo
+WHERE users_id_users = ?;";*/
+
+
+        if (mysqli_stmt_prepare($stmt, $query)) {
+
+        mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
+
+        while (mysqli_stmt_fetch($stmt)) { ?>
         <section class="row my-4 justify-content-center">
             <article class="col-11 borda_post shadow">
                 <div class="row mt-1">
                     <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="images/1.jpeg" class="img-fluid rounded-circle p-sm-1">
+                        <img src="../uploads/<?= $imagem_grupo ?>" class="img-fluid rounded-circle p-sm-1">
                     </div>
                     <div class="col-8 col-sm-8 position-relative">
-                        <h4 class="pt-3">Sara Rocha</h4>
-                        <p>Tribo do Skate * 13/05/2021</p>
+                        <h4 class="pt-3"><?= $nome_user ?></h4>
+                        <p>Tribo de <?= $nome_grupo ?> * <?= $data_criacao_post ?></p>
                     </div>
                     <div class="col-2 col-lg-3 text-right my-auto">
                         <div class="dropdown show">
@@ -61,85 +137,25 @@
                 </div>
 
                 <div class="pt-2">
-                    <p>Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está classificado como o 6º melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!</p>
+                    <p><?= $titulo_post ?></p>
+                    <p><?= $conteudo_post ?></p>
+                    <img src="../uploads/<?= $imagem_post ?>">
                     <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
                     </div>
                 </div>
             </article>
         </section>
+        <?php }
+            mysqli_stmt_close($stmt);
+        }
+        mysqli_close($link);
 
-        <section class="row my-4 justify-content-center">
-            <article class="borda_post shadow col-11">
-                <div class="row mt-1">
-                    <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="images/4.jpg" class="img-fluid rounded-circle p-sm-1">
-                    </div>
-                    <div class="col-8 col-sm-8 position-relative">
-                        <h4 class="pt-3">Ana Pedro</h4>
-                        <p>Tribo do Skate * 12/05/2021</p>
-                    </div>
-                    <div class="col-2 col-lg-3 text-right my-auto">
-                        <div class="dropdown show">
-                        <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3"
-                                   data-toggle="modal">Guardar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal5"
-                                   data-toggle="modal">Denunciar</a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
 
-                <div class="pt-2">
-                    <img src="images/3.jpg" class="img-fluid col-12 ">
-                    <div class="text-right py-2">
-                        <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
-                    </div>
-                </div>
-            </article>
-        </section>
+        ?>
 
-        <section class="row my-4 justify-content-center">
-            <article class="borda_post shadow col-11">
-                <div class="row mt-1">
-                    <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="images/6.jpg" class="img-fluid rounded-circle p-sm-1">
-                    </div>
-                    <div class="col-8 col-sm-8 position-relative">
-                        <h4 class="pt-3">Inês Isabel</h4>
-                        <p>Tribo do Skate * 11/05/2021</p>
-                    </div>
-                    <div class="col-2 col-lg-3 text-right my-auto">
-                        <div class="dropdown show">
-                        <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3"
-                                   data-toggle="modal">Guardar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal5"
-                                   data-toggle="modal">Denunciar</a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
 
-                <div class="pt-2">
-                    <p>Já viram o filme Mid90's? Bem nice, a malta skata bué!!!!!!!!!!</p>
-                    <div class="float-right pb-2">
-                        <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
-                    </div>
-                </div>
-            </article>
-        </section>
+
     </span>
 
     <!-- COMENTÁRIOS -->
