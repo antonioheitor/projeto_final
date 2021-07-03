@@ -7,10 +7,12 @@ session_start();
     <ul class="navbar-nav justify-content-center">
 
         <?php
-
-        if ($_SESSION['role'] == "3") {
-            echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+        if (isset($_SESSION['id'])) {
+            if ($_SESSION['role'] == "3") {
+                echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+            }
         }
+
 
         ?>
         <li class="icones">
@@ -22,9 +24,18 @@ session_start();
         <li class="icones">
             <a class="nav-link" href="conversas.php"><i class="far fa-2x fa-comments"></i></a>
         </li>
-        <li class="icones">
-            <a class="nav-link" href="perfil.php"><i class="far fa-2x fa-comments"></i></a>
-        </li>
+        <?php
+        if (isset($_SESSION['id'])){
+            echo "<li class=\"icones\">
+            <a class=\"nav-link\" href=\"perfil.php\"><i class=\"far fa-2x fa-user\"></i></a>
+        </li>";
+        }else {
+            echo "<li class=\"icones\">
+            <a class=\"nav-link\" href=\"login.php\"><i class=\"fas fa-2x fa-sign-in-alt\"></i></a>
+        </li>";
+        }
+        ?>
+
 
     </ul>
 </nav>
@@ -32,10 +43,11 @@ session_start();
 <nav class="fixed-top navbar-expand navbar-dark d-none d-lg-block nav_cima">
     <ul class="navbar-nav">
         <?php
-        if ($_SESSION['role'] == "3") {
-            echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+        if (isset($_SESSION['id'])) {
+            if ($_SESSION['role'] == "3") {
+                echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+            }
         }
-
         ?>
         <li class="mx-3">
             <a class="nav-link" href="homepage.php"><p>Homepage</p></a>

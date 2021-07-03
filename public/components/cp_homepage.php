@@ -53,11 +53,8 @@ WHERE users_id_users = ?;";
                                 if (mysqli_stmt_prepare($stmt, $query)) {
 
                                     mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
-
                                     mysqli_stmt_execute($stmt);
-
                                     mysqli_stmt_bind_result($stmt, $grupo_id_grupo, $id_grupo, $nome_grupo);
-
 
                                     while (mysqli_stmt_fetch($stmt)) {
                                         $selected1 = "";
@@ -67,17 +64,12 @@ WHERE users_id_users = ?;";
 
                                         echo "<option value='$id_grupo' $selected1>$nome_grupo</option>";
                                     }
-
-
                                 } else {
-
                                     echo "ERRORRRRR: " . mysqli_error($link);
                                 }
                                 //close connection
 
                                 mysqli_stmt_close($stmt);
-
-
 
                                 ?>
                             </select>
@@ -107,10 +99,18 @@ WHERE users_id_users = ?;";
     <section class="row my-4 justify-content-center">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users, nome_grupo, grupo_id_grupo FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
+INNER JOIN grupo
+ON grupo.id_grupo = posts.grupo_id_grupo
+INNER JOIN users
+ON users.id_users = posts.users_id_users
+WHERE users_id_users = ?";
+
+        /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
+        nome_grupo, grupo_id_grupo FROM posts
 INNER JOIN grupo
 ON grupo_id_grupo = id_grupo
-WHERE users_id_users = ?;";
+WHERE users_id_users = ?;";*/
 
 
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -118,7 +118,8 @@ WHERE users_id_users = ?;";
         mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $users_id_users, $nome_grupo, $grupo_id_grupo );
+        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
 
         while (mysqli_stmt_fetch($stmt)) { ?>
         <article class="col-11 borda_post shadow mb-4">
@@ -129,7 +130,7 @@ WHERE users_id_users = ?;";
                     <img src="../uploads/<?= $imagem_post ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3"><?= $users_id_users ?></h4>
+                    <h4 class="pt-3"><?= $nome_user ?></h4>
                     <p>Tribo de <?= $nome_grupo ?> * <?= $data_criacao_post ?></p>
                 </div>
                 <div class="col-2 col-lg-3 text-right my-auto">
