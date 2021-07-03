@@ -68,13 +68,12 @@
                     <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="imgperfil"
                            id="customFile"/>
                 </div>
-                <div class="row justify-content-center mb-5 mt-2">
-                    <button class="btnlogin w-50 text-center col-4" data-dismiss="modal" type="submit">
-Submeter Dados
-                    </button>
+                <div class="row justify-content-center mt-3">
+                    <button class="btnlogin py-3 text-center col-4" data-dismiss="modal" type="submit">Submeter Dados</button>
                 </div>
-                <div class="row justify-content-center mb-5 mt-2">
-                    <button class="btnlogin w-50 text-center col-4" data-dismiss="modal" type="submit">
+
+                <div class="row justify-content-center mb-5 mt-3">
+                    <button class="btnlogin py-3 text-center col-4" data-dismiss="modal" type="submit">
                         <a href="login.php" class="text-white text-decoration-none">Já tens conta?</a>
                     </button>
                 </div>
