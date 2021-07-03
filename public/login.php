@@ -6,7 +6,6 @@
     <?php include_once "helpers/help_css.php"; ?>
 </head>
 <body>
-<!-- Navigation-->
 <!-- Page Content-->
 <?php include_once "components/cp_login.php"; ?>
 
