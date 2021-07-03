@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION["nome"])) {
-    $USER_NAME = $_SESSION["nome"];
-
-}
-
-if (isset($_SESSION["id"])) {
-    $USER_ID = $_SESSION["id"];
-
-}
-
-if (isset($_SESSION["role"])) {
-    $USER_ROLE = $_SESSION["role"];
-
-}
-
-
-
-?>
-
-
 
 <main class="container-fluid mt-lg-5 pt-2">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
@@ -75,7 +52,7 @@ WHERE users_id_users = ?;";
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
 
-                                    mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+                                    mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
 
                                     mysqli_stmt_execute($stmt);
 
@@ -138,7 +115,7 @@ WHERE users_id_users = ?;";
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 
-        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+        mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $users_id_users, $nome_grupo, $grupo_id_grupo );
@@ -152,7 +129,7 @@ WHERE users_id_users = ?;";
                     <img src="../uploads/<?= $imagem_post ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3"><?= $USER_NAME ?></h4>
+                    <h4 class="pt-3"><?= $users_id_users ?></h4>
                     <p>Tribo de <?= $nome_grupo ?> * <?= $data_criacao_post ?></p>
                 </div>
                 <div class="col-2 col-lg-3 text-right my-auto">

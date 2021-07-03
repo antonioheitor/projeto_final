@@ -1,20 +1,23 @@
 <?php
-session_start();
-
-if (isset($_SESSION["nome"])) {
-    $USER_NAME = $_SESSION["nome"];
-
-}
+require_once "connections/connection.php";
 
 if (isset($_SESSION["id"])) {
-    $USER_ID = $_SESSION["id"];
-
+    $user_id = $_SESSION["id"];
 }
 
-if (isset($_SESSION["role"])) {
-    $USER_ROLE = $_SESSION["role"];
+$link = new_db_connection();
 
-}
+$stmt = mysqli_stmt_init($link);
+$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users
+WHERE users.id_users = ?";
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+mysqli_stmt_bind_param($stmt, 'i', $user_id);
+mysqli_stmt_execute($stmt);
+
+mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
+
 ?>
 
 <main class="container-fluid">
@@ -29,52 +32,46 @@ if (isset($_SESSION["role"])) {
             <a href="guardados.php"><i class="far fa-bookmark fa-2x fa-lg-3x float-right pr-1"></i></a>
         </article>
     </section>
+    <?php
+    while (mysqli_stmt_fetch($stmt)) {
+        ?>
+        <section class="row no-gutters">
+            <article class="col-12 text-center">
+                <img class="rounded-circle perfil" src="<?=$imagem ?>">
+            </article>
+        </section>
 
-    <section class="row no-gutters">
-        <article class="col-12 text-center">
-            <img class="rounded-circle perfil" src="images/2.jpeg">
-        </article>
-    </section>
-
-    <article class="col-12 text-center mb-5">
-        <h1 class="mt-3"><?= $USER_NAME ?></h1>
-        <h2 class="mt-1">Gestão, UA</h2>
-    </article>
+        <article class="col-12 text-center mb-5">
+            <h1 class="mt-3"><?= $nome ?></h1>
+        </article> <?php
+    } ?>
 
     <section class="row justify-content-center">
         <?php
-        require_once "connections/connection.php";
+
+        $stmt2 = mysqli_stmt_init($link);
+        $query2 = "SELECT imagem_grupo, grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE users_id_users = ? ;";
 
 
+        if (mysqli_stmt_prepare($stmt2, $query2)) {
 
+            mysqli_stmt_bind_param($stmt2, 'i', $user_id);
+            mysqli_stmt_execute($stmt2);
 
-        $link = new_db_connection();
+            mysqli_stmt_bind_result($stmt2, $imagem_grupo, $grupo_id_grupo, $nome_grupo);
 
-        $stmt = mysqli_stmt_init($link);
+            while (mysqli_stmt_fetch($stmt2)) { ?>
+                <article class="col-6 col-md-4 borda_post text-center mx-5 my-3 shadow">
+                    <div class="m-1 m-sm-3">
+                        <img src="images/rock.jpg" class="img-fluid rounded mt-3">
+                        <h5 class="mt-2"><?= $nome_grupo ?></h5>
+                        <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Entra na
+                            conversa</a>
+                    </div>
 
-
-        $stmt = mysqli_stmt_init($link);
-        $query = "SELECT imagem_grupo, grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE users_id_users = ? ;";
-
-
-        if (mysqli_stmt_prepare($stmt, $query)) {
-
-        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
-        mysqli_stmt_execute($stmt);
-
-        mysqli_stmt_bind_result($stmt, $imagem_grupo, $grupo_id_grupo, $nome_grupo );
-
-        while (mysqli_stmt_fetch($stmt)) { ?>
-        <article class="col-6 col-md-4 borda_post text-center mx-5 my-3 shadow">
-            <div class="m-1 m-sm-3">
-                <img src="images/rock.jpg" class="img-fluid rounded mt-3">
-                <h5 class="mt-2"><?= $nome_grupo ?></h5>
-                <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Entra na conversa</a>
-            </div>
-
-        </article>
-        <?php }
-            mysqli_stmt_close($stmt);
+                </article>
+            <?php }
+            mysqli_stmt_close($stmt2);
         }
         mysqli_close($link);
 
@@ -82,3 +79,4 @@ if (isset($_SESSION["role"])) {
         ?>
     </section>
 </main>
+<?php }?>

@@ -1,27 +1,14 @@
 <?php
+session_start();
 
-if (isset($_SESSION["nome"])) {
-    $user_name = $_SESSION["nome"];
-}
-
-if (isset($_SESSION["id"])) {
-    $user_id = $_SESSION["id"];
-}
-
-if (isset($_SESSION["role"])) {
-    $user_role = $_SESSION["role"];
-}
 ?>
-
-
 
 <nav class="fixed-bottom navbar-expand navbar-dark py-2 d-lg-none nav_baixo">
     <ul class="navbar-nav justify-content-center">
 
         <?php
-        echo $_SESSION["role"];
 
-        if ($user_role == "3") {
+        if ($_SESSION['role'] == "3") {
             echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -45,7 +32,7 @@ if (isset($_SESSION["role"])) {
 <nav class="fixed-top navbar-expand navbar-dark d-none d-lg-block nav_cima">
     <ul class="navbar-nav">
         <?php
-        if ($user_role == "3") {
+        if ($_SESSION['role'] == "3") {
             echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
         }
 
@@ -61,14 +48,12 @@ if (isset($_SESSION["role"])) {
         </li>
         <?php
 
-
-
-        if (isset($user_name)){
+        if (isset($_SESSION['id'])){
             echo "<li class='nav-item dropdown'>                                                              
-                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>" .
-                $user_name
-                ."   
-                                  <span class='caret'></span></a>                                                     
+                              <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>"
+                .$_SESSION['nome']
+                ."<span 
+            class='caret'></span></a>                                                     
                               <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'> 
                                 <li><a class='dropdown-item' href='perfil.php'>A tua conta</a></li>                     
                                   <li><a class='dropdown-item' href='scripts/sc_logout.php'>Logout</a></li>           
@@ -79,7 +64,7 @@ if (isset($_SESSION["role"])) {
         }  else {
 
             echo "<li class='mx-3'>
-            <a class='nav-link' href='login.php'>Perfil</a>
+            <a class='nav-link' href='login.php'>LogIn</a>
         </li>";
         }
 
