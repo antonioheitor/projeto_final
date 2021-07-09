@@ -49,7 +49,8 @@ if (mysqli_stmt_prepare($stmt, $query)) {
         <article class="col-11 borda_post shadow my-3 p-4">
             <div class="row">
                 <div class="col-10">
-                    <a href="chat.php?id=<?= $grupo_id_grupo ?>" class="text-decoration-none"><h2 class="mb-0 py-3">Tribo de <?= $nome_grupo ?></h2></a>
+                    <a href="chat.php?chat=<?= $grupo_id_grupo ?>" class="text-decoration-none"><h2 class="mb-0
+                    py-3">Tribo de <?= $nome_grupo ?></h2></a>
                 </div>
                 <div class="col-2 my-auto">
                     <i class="far fa-comment-dots fa-3x float-right"></i>
