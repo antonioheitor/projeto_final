@@ -1,34 +1,53 @@
 <?php
 require_once "connections/connection.php";
 
-if (isset($_GET["id"])) {
-    $grupo_id_grupo = $_GET["id"];
+if (isset($_GET["chat"])) {
+    $grupo_id_grupo = $_GET["chat"];
 }
-
 
 $link = new_db_connection();
 
-$stmt = mysqli_stmt_init($link);
+$stmt1 = mysqli_stmt_init($link);
+$query1 = "SELECT grupo_id_grupo,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE grupo_id_grupo = ?";
 
+if (mysqli_stmt_prepare($stmt1, $query1)) {
 
-$stmt = mysqli_stmt_init($link);
-$query = "SELECT grupo_id_grupo ,nome_grupo FROM users_has_grupo INNER JOIN grupo ON grupo_id_grupo = id_grupo  WHERE grupo_id_grupo = ? ;";
+    mysqli_stmt_bind_param($stmt1, 'i', $grupo_id_grupo);
+    mysqli_stmt_execute($stmt1);
 
+    mysqli_stmt_bind_result($stmt1, $grupo_id_grupo, $nome_grupo);
 
-if (mysqli_stmt_prepare($stmt, $query)) {
-
-    mysqli_stmt_bind_param($stmt, 'i', $grupo_id_grupo);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_bind_result($stmt, $grupo_id_grupo, $nome_grupo);
-
-    if (!mysqli_stmt_fetch($stmt)) {
+    if (!mysqli_stmt_fetch($stmt1)) {
 
         header("Location: users.php");
 
     }
-}?>
+}
 
+$stmt2 = mysqli_stmt_init($link);
+$query2 = "SELECT mensagens.mensagem_chat, mensagens.data_msg, grupo.id_grupo, users.nome_users FROM mensagens
+INNER JOIN users 
+ON users.id_users = mensagens.users_id_users
+INNER JOIN grupo
+ON grupo.id_grupo = mensagens.grupo_id_grupo
+WHERE grupo_id_grupo = ?";
+
+if (mysqli_stmt_prepare($stmt2, $query2)) {
+
+    echo "<p>a partir daqui não funciona</p>";
+
+    mysqli_stmt_bind_param($stmt2, 'i', $grupo_id_grupo);
+    mysqli_stmt_execute($stmt2);
+
+    mysqli_stmt_bind_result($stmt2, $mensagem, $data, $grupo_id_grupo, $user);
+    if (!mysqli_stmt_fetch($stmt2)) {
+
+        header("Location: users.php");
+
+    }
+}
+?>
+<!----
 <main class="container-fluid background">
     <section class="row sticky-top">
         <div class="col-12 text-center background">
@@ -43,8 +62,8 @@ if (mysqli_stmt_prepare($stmt, $query)) {
             <img src="images/1.jpeg" class="avatar d-none d-md-block">
             <div class="row ml-2">
                 <div class="col-10 col-lg-11 border border-dark rounded position-relative msgenviada">
-                    <h4 class="pt-3 text-light">Albertina Roxane</h4>
-                    <p class="text-light">Escangalhei-me a fazer um crooked grind, estou toda partida xd</p>
+                    <h4 class="pt-3 text-light"><?= $user ?></h4>
+                    <p class="text-light"><?=$mensagem ?>></p>
                 </div>
             </div>
         </article>
