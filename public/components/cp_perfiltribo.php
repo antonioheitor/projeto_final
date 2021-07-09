@@ -23,12 +23,6 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
         mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
 
-        if (!mysqli_stmt_fetch($stmt)) {
-
-            header("Location: users.php");
-
-        }
-
         $_SESSION["id_grupo"] = $id_grupo;
 
     } else {
