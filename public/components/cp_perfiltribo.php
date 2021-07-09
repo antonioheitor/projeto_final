@@ -50,22 +50,22 @@ mysqli_stmt_close($stmt);
     </section>
 
     <section class="row justify-content-center align-items-stretch">
-        <img src="../uploads/<?= $imagem_grupo ?>" alt="" class="w-100">
+        <img src="../uploads/<?= $imagem_grupo; ?>" alt="" class="w-100">
     </section>
 
     <section class="row justify-content-center mt-5">
-        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo ?></p>
-        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo ?></p>
+        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo; ?></p>
+        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo; ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
-        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo ?></p>
+        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo; ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
         <div class="col-8">
             <div class="row borda_post shadow-sm text-center pt-3 pb-2">
-                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede ?></h5>
+                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede; ?></h5>
             </div>
         </div>
 
@@ -107,11 +107,11 @@ WHERE users_id_users = ?;";*/
             <article class="col-11 borda_post shadow">
                 <div class="row mt-1">
                     <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="../uploads/<?= $imagem_grupo ?>" class="img-fluid rounded-circle p-sm-1">
+                        <img src="../uploads/<?= $imagem_grupo; ?>" class="img-fluid rounded-circle p-sm-1">
                     </div>
                     <div class="col-8 col-sm-8 position-relative">
-                        <h4 class="pt-3"><?= $nome_user ?></h4>
-                        <p>Tribo de <?= $nome_grupo ?> * <?= $data_criacao_post ?></p>
+                        <h4 class="pt-3"><?= $nome_user; ?></h4>
+                        <p>Tribo de <?= $nome_grupo; ?> * <?= $data_criacao_post; ?></p>
                     </div>
                     <div class="col-2 col-lg-3 text-right my-auto">
                         <div class="dropdown show">
@@ -131,9 +131,9 @@ WHERE users_id_users = ?;";*/
                 </div>
 
                 <div class="pt-2">
-                    <p><?= $titulo_post ?></p>
-                    <p><?= $conteudo_post ?></p>
-                    <img src="../uploads/<?= $imagem_post ?>">
+                    <p><?= $titulo_post; ?></p>
+                    <p><?= $conteudo_post; ?></p>
+                    <img src="../uploads/<?= $imagem_post; ?>">
                     <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
                     </div>
