@@ -2,63 +2,40 @@
 
 require_once "connections/connection.php";
 
+if (isset($_GET['area'])) {
+    $areas_id_areas = $_GET['area'];
+
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
-$stmt2 = mysqli_stmt_init($link);
 
-$query = "SELECT temas.id_temas, temas.nome_tema, areas.id_areas FROM temas
-INNER JOIN areas
-ON areas_id_areas = areas.id_areas";
 
-$query2 = "SELECT temas.id_temas, temas.nome_tema, areas.id_areas FROM temas
+$query = "SELECT temas.id_temas, temas.nome_tema, areas.id_areas, id_grupo, nome_grupo FROM temas
 INNER JOIN areas
 ON areas_id_areas = areas.id_areas
-WHERE areas.id_areas = ?";
+INNER JOIN grupo
+ON temas_id_temas = id_temas
+WHERE areas_id_areas = ?";
 
-if (isset($_GET["procura"])) {
-    $query = $query . " WHERE temas.nome_tema LIKE ?";
+
+
     if (mysqli_stmt_prepare($stmt, $query)) {
-        if (isset($_GET['procura'])) {
-            $procura = "%" . $_GET['procura'] . "%";
-            mysqli_stmt_bind_param($stmt, 's', $procura);
+
+            mysqli_stmt_bind_param($stmt, 's', $areas_id_areas);
         }
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id, $nome, $area);
-        ?>
-        <main class="container-fluid mt-lg-5">
-
-            <div class="galeria row mx-auto my-5">
-                <div class="col-6 col-md-4 col-lg-3 mb-2">
-                    <a href="perfil_tribo.php?grupo=<?= $id ?>">
-                        <img src="images/futebol.jpg" class="img-fluid m-2 redondo shadow">
-                        <h4 class="text-center ml-2"><?= $nome ?></h4>
-                    </a>
-                </div>
-            </div>
-        </main>
-        <?php
-    }
-} else {
-    if (mysqli_stmt_prepare($stmt2, $query2)) {
-        if (isset($_GET['area'])) {
-            $area = $_GET['area'];
-            mysqli_stmt_bind_param($stmt2, 's', $area);
-        }
-        mysqli_stmt_execute($stmt2);
-
-        mysqli_stmt_bind_result($stmt2, $id, $nome, $area); ?>
+        mysqli_stmt_bind_result($stmt, $id, $nome, $areas_id_areas, $id_grupo, $nome_grupo); ?>
         <main class="container-fluid mt-lg-5">
 
         <div class="galeria row mx-auto my-5 py-5">
 
             <?php
-        while (mysqli_stmt_fetch($stmt2)) {
+        while (mysqli_stmt_fetch($stmt)) {
             ?>
 
                     <div class="col-6 col-md-4 col-lg-3 mb-2">
-                        <a href="perfil_tribo.php?grupo=<?= $id ?>">
+                        <a href="perfil_tribo.php?tema=<?= $id ?>">
                             <img src="images/futebol.jpg" class="img-fluid m-2 redondo shadow">
                             <h4 class="text-center ml-2"><?= $nome ?></h4>
                         </a>
@@ -71,5 +48,5 @@ if (isset($_GET["procura"])) {
         </div>
         </main>
         <?php
-    }
+
 } ?>

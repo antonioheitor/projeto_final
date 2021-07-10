@@ -83,7 +83,7 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"])  && isset($_POST["g
     if ($target_file != null) {
         $imagem_post = $target_file;
     }
-
+//$data_criacao_post = "2021-06-06";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 

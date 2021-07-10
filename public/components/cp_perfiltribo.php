@@ -2,8 +2,8 @@
 
 require_once "connections/connection.php";
 
-if (isset($_GET["grupo"])) {
-    $id_grupo = $_GET["grupo"];
+if (isset($_GET["tema"])) {
+    $temas_id_temas = $_GET["tema"];
 }
 
 $link = new_db_connection();
@@ -22,13 +22,13 @@ WHERE temas_id_temas = ?";
 if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-    mysqli_stmt_bind_param($stmt, 'i', $id_temas);
+    mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
 
     if (mysqli_stmt_execute($stmt)) {
 
         mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
 
-        $_SESSION["id_grupo"] = $id_grupo;
+        $_SESSION["temas_id_temas"] = $temas_id_temas;
 
     } else {
 
