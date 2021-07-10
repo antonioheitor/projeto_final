@@ -99,12 +99,11 @@ WHERE users_id_users = ?;";
     <section class="row my-4 justify-content-center">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON users.id_users = posts.users_id_users
-WHERE 
 ORDER BY posts.data_criacao_post DESC";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
@@ -116,18 +115,18 @@ WHERE users_id_users = ?;";*/
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 
-        mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
+
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user, $imagem_user);
 
         while (mysqli_stmt_fetch($stmt)) { ?>
         <article class="col-11 borda_post shadow mb-4">
             <div class="row mt-1">
 
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="../uploads/<?= $imagem_post ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
+                    <img src="../uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_user ?></h4>
