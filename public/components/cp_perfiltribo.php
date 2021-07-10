@@ -2,22 +2,27 @@
 
 require_once "connections/connection.php";
 
-if (isset($_GET["id"])) {
-    $id_grupo = $_GET["id"];
+if (isset($_GET["grupo"])) {
+    $id_grupo = $_GET["grupo"];
 }
-
 
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
 
-$query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, nome_sede, temas_id_temas, nome_tema FROM grupo INNER JOIN sedes ON id_sede_grupo = sedes_id_sede_grupo INNER JOIN temas ON id_temas = temas_id_temas WHERE id_grupo = ?";
+$query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, nome_sede, temas_id_temas, nome_tema 
+FROM grupo 
+INNER JOIN sedes 
+ON id_sede_grupo = sedes_id_sede_grupo 
+INNER JOIN temas 
+ON id_temas = temas_id_temas 
+WHERE temas_id_temas = ?";
 
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-    mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
+    mysqli_stmt_bind_param($stmt, 'i', $id_temas);
 
     if (mysqli_stmt_execute($stmt)) {
 

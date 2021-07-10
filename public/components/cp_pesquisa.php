@@ -9,8 +9,7 @@ $stmt2 = mysqli_stmt_init($link);
 
 $query = "SELECT temas.id_temas, temas.nome_tema, areas.id_areas FROM temas
 INNER JOIN areas
-ON areas_id_areas = areas.id_areas 
-WHERE temas.areas_id_areas = areas.id_areas;";
+ON areas_id_areas = areas.id_areas";
 
 $query2 = "SELECT temas.id_temas, temas.nome_tema, areas.id_areas FROM temas
 INNER JOIN areas
@@ -57,7 +56,6 @@ if (isset($_GET["procura"])) {
             <?php
         while (mysqli_stmt_fetch($stmt2)) {
             ?>
-
 
                     <div class="col-6 col-md-4 col-lg-3 mb-2">
                         <a href="perfil_tribo.php?grupo=<?= $id ?>">
