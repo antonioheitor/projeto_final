@@ -174,8 +174,9 @@ WHERE users_id_users = ?;";*/
 
 
     <!-- COMENTÁRIOS -->
+
     <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal2">
+    <div class="modal show margemmodal" id="myModal<?= $id_comentario?>">
 
         <div class="modal-dialog modal-lg modal-dialog-centered">
 

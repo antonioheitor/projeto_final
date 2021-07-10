@@ -81,7 +81,7 @@
                 <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
                     <div class="row justify-content-center">
                         <button class="btnlogin w-50 text-center col-4" type="submit">
-                            Submeter Dados
+                            Sair
                         </button>
                     </div>
                 </form>

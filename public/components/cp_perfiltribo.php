@@ -28,15 +28,12 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
         mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
 
-
+        $_SESSION["temas_id_temas"] = $temas_id_temas;
 
     } else {
 
     }
-    if (!mysqli_stmt_fetch($stmt)) {
-
-echo "OLA N DEU :(";
-    }
+    //mostrar o codigo a apresentar
 } else {
 
     echo "ERRORRRRR: " . mysqli_error($link);
@@ -53,7 +50,7 @@ mysqli_stmt_close($stmt);
 
 <main class="container-fluid background">
     <section class="row">
-        <a href="filtros.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
+        <a href="pesquisa.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
         <a id="def" href="definicoestribo.php" class="m-3 dto"><i class="fas fa-cog fa-2x"></i></a>
     </section>
 
@@ -88,14 +85,12 @@ mysqli_stmt_close($stmt);
     <span id="posts" class="mt-5">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, id_temas FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
-    INNER JOIN temas
-    ON temas_id_temas = id_temas
 INNER JOIN users
 ON users.id_users = posts.users_id_users
-WHERE temas_id_temas = ?";
+WHERE id_grupo = ?";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -106,11 +101,11 @@ WHERE users_id_users = ?;";*/
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 
-        mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
+        mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user, $temas_id_temas);
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
 
         while (mysqli_stmt_fetch($stmt)) { ?>
         <section class="row my-4 justify-content-center">
