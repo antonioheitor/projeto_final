@@ -84,7 +84,6 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"])  && isset($_POST["g
         $imagem_post = $target_file;
     }
 
-    $data_criacao_post = "2021-06-06";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
@@ -92,10 +91,10 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"])  && isset($_POST["g
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "INSERT INTO posts (titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users, grupo_id_grupo ) VALUES (?,?,?,?,?,?)";
+    $query = "INSERT INTO posts (titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users, grupo_id_grupo ) VALUES (?,?,?,NOW(),?,?)";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
-        mysqli_stmt_bind_param($stmt, 'ssssii', $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post , $users_id_users, $grupo_id_grupo);
+        mysqli_stmt_bind_param($stmt, 'sssii', $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post , $users_id_users, $grupo_id_grupo);
 
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {

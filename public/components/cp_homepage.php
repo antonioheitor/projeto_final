@@ -104,7 +104,8 @@ INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON users.id_users = posts.users_id_users
-WHERE users_id_users = ?";
+WHERE 
+ORDER BY posts.data_criacao_post DESC";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
