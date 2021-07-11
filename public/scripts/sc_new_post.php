@@ -70,11 +70,7 @@ if ($uploadOk == 0) {
     }
 }
 
-
-
-
-
-if (isset($_POST["titulopost"]) && isset($_POST["descpost"])  && isset($_POST["grupo_id_grupo"]) ) {
+if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["grupo_id_grupo"]) ) {
     $titulo_post = $_POST['titulopost'];
     $conteudo_post = $_POST['descpost'];
 

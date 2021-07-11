@@ -1,7 +1,13 @@
 <?php
 require_once "../connections/connection.php";
-if (isset($_GET["chat"])) {
-    $grupo_id_grupo = $_GET["chat"];
+session_start();
+
+if (isset($_GET["sms"])) {
+    $grupo_id_grupo = $_GET["sms"];
+}
+
+if (isset($_SESSION['id'])) {
+    $id = $_SESSION['id'];
 }
 
 if (isset($_POST["sms"]) ) {
@@ -11,25 +17,25 @@ if (isset($_POST["sms"]) ) {
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "INSERT INTO mensagens (mensagem_chat, grupo_id_grupo, users_id_users, data_msg) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
+    $query = "INSERT INTO mensagens (mensagem_chat, imagem_chat, grupo_id_grupo, users_id_users, data_msg) VALUES (?, NULL, ?, ?, CURRENT_TIMESTAMP)";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
-        mysqli_stmt_bind_param($stmt, 'sii', $mensagem, $grupo_id_grupo, $_SESSION['id'] );
+        mysqli_stmt_bind_param($stmt, 'sii', $mensagem, $grupo_id_grupo, $id);
 
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             // Acção de sucesso
-            header("Location: ../chat.php");
+            echo "<p>1</p>";
         } else {
             // Acção de erro
-            header("Location: ../chat.php?msg=0#login");
-            echo "Error:" . mysqli_stmt_error($stmt);
+            echo "<p>2</p>";
+            echo $mensagem;
+            echo $grupo_id_grupo;
+            echo $id;
         }
     } else {
         // Acção de erro
-        echo "<p>erro2</p>";
-        header("Location: ../chat.php?msg=0#login");
-        echo "Error:" . mysqli_error($link);
+        echo "<p>3</p>";
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
