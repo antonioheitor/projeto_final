@@ -60,7 +60,7 @@ if (isset($_GET["grupo"])) {
             </div>
         </a>
 
-        <a href="perfil%20tribo.php" class="text-decoration-none">
+        <a href="perfil_tribo.php" class="text-decoration-none">
             <div class="row mb-2 py-4 border-top border-dark">
                 <i class="fas fa-sign-out-alt fa-2x"></i>
                 <p class="ml-3 h_definicoes">Sair da tribo</p>
