@@ -50,8 +50,8 @@ mysqli_stmt_close($stmt);
 
 <main class="container-fluid background">
     <section class="row">
-        <a href="pesquisa.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
-        <a id="def" href="definicoestribo.php" class="m-3 dto"><i class="fas fa-cog fa-2x"></i></a>
+        <a href="pesquisa.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
+        <a id="def" href="definicoestribo.php" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
     </section>
 
     <section class="row justify-content-center align-items-stretch">
