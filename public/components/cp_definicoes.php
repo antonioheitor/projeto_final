@@ -75,14 +75,12 @@
 
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tens a certeza que queres sair?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                    <h3 class="text-center pt-3">Tem a certeza que quer terminar sessão?</h3>
                 </div>
                 <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
-                    <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center col-4" type="submit">
-                            Sair
-                        </button>
+                    <div class="row justify-content-center mt-4">
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Terminar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->

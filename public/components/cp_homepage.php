@@ -227,7 +227,6 @@ WHERE users_id_users = ?;";*/
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja guardar?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
@@ -261,7 +260,6 @@ WHERE users_id_users = ?;";*/
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
@@ -295,7 +293,6 @@ WHERE users_id_users = ?;";*/
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja denunciar?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
