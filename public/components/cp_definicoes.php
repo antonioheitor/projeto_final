@@ -50,7 +50,7 @@
             </div>
         </a>
 
-        <a href="#" class="text-decoration-none">
+        <a href="#" data-target="#myModal3" data-toggle="modal" class="text-decoration-none">
             <div class="row mb-2 pt-4 border-top border-dark">
                 <i class="fas fa-heart-broken fa-2x"></i>
                 <p class="ml-3 h_definicoes">Desativar Conta</p>
@@ -65,17 +65,40 @@
         </a>
     </section>
 
-
-    <div class="modal show margemmodal" id="myModal2">
-
+    <div class="modal show margemmodal" id="myModal3">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
-
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tem a certeza que quer terminar sessão?</h3>
+                    <h3 class="text-center pt-3">Tem a certeza que deseja desativar a sua conta?</h3>
+                </div>
+                <form method="post" role="form" id="normal-form" action="#"> <!-- aqui por um script para apagar a conta da bd se der :) -->
+                    <div class="row justify-content-center mt-4">
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Desativar</button>
+                    </div>
+                </form>
+                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+                <!-- CORPO DO MODAL ######################### -->
+                <div class="modal-body mx-auto text-center bgdark">
+                </div>
+                <!-- RODAPÉ DO MODAL ######################### -->
+                <div class="modal-footer">
+                    <p class="small mx-auto">Hi-Tribe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal show margemmodal" id="myModal2">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <!-- CONTEÚDO DO MODAL ######################### -->
+            <div class="modal-content bg-white text-dark bordermodal">
+                <!-- CABEÇALHO DO MODAL ######################### -->
+                <div class="modal-header mx-auto">
+                    <h3 class="text-center pt-3">Tem a certeza que deseja terminar sessão?</h3>
                 </div>
                 <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
                     <div class="row justify-content-center mt-4">
@@ -84,7 +107,6 @@
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
                 <!-- CORPO DO MODAL ######################### -->
                 <div class="modal-body mx-auto text-center bgdark">
                 </div>
@@ -92,11 +114,8 @@
                 <div class="modal-footer">
                     <p class="small mx-auto">Hi-Tribe</p>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <?php
     require_once "connections/connection.php";
