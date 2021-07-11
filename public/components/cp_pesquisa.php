@@ -33,7 +33,7 @@ WHERE areas_id_areas = ?";
             ?>
 
                     <div class="col-6 col-md-4 col-lg-3 mb-2">
-                        <a href="perfil_tribo.php?tema=<?= $id ?>">
+                        <a href="perfil_tribo.php?grupo=<?= $id ?>">
                             <img src="images/futebol.jpg" class="img-fluid m-2 redondo shadow">
                             <h4 class="text-center ml-2"><?= $nome ?></h4>
                         </a>
