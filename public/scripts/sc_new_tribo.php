@@ -3,21 +3,15 @@ session_start();
 
 if (isset($_SESSION["nome"])) {
     $USER_NAME = $_SESSION["nome"];
-
 }
 
 if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
-
 }
 
 if (isset($_SESSION["role"])) {
     $USER_ROLE = $_SESSION["role"];
-
 }
-
-
-
 ?>
 
 
@@ -71,8 +65,6 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
-
-
 
 
 

@@ -182,20 +182,11 @@
                             <label>Sede da Tribo</label>
                             <select class="form-control" name="sedes_id_sede_grupo">
                                 <?php
-
-
-
-
-
                                 $stmt = mysqli_stmt_init($link);
-
 
                                 $query = "SELECT id_sede_grupo, nome_sede FROM sedes ORDER BY nome_sede;";
 
-
                                 if (mysqli_stmt_prepare($stmt, $query)) {
-
-
 
                                     mysqli_stmt_execute($stmt);
 
@@ -210,6 +201,7 @@
 
                                         echo "<option value='$id_sede_grupo' $selected1>$nome_sede</option>";
                                     }
+                                        echo "<option value='outro' $selected1>Nenhum</option>";
 
 
                                 } else {
@@ -229,13 +221,9 @@
                             <label>Tema da Tribo</label>
                             <select class="form-control" name="temas_id_temas">
                                 <?php
-
-
                                 $stmt = mysqli_stmt_init($link);
 
-
                                 $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema;";
-
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
 

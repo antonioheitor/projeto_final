@@ -1,6 +1,11 @@
 <?php
-session_start();
 
+session_start();
+if (!isset($_SESSION["id"])) {
+
+    header('Location: login.php');
+
+}
 ?>
 
 <nav class="fixed-bottom navbar-expand navbar-dark py-2 d-lg-none nav_baixo">

@@ -36,9 +36,6 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
     mysqli_stmt_execute($stmt2);
 
     mysqli_stmt_bind_result($stmt2, $mensagem, $data, $grupo_id_grupo, $user, $avatar);
-    if (!mysqli_stmt_fetch($stmt2)) {
-        header('Location: sessoes.php');
-    }
 }
 
 ?>
@@ -51,12 +48,12 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             <p class="pt-5 pb-1 d-md-none h_pequeno"><?= $nome_grupo ?></p>
         </div>
     </section>
-
+    <?php
+    while (mysqli_stmt_fetch($stmt2)) {
+    ?>
     <section class="row mt-4">
         <article class="col-12">
-            <?php
-            while (mysqli_stmt_fetch($stmt2)) {
-                ?>
+
 
                 <img src="<?= $avatar ?>" class="avatar d-none d-md-block">
                 <div class="row ml-2">
@@ -65,12 +62,12 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                         <p class="text-light"><?= $mensagem ?></p>
                     </div>
                 </div>
-            <?php
-            } ?>
+
         </article>
     </section>
 
-
+    <?php
+            } ?>
 
 
     <!------
