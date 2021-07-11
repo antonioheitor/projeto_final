@@ -23,11 +23,8 @@
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3"
-                                   data-toggle="modal">Guardar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal5"
-                                   data-toggle="modal">Denunciar</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +81,7 @@
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Remover</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                             </div>
                         </div>
