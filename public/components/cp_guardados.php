@@ -23,7 +23,7 @@
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Remover</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                             </div>
                         </div>
@@ -65,41 +65,71 @@
         </article>
     </section>
 
-    <section class="row my-4 justify-content-center ">
-        <article class="borda_post shadow col-11">
-            <div class="row mt-1">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/12.jpg" class="img-fluid rounded-circle p-sm-1">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Paulo Lopes</h4>
-                    <p>Tribo de Rock * 13/05/2021</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="dropdown show">
-                        <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- REMOVER -->
+    <!-- Button trigger modal -->
+    <div class="modal show margemmodal" id="myModal3">
 
-            <div class="pt-2">
-                <p>Sabem aqueles tempos nostálgicos? Dei por mim a ouvir Supertramp - Paris, album icónico que me
-                    leva para outro mundo! E melhor, ao vivo!! Apesar de já contar mais de 40 anos nunca é velho,
-                    desatualizado! Grandes Reis do Rock!
-                </p>
-                <div class="float-right pb-2">
-                    <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <!-- CONTEÚDO DO MODAL ######################### -->
+            <div class="modal-content bg-white text-dark bordermodal">
+
+                <!-- CABEÇALHO DO MODAL ######################### -->
+                <div class="modal-header mx-auto">
+                    <h3 class="text-center pt-3">Tem a certeza que deseja remover dos guardados?</h3>
+                </div>
+                <form method="post" class="text-center">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
+                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                    </div>
+                </form>
+                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                <!-- CORPO DO MODAL ######################### -->
+                <div class="modal-body mx-auto text-center bgdark">
+                </div>
+                <!-- RODAPÉ DO MODAL ######################### -->
+                <div class="modal-footer">
+                    <p class="small mx-auto">Hi-Tribe</p>
                 </div>
             </div>
-        </article>
-    </section>
+        </div>
+    </div>
+    <!-- Fim Modal -->
+
+    <!-- DENUNCIAR -->
+    <!-- Button trigger modal -->
+    <div class="modal show margemmodal" id="myModal5">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+            <!-- CONTEÚDO DO MODAL ######################### -->
+            <div class="modal-content bg-white text-dark bordermodal">
+
+                <!-- CABEÇALHO DO MODAL ######################### -->
+                <div class="modal-header mx-auto">
+                    <h3 class="text-center pt-3">Tem a certeza que deseja denunciar?</h3>
+                </div>
+                <form method="post" class="text-center">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
+                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                    </div>
+                </form>
+                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                <!-- CORPO DO MODAL ######################### -->
+                <div class="modal-body mx-auto text-center bgdark">
+                </div>
+                <!-- RODAPÉ DO MODAL ######################### -->
+                <div class="modal-footer">
+                    <p class="small mx-auto">Hi-Tribe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim Modal -->
 
 
     <!-- COMENTÁRIOS -->
@@ -117,13 +147,11 @@
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post">
-                    <div class="modal-body">
-                        <input class="w-50 mx-auto" name="descpost" type="text">
+                    <div class="modal-body text-center">
+                        <textarea class="w-50" name="descpost" type="text"></textarea>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
-                        </button>
+                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">Submeter</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
