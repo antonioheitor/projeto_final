@@ -49,6 +49,8 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             <p class="pt-5 pb-1 d-md-none h_pequeno"><?= $nome_grupo ?></p>
         </div>
     </section>
+
+    <section class="mb-5 pb-md-4">
     <?php
     while (mysqli_stmt_fetch($stmt2)) {
         ?>
@@ -65,8 +67,6 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             ?>
             <section class="row mt-4">
                 <article class="col-12">
-
-
                     <img src="<?= $avatar ?>" class="avatar d-none d-md-block">
                     <div class="row ml-2">
                         <div class="col-10 col-lg-11 border border-dark rounded position-relative msgenviada">
@@ -82,18 +82,23 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
     }
 
     ?>
-
-    <section class="row fixed-bottom bg-light">
+    </section>
+    <section class="row fixed-bottom bg-light mt-md-5">
         <div class="col-12">
             <div class="row">
-                <div class="col-9 col-md-10 pl-4">
-                    <form class="py-2">
-                        <input type="text" id="sms" name="sms" placeholder="Mensagem...">
+                <div class="col-10 col-md-11 pl-4">
+                    <form class="py-2" method="post" role="form" id="chat" action="scripts/sc_chat.php">
+                        <div class="row ml-2">
+                            <input type="text" id="sms" name="sms" placeholder="Mensagem..." class="col-11">
+                            <button type="submit" class="col-1 btn btn-outline-none p-0"><i class="fas fa-search
+                fa-1x"></i></button>
+                        </div>
+
                     </form>
                 </div>
-                <div class="col-3 col-md-2 my-auto text-center">
-                    <i class="fas fa-plus-circle fa-2x pt-2 mx-1"></i>
-                    <i class="fas fa-microphone fa-2x pt-2 mx-1"></i>
+                <div class="col-2 col-md-1 my-auto text-center">
+                    <i class="fas fa-plus-circle fa-1x pt-2 mx-1"></i>
+                    <i class="fas fa-microphone fa-1x pt-2 mx-1"></i>
                 </div>
             </div>
 

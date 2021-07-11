@@ -50,9 +50,6 @@ if ($uploadOk == 0) {
 }
 
 
-
-
-
 if (isset($_POST["nome_user"]) && isset($_POST["email_user"]) && isset($_POST["password_user"])  && isset($_POST["descricao_users"]) ) {
     $nome_users = $_POST['nome_user'];
     $email_users = $_POST['email_user'];
