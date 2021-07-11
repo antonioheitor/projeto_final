@@ -1,7 +1,17 @@
+<?php
+
+require_once "connections/connection.php";
+
+if (isset($_GET["grupo"])) {
+    $grupo = $_GET["grupo"];
+}
+?>
+
+
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
-            <a id="fechar" href="perfil.php" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
+            <a id="fechar" href="perfil_tribo.php?grupo=<?= $grupo ?>" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Definições</p>
             <p class="pt-5 pb-1 d-md-none h_pequeno">Definições</p>
         </div>

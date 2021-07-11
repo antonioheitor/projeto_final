@@ -2,8 +2,8 @@
 
 require_once "connections/connection.php";
 
-if (isset($_GET["tema"])) {
-    $temas_id_temas = $_GET["tema"];
+if (isset($_GET["grupo"])) {
+    $grupo = $_GET["grupo"];
 }
 
 $link = new_db_connection();
@@ -40,18 +40,13 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 }
 mysqli_stmt_close($stmt);
 
-
-
 ?>
-
-
-
-
 
 <main class="container-fluid background">
     <section class="row">
         <a href="pesquisa.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
-        <a id="def" href="definicoestribo.php" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
+        <a id="def" href="definicoestribo.php?grupo=<?= $grupo ?>" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog
+        fa-2x"></i></a>
     </section>
 
     <section class="row justify-content-center align-items-stretch">
