@@ -229,8 +229,8 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Guardar</button>
+                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -262,8 +262,8 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Apagar</button>
+                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -295,8 +295,8 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                            <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Denunciar</button>
+                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->

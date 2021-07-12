@@ -48,6 +48,6 @@ if (isset($_POST["email_users"]) && isset($_POST["password"]) && $_POST["email_u
     mysqli_close($link);
 
 }else {
-    echo "Campos do formulário por preencher";
+    header("Location: ../login.php?msg=2#login");
 }
 ?>

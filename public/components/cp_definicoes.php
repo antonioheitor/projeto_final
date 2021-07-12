@@ -75,8 +75,8 @@
                 </div>
                 <form method="post" role="form" id="normal-form" action="#"> <!-- aqui por um script para apagar a conta da bd se der :) -->
                     <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
                         <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Desativar</button>
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -102,8 +102,8 @@
                 </div>
                 <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
                     <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
                         <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Terminar</button>
+                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -137,9 +137,8 @@
     mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
 
     if (!mysqli_stmt_fetch($stmt)) {
-
-    header("Location: users.php");
-
+        /* Tinha aqui um header com location para users.php que estava a dar erro porque pronto, a página não existe.
+        Não sei quem pos nem porquê, mas digam quando virem isto please */
     }
 
     $_SESSION["id_grupo"] = $id_grupo;

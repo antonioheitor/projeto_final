@@ -1,6 +1,7 @@
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
+            <!-- Se fizermos nas definições, provavelmente temos de fazer ?grupo= aqui também, não? Estou kinda confusa :/ -->
             <a id="fechar" href="definicoestribo.php" class="float-right pt-4 pr-4"><i
                     class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Membros</p>
