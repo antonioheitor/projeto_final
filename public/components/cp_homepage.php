@@ -97,13 +97,27 @@
 
     <section class="row my-4 justify-content-center">
         <?php
-        $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
+        $stmt1 = mysqli_stmt_init($link);
+        $query1 = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON users.id_users = posts.users_id_users
 ORDER BY posts.data_criacao_post DESC";
+
+
+     /*   $stmt2 = mysqli_stmt_init($link);
+        $query2 = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo FROM users_has_grupo
+WHERE users_has_grupo.users_id_users = ?";
+
+        if (mysqli_stmt_prepare($stmt2, $query2)) {
+            mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
+
+            mysqli_stmt_execute($stmt2);
+
+            mysqli_stmt_bind_result($stmt2, $user, $grupo);
+        }*/
+
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -111,16 +125,15 @@ INNER JOIN grupo
 ON grupo_id_grupo = id_grupo
 WHERE users_id_users = ?;";*/
 
+        if (mysqli_stmt_prepare($stmt1, $query1)) {
 
-        if (mysqli_stmt_prepare($stmt, $query)) {
 
+            mysqli_stmt_execute($stmt1);
 
-            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt1, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
+                $nome_grupo, $grupo, $nome_user, $id_user, $imagem_user);
 
-            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-                $nome_grupo, $grupo_id_grupo, $nome_user, $id_user, $imagem_user);
-
-            while (mysqli_stmt_fetch($stmt)) { ?>
+            while (mysqli_stmt_fetch($stmt1)) { ?>
                 <article class="col-11 borda_post shadow mb-4">
                     <div class="row mt-1">
 
@@ -138,8 +151,16 @@ WHERE users_id_users = ?;";*/
                                     <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
-                                        <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
+                                        <a class="dropdown-item" href="#" data-target="#myModal3"
+                                           data-toggle="modal">Guardar</a>
+                                        <?php
+                                        if ($_SESSION['id'] == $id_user) {
+                                            ?>
+                                            <a class="dropdown-item" href=""
+                                               data-target="#myModal4" data-toggle="modal">Apagar</a>
+                                            <?php
+                                        }
+                                        ?>
                                         <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                                     </div>
                                 </div>
@@ -164,7 +185,7 @@ WHERE users_id_users = ?;";*/
                     </div>
                 </article>
             <?php }
-            mysqli_stmt_close($stmt);
+            mysqli_stmt_close($stmt1);
         }
         mysqli_close($link);
 
@@ -261,9 +282,11 @@ WHERE users_id_users = ?;";*/
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
                 </div>
-                <form method="post" class="text-center">
+                <form method="post" class="text-center" action="scripts/sc_deletepost.php?post=<?= $id_posts
+                ?>">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal"
+                                type="button">Sim</button>
                         <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
                     </div>
                 </form>
