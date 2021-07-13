@@ -1,3 +1,12 @@
+<?php
+
+if (isset($_GET["tema_tribo"])) {
+$temas_id_temas = $_GET["tema_tribo"];
+}
+
+?>
+
+
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
@@ -10,7 +19,7 @@
 
     <section class="col-12 mt-5 ml-2">
         <!-- Aqui falta o ?grupo= para saber em que tribo estamos por causa dos membros de cada tribo -->
-        <a href="membros.php" class="text-decoration-none">
+        <a href="membros.php?tema_tribo=<?= $temas_id_temas ?>" class="text-decoration-none">
             <div class="row mt-5">
                 <i class="fas fa-users fa-2x"></i>
                 <p class="ml-3 h_definicoes">Membros</p>

@@ -25,7 +25,10 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
     if (mysqli_stmt_execute($stmt)) {
 
-        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
+        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo,
+            $nome_sede, $temas_id_temas, $nome_tema);
+
+
 
         $_SESSION["temas_id_temas"] = $temas_id_temas;
         echo $nome_grupo;
@@ -56,26 +59,26 @@ mysqli_stmt_close($stmt);
 <main class="container-fluid background">
     <section class="row">
         <a href="filtros.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
-        <a id="def" href="definicoestribo.php" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
+        <a id="def" href="definicoestribo.php?tema_tribo=<?= $temas_id_temas ?>" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
     </section>
 
     <section class="row justify-content-center align-items-stretch">
-        <img src="../uploads/<?= $imagem_grupo; ?>" alt="" class="w-100">
+        <img src="../uploads/<?= $imagem_grupo ?>" alt="" class="w-100">
     </section>
 
     <section class="row justify-content-center mt-5">
-        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo; ?></p>
-        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo; ?></p>
+        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo ?></p>
+        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
-        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo; ?></p>
+        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
         <div class="col-8">
             <div class="row borda_post shadow-sm text-center pt-3 pb-2">
-                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede; ?></h5>
+                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede ?></h5>
             </div>
         </div>
 
