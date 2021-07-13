@@ -183,6 +183,9 @@ WHERE users_id_users = ?;";*/
                                 <div class="modal-body text-center">
                                     <textarea class="w-50" name="descpost" type="text"></textarea>
                                 </div>
+                                <p class="text-center mt-4">Selecione imagem</p>
+                                <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
+                                       id="customFile"/>
                                 <div class="row justify-content-center">
                                     <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
                                         Submeter

@@ -2,8 +2,8 @@
 
 require_once "connections/connection.php";
 
-if (isset($_GET["tema"])) {
-    $temas_id_temas = $_GET["tema"];
+if (isset($_GET["grupo"])) {
+    $temas_id_temas = $_GET["grupo"];
 }
 
 $link = new_db_connection();
