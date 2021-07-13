@@ -66,7 +66,7 @@ WHERE users_id_users = ? ;";
 
             while (mysqli_stmt_fetch($stmt2)) { ?>
                 <article class="col-6 col-md-4 borda_post text-center mx-5 my-3 shadow">
-                    <a href="perfil_tribo.php?tema=<?= $temas_id_temas ?>">
+                    <a href="perfil_tribo.php?grupo=<?= $temas_id_temas ?>">
                     <div class="m-1 m-sm-3">
                         <img src="../uploads/<?= $imagem_grupo ?>" class="img-fluid rounded mt-3">
                         <h5 class="mt-2"><?= $nome_grupo ?></h5>
