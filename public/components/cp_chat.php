@@ -18,7 +18,7 @@ if (mysqli_stmt_prepare($stmt1, $query1)) {
 
     mysqli_stmt_bind_result($stmt1, $nome_grupo, $grupo_id_grupo);
     if (!mysqli_stmt_fetch($stmt1)) {
-        header('Location: sessoes.php');
+        header('Location: chat.php');
     }
 }
 mysqli_stmt_close($stmt1);
@@ -29,7 +29,8 @@ INNER JOIN users
 ON users.id_users = mensagens.users_id_users
 INNER JOIN grupo
 ON grupo.id_grupo = mensagens.grupo_id_grupo
-WHERE grupo_id_grupo = ?";
+WHERE grupo_id_grupo = ?
+ORDER BY mensagens.data_msg ASC";
 
 if (mysqli_stmt_prepare($stmt2, $query2)) {
     mysqli_stmt_bind_param($stmt2, 'i', $grupo_id_grupo);
