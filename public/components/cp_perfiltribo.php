@@ -143,7 +143,10 @@ WHERE users_id_users = ?;";*/
                 <div class="pt-2">
                     <p><?= $titulo_post; ?></p>
                     <p><?= $conteudo_post; ?></p>
-                    <img src="../uploads/<?= $imagem_post; ?>">
+                      <?php if ($imagem_post != null) {
+                          echo "<img class='text-center' src='$imagem_post'>";
+                      }
+                      ?>
                     <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
                     </div>
