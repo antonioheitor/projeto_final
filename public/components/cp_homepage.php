@@ -95,10 +95,13 @@
     </div>
     <!-- Fim Modal -->
 
+
     <section class="row my-4 justify-content-center">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user, comentarios.id_comentario, comentarios.texto_comentario, comentarios.imagem_comentario FROM posts
+INNER JOIN comentarios
+ON comentarios.post_id_post = posts.id_posts          
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
@@ -157,12 +160,50 @@ WHERE users_id_users = ?;";*/
 
                             <p class="pl-5"><?= $conteudo_post ?></p>
                             <div class="float-right pb-2">
-                                <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
+                                <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                             </div>
                         </div>
 
                     </div>
                 </article>
+
+                <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
+
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                        <!-- CONTEÚDO DO MODAL ######################### -->
+                        <div class="modal-content bg-white text-dark bordermodal">
+
+                            <!-- CABEÇALHO DO MODAL ######################### -->
+                            <div class="modal-header mx-auto">
+                                <h3 class="text-center pt-3">Comenta</h3>
+                                <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                            </div>
+                            <form method="post">
+                                <div class="modal-body text-center">
+                                    <textarea class="w-50" name="descpost" type="text"></textarea>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
+                                        Submeter
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                            <!-- CORPO DO MODAL ######################### -->
+                            <div class="modal-body mx-auto text-center bgdark">
+                            </div>
+                            <!-- RODAPÉ DO MODAL ######################### -->
+                            <div class="modal-footer">
+                                <p class="small mx-auto">Hi-Tribe</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
             <?php }
             mysqli_stmt_close($stmt);
         }
@@ -174,44 +215,9 @@ WHERE users_id_users = ?;";*/
 
 
     <!-- COMENTÁRIOS -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal2">
 
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <!-- Button trigger modal -->
 
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Comenta</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post">
-                    <div class="modal-body text-center">
-                        <textarea class="w-50" name="descpost" type="text"></textarea>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
-                        </button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
     <!-- Fim Modal -->
 
     <!-- GUARDAR -->
