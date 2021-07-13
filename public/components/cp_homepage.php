@@ -99,9 +99,9 @@
     <section class="row my-4 justify-content-center">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user, comentarios.id_comentario, comentarios.texto_comentario, comentarios.imagem_comentario FROM posts
-INNER JOIN comentarios
-ON comentarios.post_id_post = posts.id_posts          
+
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user
+FROM posts        
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
@@ -120,8 +120,7 @@ WHERE users_id_users = ?;";*/
 
             mysqli_stmt_execute($stmt);
 
-            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-                $nome_grupo, $grupo_id_grupo, $nome_user, $id_user, $imagem_user);
+            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $grupo_id_grupo, $nome_user, $id_user, $imagem_user);
 
             while (mysqli_stmt_fetch($stmt)) { ?>
                 <article class="col-11 borda_post shadow mb-4">
@@ -183,13 +182,11 @@ WHERE users_id_users = ?;";*/
                                 <div class="modal-body text-center">
                                     <textarea class="w-50" name="descpost" type="text"></textarea>
                                 </div>
-                                <p class="text-center mt-4">Selecione imagem</p>
+                                <p class="text-center mt-1">Selecione imagem</p>
                                 <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
                                        id="customFile"/>
-                                <div class="row justify-content-center">
-                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
-                                        Submeter
-                                    </button>
+                                <div class="row justify-content-center mt-4">
+                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">Submeter</button>
                                 </div>
                             </form>
                             <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -217,12 +214,6 @@ WHERE users_id_users = ?;";*/
     </section>
 
 
-    <!-- COMENTÁRIOS -->
-
-        <!-- Button trigger modal -->
-
-    <!-- Fim Modal -->
-
     <!-- GUARDAR -->
     <!-- Button trigger modal -->
     <div class="modal show margemmodal" id="myModal3">
@@ -236,9 +227,9 @@ WHERE users_id_users = ?;";*/
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja guardar?</h3>
                 </div>
-                <form method="post" class="text-center" role="form" id="guardados" action="scripts/sc_guardados.php">
+                <form method="post" class="text-center" role="form" id="guardados" action="scripts/sc_guardados.php?post=<?= $id_posts; ?>">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Guardar</button>
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="submit">Guardar</button>
                         <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
@@ -271,7 +262,7 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Apagar</button>
+                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="submit">Apagar</button>
                         <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
@@ -304,7 +295,7 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                            <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Denunciar</button>
+                            <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="submit">Denunciar</button>
                         <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
                     </div>
                 </form>
