@@ -1,5 +1,4 @@
 <?php
-
 require_once "connections/connection.php";
 
 if (isset($_GET["grupo"])) {
@@ -29,6 +28,12 @@ if (mysqli_stmt_prepare($stmt, $query)) {
         mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
 
         $_SESSION["temas_id_temas"] = $temas_id_temas;
+        echo $nome_grupo;
+
+        if (!mysqli_stmt_fetch($stmt)) {
+                header('Location: filtros.php');
+
+        }
 
     } else {
 
@@ -50,7 +55,7 @@ mysqli_stmt_close($stmt);
 
 <main class="container-fluid background">
     <section class="row">
-        <a href="pesquisa.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
+        <a href="filtros.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
         <a id="def" href="definicoestribo.php" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
     </section>
 
@@ -85,7 +90,7 @@ mysqli_stmt_close($stmt);
     <span id="posts" class="mt-5">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
@@ -105,14 +110,14 @@ WHERE users_id_users = ?;";*/
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user, $imagem_user);
 
         while (mysqli_stmt_fetch($stmt)) { ?>
         <section class="row my-4 justify-content-center">
             <article class="col-11 borda_post shadow">
                 <div class="row mt-1">
                     <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="../uploads/<?= $imagem_grupo; ?>" class="img-fluid rounded-circle p-sm-1">
+                        <img src="../uploads/<?= $imagem_user; ?>" class="img-fluid rounded-circle p-sm-1">
                     </div>
                     <div class="col-8 col-sm-8 position-relative">
                         <h4 class="pt-3"><?= $nome_user; ?></h4>
