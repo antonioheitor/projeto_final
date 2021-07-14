@@ -73,10 +73,10 @@
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja desativar a sua conta?</h3>
                 </div>
-                <form method="post" role="form" id="normal-form" action="#"> <!-- aqui por um script para apagar a conta da bd se der :) -->
-                    <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Desativar</button>
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
+                <form method="get" class="text-center" role="form">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_desativar.php">Desativar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -100,10 +100,10 @@
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja terminar sessão?</h3>
                 </div>
-                <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
-                    <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Terminar</button>
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
+               <form method="get" class="text-center" role="form">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_logout.php">Terminar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
