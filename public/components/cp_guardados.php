@@ -1,5 +1,6 @@
 <?php
 require_once "connections/connection.php";
+session_start();
 
 if (isset($_GET["id"])) {
     $id_user = $_GET["id"];

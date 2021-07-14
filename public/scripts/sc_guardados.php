@@ -2,9 +2,10 @@
 require_once "../connections/connection.php";
 session_start();
 
-if (isset($_SESSION["id"]) && isset($_GET["post"])) {
-    $id_user = $_SESSION["id"];
-    $id_post = $_GET["post"];
+if (isset($_SESSION['id']) && isset($_GET['post'])) {
+
+    $id_user = $_SESSION['id'];
+    $id_post = $_GET['post'];
 
     $link = new_db_connection();
 
