@@ -10,11 +10,11 @@ if (isset($_SESSION["id"]) && isset($_GET["post"])) {
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "INSERT INTO users_has_posts(users_id_users, posts_id_posts, data)VALUES (?, ?, NOW())";
+    $query = "INSERT INTO users_has_posts(users_id_users, posts_id_posts, data) VALUES(?, ?, NOW())";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 
-        mysqli_stmt_bind_param($stmt, 'ii', $id_user, $id_posts);
+        mysqli_stmt_bind_param($stmt, 'ii', $id_user, $id_post);
 
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {

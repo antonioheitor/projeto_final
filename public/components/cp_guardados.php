@@ -33,10 +33,9 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
     <section class="row my-4 justify-content-center ">
         <?php
         if (mysqli_stmt_prepare($stmt, $query)) {
-
-        mysqli_stmt_execute($stmt);
-
-        mysqli_stmt_bind_result($stmt, $id_users, $id_posts, $nome_user, $imagem_user, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo);
+            mysqli_stmt_bind_param($stmt, 'i', $id_user);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_bind_result($stmt, $id_users, $id_posts, $nome_user, $imagem_user, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo);
 
         while (mysqli_stmt_fetch($stmt)) {
             ?>
