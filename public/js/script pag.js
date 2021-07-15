@@ -1,4 +1,4 @@
-var entrar = false;
+/*var entrar = false;
 
 window.onload = function() {
 
@@ -24,3 +24,4 @@ Isto vai ter de ser passado para php.
 De alguma forma, mostrar que o user está dentro da tribo e fica como deve estar (com posts e definições).
 Tavlvez através da base de dados.
 */
+

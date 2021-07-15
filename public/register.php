@@ -9,7 +9,7 @@
 <body>
 <!-- Page Content-->
 <?php include_once "components/cp_register.php"; ?>
-
+<?php include_once "js/script pag.js"?>
 <?php include_once "helpers/help_scripts.php"; ?>
 </body>
 </html>
