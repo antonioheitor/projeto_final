@@ -1,9 +1,8 @@
 <?php
-
 require_once "connections/connection.php";
 
 if (isset($_GET["grupo"])) {
-    $grupo = $_GET["grupo"];
+    $temas_id_temas = $_GET["grupo"];
 }
 
 $link = new_db_connection();
@@ -26,11 +25,21 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
     if (mysqli_stmt_execute($stmt)) {
 
-        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $nome_sede, $temas_id_temas, $nome_tema);
+        mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo,
+            $nome_sede, $temas_id_temas, $nome_tema);
+
+
 
         $_SESSION["temas_id_temas"] = $temas_id_temas;
+        echo $nome_grupo;
+
+        if (!mysqli_stmt_fetch($stmt)) {
+                header('Location: filtros.php');
+
+        }
 
     } else {
+
 
     }
     //mostrar o codigo a apresentar
@@ -40,32 +49,37 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 }
 mysqli_stmt_close($stmt);
 
+
+
 ?>
+
+
+
+
 
 <main class="container-fluid background">
     <section class="row">
-        <a href="pesquisa.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
-        <a id="def" href="definicoestribo.php?grupo=<?= $grupo ?>" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog
-        fa-2x"></i></a>
+        <a href="filtros.php" class="m-3 esq mt-lg-5 pt-lg-5"><i class="fas fa-arrow-left fa-2x"></i></a>
+        <a id="def" href="definicoestribo.php?tema_tribo=<?= $temas_id_temas ?>" class="m-3 dto mt-lg-5 pt-lg-5"><i class="fas fa-cog fa-2x"></i></a>
     </section>
 
     <section class="row justify-content-center align-items-stretch">
-        <img src="../uploads/<?= $imagem_grupo; ?>" alt="" class="w-100">
+        <img src="../uploads/<?= $imagem_grupo ?>" alt="" class="w-100">
     </section>
 
     <section class="row justify-content-center mt-5">
-        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo; ?></p>
-        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo; ?></p>
+        <p class="pt-5 pb-1 d-md-block d-none h">Tribo de <?= $nome_grupo ?></p>
+        <p class="pt-5 pb-1 d-md-none h_pequeno text-center">Tribo de <?= $nome_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
-        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo; ?></p>
+        <p class="col-11 text-center font-weight-bold"><?= $descricao_grupo ?></p>
     </section>
 
     <section class="justify-content-center mt-5 row">
         <div class="col-8">
             <div class="row borda_post shadow-sm text-center pt-3 pb-2">
-                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede; ?></h5>
+                <h5 class="col-12 text-center"><b>Sede: </b><?= $nome_sede ?></h5>
             </div>
         </div>
 
@@ -80,7 +94,7 @@ mysqli_stmt_close($stmt);
     <span id="posts" class="mt-5">
         <?php
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users FROM posts 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
@@ -100,14 +114,14 @@ WHERE users_id_users = ?;";*/
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user);
+            $nome_grupo, $grupo_id_grupo, $nome_user,  $id_user, $imagem_user);
 
         while (mysqli_stmt_fetch($stmt)) { ?>
         <section class="row my-4 justify-content-center">
             <article class="col-11 borda_post shadow">
                 <div class="row mt-1">
                     <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="../uploads/<?= $imagem_grupo; ?>" class="img-fluid rounded-circle p-sm-1">
+                        <img src="../uploads/<?= $imagem_user; ?>" class="img-fluid rounded-circle p-sm-1">
                     </div>
                     <div class="col-8 col-sm-8 position-relative">
                         <h4 class="pt-3"><?= $nome_user; ?></h4>
@@ -133,12 +147,58 @@ WHERE users_id_users = ?;";*/
                 <div class="pt-2">
                     <p><?= $titulo_post; ?></p>
                     <p><?= $conteudo_post; ?></p>
-                    <img src="../uploads/<?= $imagem_post; ?>">
+                      <?php if ($imagem_post != null) {
+                          echo "<img class='text-center' src='$imagem_post'>";
+                      }
+                      ?>
                     <div class="float-right pb-2">
-                        <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
-                    </div>
+                                <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
+                            </div>
+                        </div>
+
                 </div>
-            </article>
+                </article>
+
+                <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
+
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                        <!-- CONTEÚDO DO MODAL ######################### -->
+                        <div class="modal-content bg-white text-dark bordermodal">
+
+                            <!-- CABEÇALHO DO MODAL ######################### -->
+                            <div class="modal-header mx-auto">
+                                <h3 class="text-center pt-3">Comenta</h3>
+                                <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                            </div>
+                            <form method="post">
+                                <div class="modal-body text-center">
+                                    <textarea class="w-50" name="descpost" type="text"></textarea>
+                                </div>
+                                <p class="text-center mt-4">Selecione imagem</p>
+                                <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
+                                       id="customFile"/>
+                                <div class="row justify-content-center">
+                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
+                                        Submeter
+                                    </button>
+                                </div>
+                            </form>
+                            <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                            <!-- CORPO DO MODAL ######################### -->
+                            <div class="modal-body mx-auto text-center bgdark">
+                            </div>
+                            <!-- RODAPÉ DO MODAL ######################### -->
+                            <div class="modal-footer">
+                                <p class="small mx-auto">Hi-Tribe</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
         </section>
         <?php }
             mysqli_stmt_close($stmt);

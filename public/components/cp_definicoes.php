@@ -73,10 +73,10 @@
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja desativar a sua conta?</h3>
                 </div>
-                <form method="post" role="form" id="normal-form" action="#"> <!-- aqui por um script para apagar a conta da bd se der :) -->
-                    <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Desativar</button>
+                <form method="get" class="text-center" role="form">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_desativar.php">Desativar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -100,10 +100,10 @@
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja terminar sessão?</h3>
                 </div>
-                <form method="post" role="form" id="normal-form" action="scripts/sc_logout.php">
-                    <div class="row justify-content-center mt-4">
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Cancelar</button>
-                        <button class="btnlogin w-50 text-center col-4 mx-2" type="submit">Terminar</button>
+               <form method="get" class="text-center" role="form">
+                    <div class="row justify-content-center mx-auto mt-4">
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_logout.php">Terminar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -125,7 +125,7 @@
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, temas_id_temas FROM grupo WHERE id_grupo = 4;";
+    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, temas_id_temas FROM grupo WHERE id_grupo = 4";
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -137,9 +137,8 @@
     mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
 
     if (!mysqli_stmt_fetch($stmt)) {
-
-    header("Location: users.php");
-
+        /* Tinha aqui um header com location para users.php que estava a dar erro porque pronto, a página não existe.
+        Não sei quem pos nem porquê, mas digam quando virem isto please */
     }
 
     $_SESSION["id_grupo"] = $id_grupo;
@@ -166,21 +165,22 @@
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
                 <div class="modal-header mx-auto">
-                    <h2 class="text-center pt-3">Criar uma nova tribo</h2>
+                    <h2 class="text-center pt-3">Cria a tua tribo</h2>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
 
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <form method="post" role="form" id="new-tribe-form" action="scripts/sc_new_tribo.php" enctype="multipart/form-data">
-                    <input class="w-50 mx-auto" name="nome_tribo" type="text" placeholder="<?= $nome_grupo ?>">
                     <div class="modal-body">
-                        <input class="w-50 mx-auto" name="descricao_tribo" type="text" placeholder="<?= $descricao_grupo ?>">
-                        <p class="text-center mt-4">Selecione imagem para a Tribo</p>
+                        <p class="text-center mt-4">Escolhe um nome e uma descrição</p>
+                        <input class="w-50 mx-auto" name="nome_tribo" type="text" placeholder="Nome">
+                        <input class="w-50 mx-auto" name="descricao_tribo" type="text" placeholder="Descrição">
+                        <p class="text-center mt-4">Escolhe uma imagem</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload" id="customFile1"/>
                         <div class="dropdown text-center mt-4">
-                            <label>Sede da Tribo</label>
-                            <select class="form-control" name="sedes_id_sede_grupo">
+                            <label>Escolhe uma sede</label>
+                            <select class="w-50 mx-auto form-control" name="sedes_id_sede_grupo">
                                 <?php
                                 $stmt = mysqli_stmt_init($link);
 
@@ -218,8 +218,8 @@
                             </select>
                         </div>
                         <div class="dropdown text-center mt-4">
-                            <label>Tema da Tribo</label>
-                            <select class="form-control" name="temas_id_temas">
+                            <label>Escolhe um tema</label>
+                            <select class="w-50 mx-auto form-control" name="temas_id_temas">
                                 <?php
                                 $stmt = mysqli_stmt_init($link);
 
@@ -258,9 +258,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center col-4" type="submit">
-                            Submeter Dados
-                        </button>
+                        <button class="btnlogin w-50 text-center col-4 mt-2" type="submit">Submeter dados</button>
                     </div>
                 </form>
                 <!-- CORPO DO MODAL ######################### -->

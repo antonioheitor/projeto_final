@@ -16,19 +16,19 @@
             $msg_show = true;
             switch ($_GET["msg"]) {
                 case 0:
-                    $message = "ocorreu um erro no registo";
+                    $message = "Ocorreu um erro no registo";
                     $class="alert-warning";
                     break;
                 case 1:
-                    $message = "registo efectuado com sucesso";
+                    $message = "Registo efectuado com sucesso";
                     $class="alert-success";
                     break;
                 case 2:
-                    $message = "ocorreu um erro no login";
+                    $message = "Ocorreu um erro no login";
                     $class="alert-warning";
                     break;
                 case 3:
-                    $message = "login efectuado com sucesso";
+                    $message = "Login efectuado com sucesso";
                     $class="alert-success";
                     break;
                 default:

@@ -25,17 +25,17 @@ if (isset($_POST["sms"]) ) {
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             // Acção de sucesso
-            echo "<p>1</p>";
+            header("Location: ../chat.php?chat=<?= $grupo_id_grupo ?>");
         } else {
             // Acção de erro
-            echo "<p>2</p>";
+
             echo $mensagem;
             echo $grupo_id_grupo;
             echo $id;
         }
     } else {
         // Acção de erro
-        echo "<p>3</p>";
+
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);

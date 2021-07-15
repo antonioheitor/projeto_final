@@ -95,29 +95,18 @@
     </div>
     <!-- Fim Modal -->
 
+
     <section class="row my-4 justify-content-center">
         <?php
-        $stmt1 = mysqli_stmt_init($link);
-        $query1 = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
+        $stmt = mysqli_stmt_init($link);
+
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user
+FROM posts        
 INNER JOIN grupo
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON users.id_users = posts.users_id_users
 ORDER BY posts.data_criacao_post DESC";
-
-
-     /*   $stmt2 = mysqli_stmt_init($link);
-        $query2 = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo FROM users_has_grupo
-WHERE users_has_grupo.users_id_users = ?";
-
-        if (mysqli_stmt_prepare($stmt2, $query2)) {
-            mysqli_stmt_bind_param($stmt2, 'i', $_SESSION['id']);
-
-            mysqli_stmt_execute($stmt2);
-
-            mysqli_stmt_bind_result($stmt2, $user, $grupo);
-        }*/
-
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -125,15 +114,15 @@ INNER JOIN grupo
 ON grupo_id_grupo = id_grupo
 WHERE users_id_users = ?;";*/
 
-        if (mysqli_stmt_prepare($stmt1, $query1)) {
+
+        if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-            mysqli_stmt_execute($stmt1);
+            mysqli_stmt_execute($stmt);
 
-            mysqli_stmt_bind_result($stmt1, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-                $nome_grupo, $grupo, $nome_user, $id_user, $imagem_user);
+            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $grupo_id_grupo, $nome_user, $id_user, $imagem_user);
 
-            while (mysqli_stmt_fetch($stmt1)) { ?>
+            while (mysqli_stmt_fetch($stmt)) { ?>
                 <article class="col-11 borda_post shadow mb-4">
                     <div class="row mt-1">
 
@@ -151,16 +140,8 @@ WHERE users_id_users = ?;";*/
                                     <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" data-target="#myModal3"
-                                           data-toggle="modal">Guardar</a>
-                                        <?php
-                                        if ($_SESSION['id'] == $id_user) {
-                                            ?>
-                                            <a class="dropdown-item" href=""
-                                               data-target="#myModal4" data-toggle="modal">Apagar</a>
-                                            <?php
-                                        }
-                                        ?>
+                                        <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Guardar</a>
+                                        <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
                                         <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                                     </div>
                                 </div>
@@ -178,14 +159,53 @@ WHERE users_id_users = ?;";*/
 
                             <p class="pl-5"><?= $conteudo_post ?></p>
                             <div class="float-right pb-2">
-                                <i class="fas fa-plus-circle fa-2x" data-target="#myModal2" data-toggle="modal"></i>
+                                <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                             </div>
                         </div>
 
                     </div>
                 </article>
+
+                <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
+
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                        <!-- CONTEÚDO DO MODAL ######################### -->
+                        <div class="modal-content bg-white text-dark bordermodal">
+
+                            <!-- CABEÇALHO DO MODAL ######################### -->
+                            <div class="modal-header mx-auto">
+                                <h3 class="text-center pt-3">Comenta</h3>
+                                <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                            </div>
+                            <form method="post">
+                                <div class="modal-body text-center">
+                                    <textarea class="w-50" name="descpost" type="text"></textarea>
+                                </div>
+                                <p class="text-center mt-1">Selecione imagem</p>
+                                <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
+                                       id="customFile"/>
+                                <div class="row justify-content-center mt-4">
+                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">Submeter</button>
+                                </div>
+                            </form>
+                            <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                            <!-- CORPO DO MODAL ######################### -->
+                            <div class="modal-body mx-auto text-center bgdark">
+                            </div>
+                            <!-- RODAPÉ DO MODAL ######################### -->
+                            <div class="modal-footer">
+                                <p class="small mx-auto">Hi-Tribe</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
             <?php }
-            mysqli_stmt_close($stmt1);
+            mysqli_stmt_close($stmt);
         }
         mysqli_close($link);
 
@@ -193,48 +213,6 @@ WHERE users_id_users = ?;";*/
         ?>
     </section>
 
-
-    <!-- COMENTÁRIOS -->
-
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal2">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Comenta</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post">
-                    <div class="modal-body text-center">
-                        <textarea class="w-50" name="descpost" type="text"></textarea>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
-                        </button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <!-- Fim Modal -->
 
     <!-- GUARDAR -->
     <!-- Button trigger modal -->
@@ -249,10 +227,11 @@ WHERE users_id_users = ?;";*/
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja guardar?</h3>
                 </div>
-                <form method="post" class="text-center">
+
+                <form method="get" class="text-center" role="form">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_guardados.php?post=<?= $id_posts; ?>">Guardar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -282,12 +261,10 @@ WHERE users_id_users = ?;";*/
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
                 </div>
-                <form method="post" class="text-center" action="scripts/sc_deletepost.php?post=<?= $id_posts
-                ?>">
+               <form method="get" class="text-center" role="form">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal"
-                                type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="#">Apagar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -317,10 +294,10 @@ WHERE users_id_users = ?;";*/
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja denunciar?</h3>
                 </div>
-                <form method="post" class="text-center">
+                <form method="get" class="text-center" role="form">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não</button>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="#">Denunciar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->

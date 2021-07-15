@@ -1,6 +1,17 @@
+
+<?php
+
+if (isset($_GET["tema_tribo"])) {
+    $temas_id_temas = $_GET["tema_tribo"];
+}
+
+?>
+
+
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
+            <!-- Se fizermos nas definições, provavelmente temos de fazer ?grupo= aqui também, não? Estou kinda confusa :/ -->
             <a id="fechar" href="definicoestribo.php" class="float-right pt-4 pr-4"><i
                     class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Membros</p>
@@ -13,15 +24,54 @@
             <input type="text" id="procura" name="procura" placeholder="Pesquisa por um membro" class="shadow-sm">
         </form>
     </section>
+    <?php
+
+    require_once "connections/connection.php";
+
+
+    $link = new_db_connection();
+
+    $stmt = mysqli_stmt_init($link);
+
+    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas FROM users_has_grupo 
+    INNER JOIN users ON id_users = users_id_users 
+    INNER JOIN grupo ON id_grupo = grupo_id_grupo 
+    
+ WHERE temas_id_temas = ?;
+
+
+;";
+
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+        mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
+
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas);
+
+
+    } else {
+
+        echo "ERRORRRRR: " . mysqli_error($link);
+    }
+    ?>
+
 
     <section class="row my-4 justify-content-center">
         <article class="col-11">
+            <?php
+
+            while (mysqli_stmt_fetch($stmt)) {
+            ?>
             <div class="row mt-2">
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/1.jpeg" class="img-fluid rounded-circle p-sm-1 border border-success">
+                    <img src="../uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Sara Rocha</h4>
+                    <h4 class="pt-3"><?= $nome_users ?></h4>
                     <p>Líder</p>
                 </div>
                 <div class="col-2 col-lg-3 text-right my-auto">
@@ -36,82 +86,18 @@
                     </div>
                 </div>
             </div>
+                <?php
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($link);
+            ?>
 
-            <div class="row mt-2">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/9.jpg" class="img-fluid rounded-circle p-sm-1 border border-secondary">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Diogo Queijo</h4>
-                    <p>Co-líder</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#" data-target="#myModal1" data-toggle="modal">Votar</a>
-                            <a class="dropdown-item" href="#" data-target="#myModal2" data-toggle="modal">Apagar membro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row mt-2">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/8.jpg" class="img-fluid rounded-circle p-sm-1 border border-danger">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Vitória Britodamana</h4>
-                    <p>Ancião</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#" data-target="#myModal1" data-toggle="modal">Votar</a>
-                            <a class="dropdown-item" href="#" data-target="#myModal2" data-toggle="modal">Apagar membro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row mt-2">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/10.jpg" class="img-fluid rounded-circle p-sm-1 border border-warning">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">Diva Martins</h4>
-                    <p>Mestre</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#" data-target="#myModal1" data-toggle="modal">Votar</a>
-                            <a class="dropdown-item" href="#" data-target="#myModal2" data-toggle="modal">Apagar membro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row mt-2">
-                <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="images/5.jpg" class="img-fluid rounded-circle p-sm-1">
-                </div>
-                <div class="col-8 col-sm-8 position-relative">
-                    <h4 class="pt-3">André Feliz</h4>
-                    <p>⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
-                </div>
-                <div class="col-2 col-lg-3 text-right my-auto">
-                    <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#" data-target="#myModal1" data-toggle="modal">Votar</a>
-                            <a class="dropdown-item" href="#" data-target="#myModal2" data-toggle="modal">Apagar membro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
         </article>
     </section>
 
