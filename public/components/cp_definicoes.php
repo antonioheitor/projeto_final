@@ -125,7 +125,7 @@
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, temas_id_temas FROM grupo WHERE id_grupo = 4;";
+    $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo, temas_id_temas FROM grupo WHERE id_grupo = 4";
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
