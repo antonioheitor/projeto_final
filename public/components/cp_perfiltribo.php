@@ -86,9 +86,11 @@ mysqli_stmt_close($stmt);
     </section>
 
     <section class="row justify-content-center mt-5 pt-3 mb-5">
+
         <button class="btnlogin w-50 text-center col-5 col-md-4 col-lg-3" data-dismiss="modal" type="button"
                 id="entrar">Entrar
         </button>
+
     </section>
 
     <span id="posts" class="mt-5">
