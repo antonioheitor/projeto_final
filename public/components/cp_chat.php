@@ -137,11 +137,8 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                 <div class="modal-footer">
                     <p class="small mx-auto">Hi-Tribe</p>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
 </main>
