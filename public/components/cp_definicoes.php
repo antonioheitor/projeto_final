@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+if (isset($_SESSION["id"])) {
+    $id_user = $_SESSION["id"];
+}
+?>
+
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
@@ -75,7 +83,7 @@
                 </div>
                 <form method="get" class="text-center" role="form">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_desativar.php">Desativar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_desativar.php?id=<?=$id_user;?>">Desativar</a>
                         <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
