@@ -38,11 +38,11 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao);
               enctype="multipart/form-data">
             <div class="form-group rounded">
                 <p>Nome</p>
-                <input type="text" aria-describedby="name" name="nome_user" placeholder="<?=$nome ?>">
+                <input type="text" aria-describedby="name" name="nome_user" value="<?=$nome ?>">
             </div>
             <div class="form-group rounded">
                 <p>Email</p>
-                <input type="email" class="inputs" aria-describedby="email" name="email_user" placeholder="<?=$email ?>">
+                <input type="email" class="inputs" aria-describedby="email" name="email_user" value="<?=$email ?>">
             </div>
 
             <!---<div class="form-group rounded">
@@ -51,7 +51,7 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao);
             <div class="form-group rounded">
                 <p>Descrição</p>
                 <input type="text" class="inputs inputdescricao" aria-describedby="description"
-                       name="descricao_users" placeholder="<?=$descricao ?>">
+                       name="descricao_users" value="<?=$descricao ?>">
             </div>
             <div class="form-group rounded bg-light pb-4">
                 <p class="px-3 pt-3">Alterar foto de perfil</p>
