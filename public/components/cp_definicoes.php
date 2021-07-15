@@ -14,7 +14,12 @@
                 <p class="ml-3 h_definicoes">Criar Tribo</p>
             </div>
         </a>
-
+        <a href="alterarperfil.php" class="text-decoration-none">
+            <div class="row mb-2 pt-4 border-top border-dark">
+                <i class="far fa-2x fa-user"></i>
+                <p class="ml-3 h_definicoes">Alterar perfil</p>
+            </div>
+        </a>
         <a href="#" class="text-decoration-none">
             <div class="row mb-2 pt-4 border-top border-dark">
                 <i class="far fa-2x fa-user"></i>

@@ -33,14 +33,15 @@ if (isset($_GET["tema_tribo"])) {
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas FROM users_has_grupo 
+    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, nome_role	 FROM users_has_grupo 
     INNER JOIN users ON id_users = users_id_users 
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
-    
+    INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
  WHERE temas_id_temas = ?;
 
 
 ;";
+
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -50,7 +51,7 @@ if (isset($_GET["tema_tribo"])) {
 
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas);
+        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles, $nome_role);
 
 
     } else {
@@ -72,25 +73,21 @@ if (isset($_GET["tema_tribo"])) {
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_users ?></h4>
-                    <p>Líder</p>
+                    <p><?= $nome_role ?></p>
                 </div>
                 <div class="col-2 col-lg-3 text-right my-auto">
                     <div class="dropdown show">
                         <div class="btn-group dropleft">
                             <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal1" data-toggle="modal">Votar</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal1<?= $id_users ?>" data-toggle="modal">Votar</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal2" data-toggle="modal">Apagar membro</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <?php
-            }
-            mysqli_stmt_close($stmt);
-            mysqli_close($link);
-            ?>
+
 
 
 
@@ -103,7 +100,7 @@ if (isset($_GET["tema_tribo"])) {
 
     <!-- VOTAR -->
     <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal1">
+    <div class="modal show margemmodal" id="myModal1<?= $id_users ?>">
 
         <div class="modal-dialog modal-lg modal-dialog-centered">
 
@@ -148,7 +145,11 @@ if (isset($_GET["tema_tribo"])) {
         </div>
     </div>
     <!-- Fim Modal -->
-
+<?php
+}
+mysqli_stmt_close($stmt);
+mysqli_close($link);
+?>
     <!-- APAGAR MEMBRO -->
     <!-- Button trigger modal -->
     <div class="modal show margemmodal" id="myModal2">
