@@ -238,7 +238,7 @@ WHERE users_id_users = ?;";*/
                     </div>
                 </div>
                 <!-- Fim Modal -->
-                
+
             <?php }
             mysqli_stmt_close($stmt);
         }
