@@ -96,12 +96,49 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                     </form>
                 </div>
                 <div class="col-2 col-md-1 my-auto text-center">
-                    <i class="fas fa-plus-circle fa-1x pt-2 mx-1"></i>
+                    <i class="fas fa-plus-circle fa-1x pt-2 mx-1" data-toggle="modal" data-target="#modal"></i>
                     <i class="fas fa-microphone fa-1x pt-2 mx-1"></i>
                 </div>
             </div>
 
         </div>
     </section>
+
+
+    <!-- ADD FOTO -->
+    <div class="modal show margemmodal" id="modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <!-- CONTEÚDO DO MODAL ######################### -->
+            <div class="modal-content bg-white text-dark bordermodal">
+
+                <!-- CABEÇALHO DO MODAL ######################### -->
+                <div class="modal-header">
+                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                </div>
+                <form method="post" role="form" id="post-form" action="scripts/sc_new_post.php"
+                      enctype="multipart/form-data">
+                    <div class="modal-body text-center">
+                        <p class="text-center mt-4">Selecione imagem</p>
+                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fotomsg"
+                               id="fotomsg"/>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
+                            Submeter
+                        </button>
+                    </div>
+                </form>
+                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                <!-- CORPO DO MODAL ######################### -->
+                <div class="modal-body mx-auto text-center bgdark">
+                </div>
+                <!-- RODAPÉ DO MODAL ######################### -->
+                <div class="modal-footer">
+                    <p class="small mx-auto">Hi-Tribe</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </main>
