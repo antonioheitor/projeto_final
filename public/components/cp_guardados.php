@@ -136,9 +136,9 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                         <div class="modal-header mx-auto">
                             <h3 class="text-center pt-3">Tem a certeza que deseja remover dos guardados?</h3>
                         </div>
-                        <form method="post" class="text-center">
+                        <form method="get" class="text-center">
                             <div class="row justify-content-center mx-auto mt-4">
-                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_remover_guardados?post=<?= $id_posts; ?>">Remover</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_remover_guardados.php?post=<?= $id_posts; ?>">Remover</a>
                                 <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                             </div>
                         </form>
