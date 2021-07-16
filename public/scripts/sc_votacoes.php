@@ -2,10 +2,11 @@
 require_once "../connections/connection.php";
 session_start();
 
-if (isset($_SESSION['id']) && isset($_GET['voto']) && isset($_GET['grupo'])) {
+if (isset($_SESSION['id']) && isset($_GET['voto']) && isset($_GET['grupo']) && isset($_GET['tema_tribo'])) {
     $user = $_SESSION['id'];
     $user_votado = $_GET['voto'];
-    $grupo = $_GET['voto'];
+    $grupo = $_GET['grupo'];
+    $tema = $_GET['tema_tribo'];
 
     $link = new_db_connection();
 
@@ -23,7 +24,7 @@ VALUES (1, ?, ?, ?, ?)";
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             //Ação de sucesso
-            header("Location: ../membros.php");
+            header("Location: ../membros.php?tema_tribo=$tema");
         } else {
             //Ação de erro
             echo "Error:" . mysqli_error($link);
