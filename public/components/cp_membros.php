@@ -37,13 +37,7 @@ if (isset($_GET["tema_tribo"])) {
     INNER JOIN users ON id_users = users_id_users 
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
     INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
- WHERE temas_id_temas = ?;
-
-
-;";
-
-
-
+ WHERE temas_id_temas = ?";
     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
@@ -60,13 +54,13 @@ if (isset($_GET["tema_tribo"])) {
     }
     ?>
 
+    <?php
 
+    while (mysqli_stmt_fetch($stmt)) {
+    ?>
     <section class="row my-4 justify-content-center">
         <article class="col-11">
-            <?php
 
-            while (mysqli_stmt_fetch($stmt)) {
-            ?>
             <div class="row mt-2">
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
                     <img src="../uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
@@ -102,7 +96,7 @@ if (isset($_GET["tema_tribo"])) {
                     <h3 class="text-center pt-3">Votações</h3>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
-                <form method="post" class="text-center">
+                <form  method="post" class="text-center" action="scripts/sc_votacoes.php?voto=<?= $id_users; ?>">
                     <div class="form-check my-4">
                         <input class="form-check-input" type="radio" name="role[]" id="role" value="1">
                         <label class="form-check-label" for="flexRadioDefault1">Líder</label>
@@ -112,7 +106,7 @@ if (isset($_GET["tema_tribo"])) {
                         <label class="form-check-label" for="flexRadioDefault1">Mestre</label>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
+                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
                             Submeter
                         </button>
                     </div>
