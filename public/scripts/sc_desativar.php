@@ -30,5 +30,3 @@ if (isset($_SESSION['id'])) {
     mysqli_stmt_close($stmt);
     mysqli_close($link);
 }
-
-echo "JU?";
