@@ -20,7 +20,7 @@ if (isset($_SESSION['id']) && isset($_GET['post'])) {
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             //Ação de sucesso
-            header("Location: ../perfil.php");
+            header("Location: ../guardados.php");
         } else {
             //Ação de erro
             echo "Error:" . mysqli_error($link);

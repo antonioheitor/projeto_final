@@ -57,7 +57,7 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                             <button type="button" class="btn btn-secondary dropdown-toggle"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#" data-target="#myModal3" data-toggle="modal">Remover</a>
+                                <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Remover</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                             </div>
                         </div>
@@ -82,6 +82,8 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
             </div>
         </article>
 
+            <!-- COMENTÁRIOS -->
+            <!-- Button trigger modal -->
             <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
 
                 <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -120,44 +122,44 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                 </div>
 
             </div>
+
+            <!-- REMOVER -->
+            <!-- Button trigger modal -->
+            <div class="modal show margemmodal" id="myModal3<?=$id_posts?>">
+
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Tem a certeza que deseja remover dos guardados?</h3>
+                        </div>
+                        <form method="post" class="text-center">
+                            <div class="row justify-content-center mx-auto mt-4">
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_remover_guardados?post=<?= $id_posts; ?>">Remover</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fim Modal -->
         <?php
         } mysqli_stmt_close($stmt);
         } mysqli_close($link);
         ?>
     </section>
-
-    <!-- REMOVER -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal3">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tem a certeza que deseja remover dos guardados?</h3>
-                </div>
-                <form method="post" class="text-center">
-                    <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Remover</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal -->
 
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->
@@ -174,8 +176,8 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                 </div>
                 <form method="post" class="text-center">
                     <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Denunciar</button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Cancelar</button>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Denunciar</a>
+                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                     </div>
                 </form>
                 <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -191,44 +193,4 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
         </div>
     </div>
     <!-- Fim Modal -->
-
-
-    <!-- COMENTÁRIOS -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal2">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h2 class="text-center pt-3">Comenta</h2>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post">
-                    <div class="modal-body text-center">
-                        <textarea class="w-50" name="descpost" type="text"></textarea>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">Submeter</button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <!-- Modal -->
 </main>
