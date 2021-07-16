@@ -19,6 +19,10 @@ if (isset($_GET["tema_tribo"])) {
         </div>
     </section>
 
+    <div class="alert alert-danger">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        Não te esqueças de votar eheh
+    </div>
     <section class="row justify-content-center pt-3">
         <form class="col-11">
             <input type="text" id="procura" name="procura" placeholder="Pesquisa por um membro" class="shadow-sm">
