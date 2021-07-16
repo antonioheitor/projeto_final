@@ -11,15 +11,6 @@ if (!isset($_SESSION["id"])) {
 <nav class="fixed-bottom navbar-expand navbar-dark py-2 d-lg-none nav_baixo">
     <ul class="navbar-nav justify-content-center">
 
-        <?php
-        if (isset($_SESSION['id'])) {
-            if ($_SESSION['role'] == "3") {
-                echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
-            }
-        }
-
-
-        ?>
         <li class="icones">
             <a class="nav-link" href="homepage.php"><i class="fas fa-2x fa-home"></i></a>
         </li>

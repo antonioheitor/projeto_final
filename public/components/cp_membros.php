@@ -87,14 +87,6 @@ if (isset($_GET["tema_tribo"])) {
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
         </article>
     </section>
 
@@ -106,25 +98,18 @@ if (isset($_GET["tema_tribo"])) {
 
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Votações</h3>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post" class="text-center">
                     <div class="form-check my-4">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <input class="form-check-input" type="radio" name="role[]" id="role" value="1">
                         <label class="form-check-label" for="flexRadioDefault1">Líder</label>
                     </div>
                     <div class="form-check my-4">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                        <label class="form-check-label" for="flexRadioDefault2">Co-Líder</label>
-                    </div>
-                    <div class="form-check my-4">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3"
-                               checked>
-                        <label class="form-check-label" for="flexRadioDefault2">Mestre</label>
+                        <input class="form-check-input" type="radio" name="role[]" id="role" value="4">
+                        <label class="form-check-label" for="flexRadioDefault1">Mestre</label>
                     </div>
                     <div class="row justify-content-center">
                         <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
