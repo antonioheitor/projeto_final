@@ -14,38 +14,32 @@ if (isset($_SESSION['id']) && isset($_GET['voto']) && isset($_GET['grupo']) && i
 
     $query = "SELECT id_quinzena FROM quinzenas ORDER BY id_quinzena ASC LIMIT 1";
 
-     $stmt2 = mysqli_stmt_init($link);
+    $stmt2 = mysqli_stmt_init($link);
 
     $query2 = "INSERT INTO votos (quinzenas_id_quinzena, grupo_id_grupo, users_id_users, users_id_users1, roles_grupos_id_roles)
 VALUES (?, ?, ?, ?, ?)";
 
 
-           if (mysqli_stmt_prepare($stmt, $query)) {
+    if (mysqli_stmt_prepare($stmt, $query)) {
 
-                 mysqli_stmt_bind_result($stmt, $quinzena);
-
-
-               //Devemos validar também o resultado do execute!
-               if (mysqli_stmt_execute($stmt)) {
-                   //Ação de sucesso
-
-               } else {
-                   //Ação de erro
-                   echo "Error:" . mysqli_error($link);
-               }
-           } else {
-               echo "Error:" . mysqli_error($link);
-           }
+        mysqli_stmt_bind_result($stmt, $quinzena);
 
 
+        //Devemos validar também o resultado do execute!
+        if (mysqli_stmt_execute($stmt)) {
+            //Ação de sucesso
 
-
-
+        } else {
+            //Ação de erro
+            echo "Error:" . mysqli_error($link);
+        }
+    } else {
+        echo "Error:" . mysqli_error($link);
+    }
 
     if (mysqli_stmt_prepare($stmt2, $query2)) {
 
-   mysqli_stmt_bind_param($stmt2, 'iiiii', $quinzena,$grupo, $user, $user_votado, $role);
-
+        mysqli_stmt_bind_param($stmt2, 'iiiii', $quinzena, $grupo, $user, $user_votado, $role);
 
 
         //Devemos validar também o resultado do execute!
@@ -62,8 +56,7 @@ VALUES (?, ?, ?, ?, ?)";
     mysqli_stmt_close($stmt2);
 
 
-
 }
-                 //1 296 000 segundos em 15 dias
+//1 296 000 segundos em 15 dias
 
 

@@ -28,11 +28,9 @@ if (isset($_GET["tema_tribo"])) {
             <input type="text" id="procura" name="procura" placeholder="Pesquisa por um membro" class="shadow-sm">
         </form>
     </section>
+
     <?php
-
     require_once "connections/connection.php";
-
-
     $link = new_db_connection();
 
     $stmt = mysqli_stmt_init($link);

@@ -37,17 +37,14 @@
                                 <?php
                                 require_once "connections/connection.php";
 
-
                                 $link = new_db_connection();
 
                                 $stmt = mysqli_stmt_init($link);
-
 
                                 $query = "SELECT grupo_id_grupo, id_grupo, nome_grupo FROM users_has_grupo 
                                         INNER JOIN grupo
                                         ON grupo_id_grupo = id_grupo 
                                         WHERE users_id_users = ?";
-
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
 
@@ -60,7 +57,6 @@
                                         if ($grupo_id_grupo == $id_grupo) {
                                             $selected1 = "selected";
                                         }
-
                                         echo "<option value='$id_grupo' $selected1>$nome_grupo</option>";
                                     }
                                 } else {
