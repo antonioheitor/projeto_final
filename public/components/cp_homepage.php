@@ -141,7 +141,13 @@ WHERE users_id_users = ?;";*/
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
-                                        <a class="dropdown-item" href="#" data-target="#myModal4" data-toggle="modal">Apagar</a>
+                                        <?php
+                                        if ($_SESSION['id'] == $id_user) {
+                                            ?>
+                                            <a class="dropdown-item" href="#" data-target="#myModal4<?=$id_posts?>" data-toggle="modal">Apagar</a>
+                                            <?php
+                                        }
+                                        ?>
                                         <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
                                     </div>
                                 </div>
@@ -239,6 +245,40 @@ WHERE users_id_users = ?;";*/
                 </div>
                 <!-- Fim Modal -->
 
+                <!-- APAGAR POST -->
+                <!-- Button trigger modal -->
+                <div class="modal show margemmodal" id="myModal4<?=$id_posts?>">
+
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                        <!-- CONTEÚDO DO MODAL ######################### -->
+                        <div class="modal-content bg-white text-dark bordermodal">
+
+                            <!-- CABEÇALHO DO MODAL ######################### -->
+                            <div class="modal-header mx-auto">
+                                <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
+                            </div>
+                            <form method="get" class="text-center" role="form">
+                                <div class="row justify-content-center mx-auto mt-4">
+                                    <a class="btnlogin w-25 text-decoration-none mx-3"
+                                       href="scripts/sc_deletepost.php?post=<?= $id_posts?>">Apagar</a>
+                                    <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                                </div>
+                            </form>
+                            <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                            <!-- CORPO DO MODAL ######################### -->
+                            <div class="modal-body mx-auto text-center bgdark">
+                            </div>
+                            <!-- RODAPÉ DO MODAL ######################### -->
+                            <div class="modal-footer">
+                                <p class="small mx-auto">Hi-Tribe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim Modal -->
+
             <?php }
             mysqli_stmt_close($stmt);
         }
@@ -247,39 +287,6 @@ WHERE users_id_users = ?;";*/
 
         ?>
     </section>
-
-    <!-- APAGAR POST -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal4">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
-                </div>
-               <form method="get" class="text-center" role="form">
-                    <div class="row justify-content-center mx-auto mt-4">
-                        <a class="btnlogin w-25 text-decoration-none mx-3" href="#">Apagar</a>
-                        <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal -->
 
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->
