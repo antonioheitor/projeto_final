@@ -8,6 +8,6 @@
 <body>
 
 <?php include_once "components/cp_chat.php"?>
-<?php include_once "helpers/help_scripts.php"; ?>
+<?php include_once "helpers/help_scripts.php"?>
 </body>
 </html>
