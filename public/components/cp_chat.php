@@ -111,12 +111,11 @@ fa-1x"></i></button>
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
-
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header">
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
-                <form method="post" role="form" id="post-form" action="scripts/sc_new_post.php"
+                <form method="post" role="form" id="post-form" action="scripts/sc_chat.php"
                       enctype="multipart/form-data">
                     <div class="modal-body text-center">
                         <p class="text-center mt-4">Selecione imagem</p>

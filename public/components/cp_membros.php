@@ -33,7 +33,7 @@ if (isset($_GET["tema_tribo"])) {
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, nome_role	 FROM users_has_grupo 
+    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, nome_role, grupo_id_grupo  FROM users_has_grupo 
     INNER JOIN users ON id_users = users_id_users 
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
     INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
@@ -45,7 +45,8 @@ if (isset($_GET["tema_tribo"])) {
 
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles, $nome_role);
+        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles,
+            $nome_role, $id_grupo);
 
 
     } else {
@@ -96,7 +97,8 @@ if (isset($_GET["tema_tribo"])) {
                     <h3 class="text-center pt-3">Votações</h3>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
-                <form  method="post" class="text-center" action="scripts/sc_votacoes.php?voto=<?= $id_users; ?>">
+                <form  method="post" class="text-center" action="scripts/sc_votacoes.php?voto=<?= $id_users?>&grupo=<?=
+                $id_grupo; ?>">
                     <div class="form-check my-4">
                         <input class="form-check-input" type="radio" name="role[]" id="role" value="1">
                         <label class="form-check-label" for="flexRadioDefault1">Líder</label>
