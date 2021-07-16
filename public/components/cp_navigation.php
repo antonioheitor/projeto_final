@@ -41,7 +41,7 @@ if (!isset($_SESSION["id"])) {
         <?php
         if (isset($_SESSION['id'])) {
             if ($_SESSION['role'] == "3") {
-                echo "<li class='icones'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
+                echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
             }
         }
         ?>
@@ -57,7 +57,7 @@ if (!isset($_SESSION["id"])) {
         <?php
 
         if (isset($_SESSION['id'])){
-            echo "<li class='nav-item dropdown'>                                                              
+            echo "<li class='nav-item dropdown mx-3'>                                                              
                               <a class='nav-link dropdown-toggle text-black' href='#' data-toggle='dropdown'>"
                 .$_SESSION['nome']
                 ."<span 

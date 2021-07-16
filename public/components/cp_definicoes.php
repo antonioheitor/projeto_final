@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
@@ -8,8 +12,21 @@
     </section>
 
     <section class="col-12 mt-5 ml-2">
+        <?php
+        if (isset($_SESSION['id'])) {
+            if ($_SESSION['role'] == "3") {
+                echo "<a href='../admin/index.php' class='text-decoration-none'>
+                        <div class='row mt-5'>
+                            <i class='fas fa-user-shield fa-2x'></i>
+                            <p class='ml-3 h_definicoes'>Admin</p>
+                        </div>
+                      </a>";
+            }
+        }
+        ?>
+
         <a href="#" class="text-decoration-none" data-target="#myModalgroup" data-toggle="modal">
-            <div class="row mt-5">
+            <div class="row pt-4 border-top border-dark">
                 <i class="fas fa-plus-circle fa-2x"></i>
                 <p class="ml-3 h_definicoes">Criar Tribo</p>
             </div>
