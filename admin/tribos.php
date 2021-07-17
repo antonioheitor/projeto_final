@@ -101,7 +101,6 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                         echo "ERRORRRRR: " . mysqli_error($link);
                     }
                     ?>
-
                     <!-- Content Row -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">

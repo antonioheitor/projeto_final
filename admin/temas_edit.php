@@ -26,7 +26,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Peças Edição</title>
+    <title>Temas Edição</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
