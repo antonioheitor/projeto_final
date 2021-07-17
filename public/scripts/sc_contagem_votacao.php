@@ -49,7 +49,9 @@ ORDER BY votos.users_id_users DESC LIMIT 1";
             //Ação de sucesso
            mysqli_stmt_bind_result($stmt1, $user_id, $user_name, $contagem);
 
-           while ( mysqli_stmt_fetch($stmt1)) {
+           while (mysqli_stmt_fetch($stmt1)) {
+
+               header("Location: sc_submeter_votos.php?id=$user_id&nome=$user_name&contagem=$contagem");
            };
 
 
