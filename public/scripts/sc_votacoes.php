@@ -23,8 +23,6 @@ VALUES (?, ?, ?, ?, ?)";
     if (mysqli_stmt_prepare($stmt, $query)) {
 
         mysqli_stmt_bind_result($stmt, $quinzena);
-
-
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             //Ação de sucesso
@@ -41,6 +39,7 @@ VALUES (?, ?, ?, ?, ?)";
 
         mysqli_stmt_bind_param($stmt2, 'iiiii', $quinzena, $grupo, $user, $user_votado, $role);
 
+        foreach ($_POST['role'] as $role)
 
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt2)) {
