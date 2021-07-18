@@ -22,7 +22,7 @@ if (isset($_SESSION["role"])) {
 <?php
 require_once "../connections/connection.php";
 
-$target_dir = "../../uploads/";
+$target_dir = "../uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -77,7 +77,7 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
     if ($target_file != null) {
         $imagem_post = $target_file;
     }
-   // $data_criacao_post = "2021-06-06";
+$data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
@@ -96,7 +96,7 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
             header("Location: ../homepage.php");
         } else {
             // Acção de erro
-            header("Location: ../guardados.php");
+            header("Location: ../homepage.php");
             echo "Error:" . mysqli_stmt_error($stmt);
         }
     } else {
