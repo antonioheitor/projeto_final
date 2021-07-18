@@ -1,4 +1,3 @@
-
 <?php
 
 if (isset($_SESSION["nome"])) {
@@ -13,11 +12,7 @@ if (isset($_SESSION["role"])) {
     $USER_ROLE = $_SESSION["role"];
 }
 
-
 ?>
-
-
-
 
 
 <main class="container-fluid mt-lg-5 pt-2">
@@ -58,7 +53,6 @@ if (isset($_SESSION["role"])) {
                             <select class="form-control" name="grupo_id_grupo">
                                 <?php
 
-
                                 require_once "connections/connection.php";
 
                                 $link = new_db_connection();
@@ -90,38 +84,6 @@ if (isset($_SESSION["role"])) {
 
                                 mysqli_stmt_close($stmt);
 
-                                $stmt = mysqli_stmt_init($link);
-
-                                $query = "SELECT users_id_users, posts_id_posts FROM users_has_posts WHERE users_id_users = ?";
-
-
-                                if (mysqli_stmt_prepare($stmt, $query)) {
-
-                                    mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
-
-                                    mysqli_stmt_execute($stmt);
-
-                                    mysqli_stmt_bind_result($stmt, $USER_ID, $id_posts);
-
-
-                                    if (!mysqli_stmt_fetch($stmt)) {
-
-                                        header("Location: perfil.php");
-
-                                    }
-
-
-                                } else {
-
-                                    echo "ERRORRRRR: " . mysqli_error($link);
-                                }
-                                //close connection
-
-                                mysqli_stmt_close($stmt);
-
-
-
-
                                 ?>
                             </select>
                         </div>
@@ -139,11 +101,8 @@ if (isset($_SESSION["role"])) {
                 <div class="modal-footer">
                     <p class="small mx-auto">Hi-Tribe</p>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <!-- Fim Modal -->
 
