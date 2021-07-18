@@ -1,3 +1,25 @@
+
+<?php
+
+if (isset($_SESSION["nome"])) {
+    $USER_NAME = $_SESSION["nome"];
+}
+
+if (isset($_SESSION["id"])) {
+    $USER_ID = $_SESSION["id"];
+}
+
+if (isset($_SESSION["role"])) {
+    $USER_ROLE = $_SESSION["role"];
+}
+
+
+?>
+
+
+
+
+
 <main class="container-fluid mt-lg-5 pt-2">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
         <div class="col-11 shadow-sm borda_post rounded-pill py-3">
@@ -35,6 +57,8 @@
                             <label>Escolhe a tua tribo</label>
                             <select class="form-control" name="grupo_id_grupo">
                                 <?php
+
+
                                 require_once "connections/connection.php";
 
                                 $link = new_db_connection();
@@ -96,13 +120,16 @@
         <?php
         $stmt = mysqli_stmt_init($link);
 
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user
-FROM posts        
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.imagem_user, users.nome_users
+FROM users_has_grupo
 INNER JOIN grupo
+ON grupo.id_grupo = users_has_grupo.grupo_id_grupo
+INNER JOIN posts
 ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
-ON users.id_users = posts.users_id_users
-ORDER BY posts.data_criacao_post DESC";
+ON posts.users_id_users = users.id_users
+WHERE users_has_grupo.users_id_users = ?
+ORDER BY posts.data_criacao_post DESC;";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -113,12 +140,15 @@ WHERE users_id_users = ?;";*/
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 
+            mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
 
             mysqli_stmt_execute($stmt);
 
-            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $grupo_id_grupo, $nome_user, $id_user, $imagem_user);
+            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $users_id_users, $id_grupo, $imagem_user, $nome_user);
 
-            while (mysqli_stmt_fetch($stmt)) { ?>
+            while (mysqli_stmt_fetch($stmt))
+            { ?>
+
                 <article class="col-11 borda_post shadow mb-4">
                     <div class="row mt-1">
 
@@ -138,7 +168,7 @@ WHERE users_id_users = ?;";*/
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
                                         <?php
-                                        if ($_SESSION['id'] == $id_user) {
+                                        if ($_SESSION['id'] == $USER_ID) {
                                             ?>
                                             <a class="dropdown-item" href="#" data-target="#myModal4<?=$id_posts?>" data-toggle="modal">Apagar</a>
                                             <?php
