@@ -88,7 +88,7 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
     $query = "INSERT INTO posts (titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users, grupo_id_grupo ) VALUES (?,?,?,NOW(),?,?)";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
-        mysqli_stmt_bind_param($stmt, 'sssii', $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post , $users_id_users, $grupo_id_grupo);
+        mysqli_stmt_bind_param($stmt, 'sssii', $titulo_post, $conteudo_post, $imagem_post, $USER_ID, $grupo_id_grupo);
 
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
@@ -96,7 +96,7 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
             header("Location: ../homepage.php");
         } else {
             // Acção de erro
-            header("Location: ../homepage.php");
+            header("Location: ../guardados.php");
             echo "Error:" . mysqli_stmt_error($stmt);
         }
     } else {
