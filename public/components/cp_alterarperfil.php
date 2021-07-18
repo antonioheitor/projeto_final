@@ -55,7 +55,7 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao);
             </div>
             <div class="form-group rounded bg-light pb-4">
                 <p class="px-3 pt-3">Alterar foto de perfil</p>
-                <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="imgperfil"
+                <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="fileToUpload"
                        id="customFile"/>
             </div>
             <div class="row justify-content-center mt-3">
