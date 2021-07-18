@@ -2,23 +2,24 @@
 require_once "connections/connection.php";
 session_start();
 
-if (isset($_GET["id"])) {
-    $id_user = $_GET["id"];
+if (isset($_SESSION["id"])) {
+    $USER_ID = $_SESSION["id"];
 }
 
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
 
-$query = "SELECT users_has_posts.users_id_users, users_has_posts.posts_id_posts, users.nome_users, users.imagem_user, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo
-FROM users_has_posts
+$query = "SELECT users_has_posts.users_id_users, users_has_posts.posts_id_posts, users.nome_users, users.imagem_user, posts.users_id_users, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo
+FROM posts
 INNER JOIN users
-ON users_has_posts.users_id_users = users.id_users
-INNER JOIN posts
+ON posts.users_id_users = users.id_users
+INNER JOIN users_has_posts
 ON users_has_posts.posts_id_posts = posts.id_posts
 INNER JOIN grupo
-ON posts.grupo_id_grupo = grupo.id_grupo";
-/* A query está mal porque passa o nome e o avatar do perfil e não do criador do post, porém vou ver isso mais logo */
+ON posts.grupo_id_grupo = grupo.id_grupo
+WHERE users_has_posts.users_id_users = ?
+ORDER BY posts.data_criacao_post DESC";
 
 ?>
 
@@ -34,8 +35,9 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
     <section class="row my-4 justify-content-center ">
         <?php
         if (mysqli_stmt_prepare($stmt, $query)) {
+            mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
             mysqli_stmt_execute($stmt);
-            mysqli_stmt_bind_result($stmt, $id_users, $id_posts, $nome_user, $imagem_user, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo);
+            mysqli_stmt_bind_result($stmt, $id_users, $id_posts, $nome_user, $imagem_user, $user_post, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo);
 
         while (mysqli_stmt_fetch($stmt)) {
             ?>
@@ -66,13 +68,10 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
 
                 <div class="pt-2">
                     <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
-
-
                     <?php if ($imagem_post != null) {
                         echo "<img class='text-center' src='$imagem_post'>";
                     }
                     ?>
-
                     <p class="pl-5"><?= $conteudo_post ?></p>
                     <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
@@ -116,11 +115,8 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                         <div class="modal-footer">
                             <p class="small mx-auto">Hi-Tribe</p>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <!-- REMOVER -->
@@ -164,12 +160,9 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->
     <div class="modal show margemmodal" id="myModal5">
-
         <div class="modal-dialog modal-lg modal-dialog-centered">
-
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
-
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja denunciar?</h3>

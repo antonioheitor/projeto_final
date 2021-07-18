@@ -10,7 +10,7 @@ if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
 }
 
-if (isset($_POST["sms"]) ) {
+if (isset($_POST["sms"]) && ($_POST["sms"] != "")) {
     $mensagem = $_POST['sms'];
 
     $link = new_db_connection();

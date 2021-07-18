@@ -228,7 +228,7 @@ WHERE users_id_users = ?;";*/
 
                         <p class="pl-5"><?= $conteudo_post ?></p>
                         <div class="float-right pb-2">
-                            <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
+                        <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                         </div>
                     </div>
 
@@ -247,7 +247,7 @@ WHERE users_id_users = ?;";*/
                             <h3 class="text-center pt-3">Comenta</h3>
                             <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                         </div>
-                        <form method="post">
+                        <form method="post" action="scripts/sc_new_comment.php?post=<?= $id_posts?>">
                             <div class="modal-body text-center">
                                 <textarea class="w-50" name="descpost" type="text"></textarea>
                             </div>
@@ -255,7 +255,7 @@ WHERE users_id_users = ?;";*/
                             <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
                                    id="customFile"/>
                             <div class="row justify-content-center mt-4">
-                                <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">Submeter</button>
+                                <button class="btnlogin w-50 text-center" type="submit">Submeter</button>
                             </div>
                         </form>
                         <!-- BOTÃO QUE FECHA O MODAL ######################### -->

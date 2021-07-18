@@ -54,7 +54,6 @@ ORDER BY votos.users_id_users DESC LIMIT 1";
                header("Location: sc_submeter_votos.php?id=$user_id&nome=$user_name&contagem=$contagem");
            };
 
-
         } else {
             //Ação de erro
             echo "Error:" . mysqli_error($link);
