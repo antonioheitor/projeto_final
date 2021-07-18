@@ -3,6 +3,7 @@
 session_start();
 
 if (isset($_SESSION['id']) && isset($_GET["grupo"]) && isset($_GET["tema"]) ) {
+
     $users_id_users = $_SESSION['id'];
     $grupo_id_grupo = $_GET["grupo"];
     $roles_grupos_id_roles = 6;
@@ -22,9 +23,6 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
     // Devemos validar também o resultado do execute!
     if (mysqli_stmt_execute($stmt)) {
-       // session_start();
-
-       // $_SESSION["role_grupo"] = $roles_grupos_id_roles;
 
         // Acção de sucesso
 
