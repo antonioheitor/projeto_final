@@ -66,13 +66,10 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
 
                 <div class="pt-2">
                     <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
-
-
                     <?php if ($imagem_post != null) {
                         echo "<img class='text-center' src='$imagem_post'>";
                     }
                     ?>
-
                     <p class="pl-5"><?= $conteudo_post ?></p>
                     <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
@@ -116,11 +113,8 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
                         <div class="modal-footer">
                             <p class="small mx-auto">Hi-Tribe</p>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <!-- REMOVER -->
@@ -164,12 +158,9 @@ ON posts.grupo_id_grupo = grupo.id_grupo";
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->
     <div class="modal show margemmodal" id="myModal5">
-
         <div class="modal-dialog modal-lg modal-dialog-centered">
-
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
-
                 <!-- CABEÇALHO DO MODAL ######################### -->
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja denunciar?</h3>

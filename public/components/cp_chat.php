@@ -124,7 +124,7 @@ fa-1x"></i></button>
                     </div>
                     <div class="row justify-content-center">
                         <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
+                            Enviar
                         </button>
                     </div>
                 </form>
