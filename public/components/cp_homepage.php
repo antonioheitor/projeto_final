@@ -190,6 +190,23 @@ WHERE users_id_users = ?;";*/
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                         </div>
                     </div>
+                    <div class="row border-top">
+                        <div class="pt-2 col-11">
+                            <div class="row justify-content-end ml-2">
+                                <div class="col-2 col-sm-1 pr-0">
+                                    <i class="fas fa-reply fa-rotate-180 fa-2x"></i>
+                                </div>
+                                <div class="col-10 col-sm-11 pl-0">
+                                    <h6 class="col-10 mt-2">Maria Renato</h6>
+                                </div>
+                            </div>
+                            <p class="ml-3">Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está
+                                classificado como
+                                o 6º
+                                melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
             </article>
