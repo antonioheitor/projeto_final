@@ -8,15 +8,14 @@ if (isset($_SESSION["id"])) {
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
-$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users
-WHERE users.id_users = ?";
+$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users WHERE users.id_users = ?";
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
 mysqli_stmt_bind_param($stmt, 'i', $user_id);
 mysqli_stmt_execute($stmt);
 
-mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
+mysqli_stmt_bind_result($stmt, $nome, $img, $user_id);
 
 ?>
 
@@ -37,25 +36,25 @@ mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
         ?>
         <section class="row no-gutters">
             <article class="col-12 text-center">
-                <img class="rounded-circle perfil" src="<?=$imagem ?>">
+                <img class="rounded-circle perfil" src="uploads/<?= $img; ?>">
             </article>
         </section>
 
         <article class="col-12 text-center mb-5">
             <h1 class="mt-3"><?= $nome ?></h1>
-        </article> <?php
-
+        </article>
+    <?php
     }
-    mysqli_stmt_close($stmt);?>
+    mysqli_stmt_close($stmt);
+    ?>
 
     <section class="row justify-content-center">
         <?php
 
         $stmt2 = mysqli_stmt_init($link);
         $query2 = "SELECT imagem_grupo, grupo_id_grupo , nome_grupo, temas_id_temas FROM users_has_grupo 
-    INNER JOIN grupo ON grupo_id_grupo = id_grupo  
-WHERE users_id_users = ? ;";
-
+INNER JOIN grupo ON grupo_id_grupo = id_grupo  
+WHERE users_id_users = ?";
 
         if (mysqli_stmt_prepare($stmt2, $query2)) {
 
@@ -76,13 +75,12 @@ WHERE users_id_users = ? ;";
                     <a href="chat.php?chat=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Entra na
                         conversa</a>
                 </article>
-            <?php }
+        <?php
+            }
             mysqli_stmt_close($stmt2);
         }
         mysqli_close($link);
-
-
         ?>
     </section>
 </main>
-<?php }?>
+<?php } ?>

@@ -1,8 +1,7 @@
 <?php
-
 require_once ("../connections/connection.php");
-
 session_start();
+
 if (isset($_SESSION["id"])) {
     $id = $_SESSION["id"];
 }
@@ -42,6 +41,12 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
     $uploadOk = 0;
 }
 
+/*If no errors registred, print the success message
+if (isset($_POST['submit']) && !$errors) {
+    // mysql_query("update SQL statement ");
+    echo "Image Uploaded Successfully!";
+}*/
+
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
@@ -53,16 +58,16 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
+
+
+
 if ($target_file != null) {
 // UPDATE NOME
     if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != "")) && (isset($_SESSION["id"])) && $target_file != null) {
         $nome = $_POST["nome_user"];
         $email = $_POST["email_user"];
-
         $imagem = $target_file;
-
         $descricao = $_POST["descricao_users"];
-
 
         // Create a new DB connection
         $link = new_db_connection();
@@ -70,8 +75,7 @@ if ($target_file != null) {
         /* create a prepared statement */
         $stmt = mysqli_stmt_init($link);
 
-        $query = "UPDATE users
-SET nome_users = ?, email_users = ?, descricao_users = ?, imagem_user = ? WHERE id_users = ?";
+        $query = "UPDATE users SET nome_users = ?, email_users = ?, descricao_users = ?, imagem_user = ? WHERE id_users = ?";
         if (mysqli_stmt_prepare($stmt, $query)) {
             /* Bind paramenters */
             mysqli_stmt_bind_param($stmt, "ssssi", $nome, $email, $descricao, $imagem, $id);
@@ -125,9 +129,4 @@ SET nome_users = ?, email_users = ?, descricao_users = ?, imagem_user = ? WHERE 
         echo "FALTAM VALORES";
     }
 
-
 }
-
-
-
-
