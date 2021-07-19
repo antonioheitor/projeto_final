@@ -2,7 +2,7 @@
     <section class="row justify-content-center pt-lg-5 mb-4 pt-2">
         <form class="col-11 mt-lg-4" method="get" action="pesquisa.php">
             <div class="row">
-                <input type="text" id="procurar" class="shadow-sm col-11" name="procurar" value="procurar" placeholder="Pesquisa...">
+                <input type="text" id="procurar" class="shadow-sm col-11" name="procurar" placeholder="Pesquisa...">
                 <button value="Pesquisar" type="submit" class="col-1 btn btn-outline-none p-0"><i class="fas fa-search
                 fa-2x"></i></button>
             </div>
