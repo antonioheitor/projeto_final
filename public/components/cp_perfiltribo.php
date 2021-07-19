@@ -63,10 +63,18 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 ?>
 
 <main class="container-fluid background pb-5">
-    <section class="row">
-        <a href="filtros.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x"></i></a>
-        <a id="def" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="m-3 dto"><i
-                    class="fas fa-cog fa-2x"></i></a>
+    <section class="row mt-lg-5">
+        <a href="filtros.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x mt-lg-3"></i></a>
+        <?php
+        if ($check == TRUE) {
+            ?>
+            <a id="def" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="m-3 dto mt-lg-3"><i
+                        class="fas fa-cog fa-2x"></i></a>
+        <?php
+        }
+
+        ?>
+
     </section>
 
     <section class="row justify-content-center align-items-stretch">
@@ -177,10 +185,17 @@ WHERE id_grupo = ?";
                                             data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" data-target="#myModal3"
+                                        <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>"
                                            data-toggle="modal">Guardar</a>
-                                        <a class="dropdown-item" href="#" data-target="#myModal4"
-                                           data-toggle="modal">Apagar</a>
+                                        <?php
+
+                                        if ($id_user == $id) {
+                                            ?>
+
+                                            <a class="dropdown-item" href="#" data-target="#myModal4<?=$id_posts?>" data-toggle="modal">Apagar</a>
+                                            <?php
+                                        }
+                                        ?>
                                         <a class="dropdown-item" href="#" data-target="#myModal5"
                                            data-toggle="modal">Denunciar</a>
                                     </div>
@@ -190,18 +205,20 @@ WHERE id_grupo = ?";
                     </div>
 
                     <div class="pt-2">
-                        <p><?= $titulo_post; ?></p>
-                        <p><?= $conteudo_post; ?></p>
-                        <?php if ($imagem_post != null) {
-                            echo "<img class='text-center' src='$imagem_post'>";
+                        <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
+                        <p class="pl-5"><?= $conteudo_post ?></p>
+
+                        <?php
+                        if ($imagem_post != null) {
+                            ?>
+                            <img class="text-center img-fluid" src="uploads/<?= $imagem_post ?>"
+                            <?php
                         }
                         ?>
-                        <div class="float-right pb-2">
-                            <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?= $id_posts ?>"
-                               data-toggle="modal"></i>
-                        </div>
-                    </div>
 
+                    </div>
+                    <div class="text-right pb-2 col-12">
+                        <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
                 </article>
 
@@ -247,7 +264,118 @@ WHERE id_grupo = ?";
 
                 </div>
             </section>
-            <?php }
+
+                <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
+
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Comenta</h3>
+                            <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
+                        </div>
+                        <form method="post" action="scripts/sc_new_comment.php?post=<?= $id_posts?>">
+                            <div class="modal-body text-center">
+                                <textarea class="w-50" name="descpost" type="text"></textarea>
+                            </div>
+                            <p class="text-center mt-1">Selecione imagem</p>
+                            <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
+                                   id="customFile"/>
+                            <div class="row justify-content-center mt-4">
+                                <button class="btnlogin w-50 text-center" type="submit">Submeter</button>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- GUARDAR -->
+            <!-- Button trigger modal -->
+            <div class="modal show margemmodal" id="myModal3<?=$id_posts?>">
+
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Tem a certeza que deseja guardar?</h3>
+                        </div>
+
+                        <form method="get" class="text-center" role="form">
+                            <div class="row justify-content-center mx-auto mt-4">
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_guardados.php?post=<?= $id_posts; ?>">Guardar</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fim Modal -->
+
+            <!-- APAGAR POST -->
+            <!-- Button trigger modal -->
+            <div class="modal show margemmodal" id="myModal4<?=$id_posts?>">
+
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
+                        </div>
+                        <form method="get" class="text-center" role="form">
+                            <div class="row justify-content-center mx-auto mt-4">
+                                <a class="btnlogin w-25 text-decoration-none mx-3"
+                                   href="scripts/sc_deletepost.php?post=<?= $id_posts?>">Apagar</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <?php
+            }
             mysqli_stmt_close($stmt);
         }
         mysqli_close($link);
@@ -255,118 +383,6 @@ WHERE id_grupo = ?";
         ?>
     </span>
 
-    <!-- COMENTÁRIOS -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal2">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Comenta</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post">
-                    <div class="modal-body text-center">
-                        <textarea class="w-50" name="descpost" type="text"></textarea>
-                    </div>
-                    <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
-                            Submeter
-                        </button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <!-- Fim Modal -->
-
-    <!-- GUARDAR -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal3">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tem a certeza que deseja guardar?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post" class="text-center">
-                    <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim
-                        </button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não
-                        </button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal -->
-
-    <!-- APAGAR POST -->
-    <!-- Button trigger modal -->
-    <div class="modal show margemmodal" id="myModal4">
-
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-            <!-- CONTEÚDO DO MODAL ######################### -->
-            <div class="modal-content bg-white text-dark bordermodal">
-
-                <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header mx-auto">
-                    <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
-                    <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                </div>
-                <form method="post" class="text-center">
-                    <div class="row justify-content-center mx-auto mt-4">
-                        <button class="btnlogin w-25 text-center mr-3" data-dismiss="modal" type="button">Sim
-                        </button>
-                        <button class="btnlogin w-25 text-center ml-3" data-dismiss="modal" type="button">Não
-                        </button>
-                    </div>
-                </form>
-                <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                <!-- CORPO DO MODAL ######################### -->
-                <div class="modal-body mx-auto text-center bgdark">
-                </div>
-                <!-- RODAPÉ DO MODAL ######################### -->
-                <div class="modal-footer">
-                    <p class="small mx-auto">Hi-Tribe</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fim Modal -->
 
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->

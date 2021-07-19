@@ -72,6 +72,8 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
 
     if ($target_file != null) {
         $imagem_post = $target_file;
+    } else {
+        $imagem_post = null;
     }
     $data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
