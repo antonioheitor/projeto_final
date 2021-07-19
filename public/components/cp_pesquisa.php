@@ -13,12 +13,12 @@ $link = new_db_connection();
 
     //stmt tem de ser diferente nas queries
 
-    $query = "SELECT id_temas, nome_tema, areas_id_areas, grupo.id_grupo, grupo.imagem_grupo FROM temas
+    $query = "SELECT id_temas, nome_tema, areas_id_areas, grupo.id_grupo, grupo.imagem_grupo, grupo.nome_grupo FROM temas
 INNER JOIN grupo
 ON temas.id_temas = grupo.temas_id_temas";
 
     if (isset($_GET["procurar"])) {
-        $query = $query . " WHERE temas.nome_tema LIKE ?";
+        $query = $query . " WHERE grupo.nome_grupo LIKE ?";
     }
 
     if (mysqli_stmt_prepare($stmt, $query)) {
@@ -30,7 +30,7 @@ ON temas.id_temas = grupo.temas_id_temas";
         mysqli_stmt_execute($stmt);
 
 
-        mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $areas_id_areas, $id_grupo, $img_grupo); ?>
+        mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $areas_id_areas, $id_grupo, $img_grupo, $nome_grupo); ?>
         <main class="container-fluid mt-lg-5">
 
         <div class="galeria row mx-auto my-5 py-5">
@@ -38,8 +38,8 @@ ON temas.id_temas = grupo.temas_id_temas";
         <?php   while (mysqli_stmt_fetch($stmt)) { ?>
             <div class="col-6 col-md-4 col-lg-3 mb-2">
                 <a href="perfil_tribo.php?grupo=<?= $id_grupo ?>">
-                    <img src="uploads/<?=$img_grupo ?>" class="img-fluid m-2 redondo shadow">
-                    <h4 class="text-center ml-2"><?= $nome_tema ?></h4>
+                    <img src="images/<?=$img_grupo ?>" class="img-fluid m-2 redondo shadow">
+                    <h4 class="text-center ml-2"><?= $nome_grupo ?></h4>
                 </a>
             </div>
 
@@ -84,7 +84,7 @@ WHERE areas_id_areas = ?";
             ?>
                     <div class="col-6 col-md-4 col-lg-3 mb-2">
                         <a href="perfil_tribo.php?grupo=<?= $id_grupo ?>">
-                            <img src="uploads/<?=$imagem_grupo ?>" class="img-fluid m-2 redondo shadow">
+                            <img src="images/<?=$imagem_grupo ?>" class="img-fluid m-2 redondo shadow">
                             <h4 class="text-center ml-2"><?= $nome_grupo ?></h4>
                         </a>
                     </div>

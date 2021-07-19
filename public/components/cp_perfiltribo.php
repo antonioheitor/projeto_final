@@ -126,8 +126,7 @@ WHERE grupo.id_grupo = ?";
         ?>
 
         <section class="row justify-content-center mt-3 pt-3 mb-5">
-            <form method="post" class="w-50 text-center" role="form" id="register-form" action="scripts/sc_entrar_tribo
-        .php?grupo=<?= $id_grupo ?>" enctype="multipart/form-data">
+            <form method="post" class="w-50 text-center" role="form" id="register-form" action="scripts/sc_entrar_tribo.php?grupo=<?= $id_grupo ?>" enctype="multipart/form-data">
                 <button class="btnlogin text-center col-5 col-md-4 col-lg-3" data-dismiss="modal" type="submit"
                         id="entrar">Entrar
                 </button>
