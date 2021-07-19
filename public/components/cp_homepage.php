@@ -1,4 +1,3 @@
-
 <?php
 
 if (isset($_SESSION["nome"])) {
@@ -13,11 +12,7 @@ if (isset($_SESSION["role"])) {
     $USER_ROLE = $_SESSION["role"];
 }
 
-
 ?>
-
-
-
 
 
 <main class="container-fluid mt-lg-5 pt-2">
@@ -58,7 +53,6 @@ if (isset($_SESSION["role"])) {
                             <select class="form-control" name="grupo_id_grupo">
                                 <?php
 
-
                                 require_once "connections/connection.php";
 
                                 $link = new_db_connection();
@@ -90,38 +84,6 @@ if (isset($_SESSION["role"])) {
 
                                 mysqli_stmt_close($stmt);
 
-                                $stmt = mysqli_stmt_init($link);
-
-                                $query = "SELECT users_id_users, posts_id_posts FROM users_has_posts WHERE users_id_users = ?";
-
-
-                                if (mysqli_stmt_prepare($stmt, $query)) {
-
-                                    mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
-
-                                    mysqli_stmt_execute($stmt);
-
-                                    mysqli_stmt_bind_result($stmt, $USER_ID, $id_posts);
-
-
-                                    if (!mysqli_stmt_fetch($stmt)) {
-
-                                        header("Location: perfil.php");
-
-                                    }
-
-
-                                } else {
-
-                                    echo "ERRORRRRR: " . mysqli_error($link);
-                                }
-                                //close connection
-
-                                mysqli_stmt_close($stmt);
-
-
-
-
                                 ?>
                             </select>
                         </div>
@@ -139,17 +101,37 @@ if (isset($_SESSION["role"])) {
                 <div class="modal-footer">
                     <p class="small mx-auto">Hi-Tribe</p>
                 </div>
-
             </div>
-
         </div>
-
     </div>
     <!-- Fim Modal -->
 
 
     <section class="row my-4 justify-content-center">
         <?php
+        $stmt = mysqli_stmt_init($link);
+
+        $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, post_id_post, users.nome_users FROM comentarios
+INNER JOIN users
+ON users_id_users = users.id_users
+WHERE post_id_post = ?";
+
+        if (mysqli_stmt_prepare($stmt, $query)) {
+            mysqli_stmt_bind_param($stmt, 'i', $id_posts);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $id_posts, $nome_user);
+                if (!mysqli_stmt_fetch($stmt)) {
+                   // header("Location: homepage.php");
+                }
+
+            } else {
+            }
+            //mostrar o codigo a apresentar
+        } else {
+            echo "ERRORRRRR: " . mysqli_error($link);
+        }
+        mysqli_stmt_close($stmt);
+
         $stmt = mysqli_stmt_init($link);
 
         $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.imagem_user, users.nome_users
@@ -229,6 +211,19 @@ WHERE users_id_users = ?;";*/
                         <p class="pl-5"><?= $conteudo_post ?></p>
                         <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
+                        </div>
+                    </div>
+                    <div class="row border-top">
+                        <div class="pt-2 col-11">
+                            <div class="row justify-content-end ml-2">
+                                <div class="col-2 col-sm-1 pr-0">
+                                    <i class="fas fa-reply fa-rotate-180 fa-2x"></i>
+                                </div>
+                                <div class="col-10 col-sm-11 pl-0">
+                                    <h6 class="col-10 mt-2"><?=$nome_user ?></h6>
+                                </div>
+                            </div>
+                            <p class="ml-3"><?= $texto_comentario ?> </p>
                         </div>
                     </div>
 

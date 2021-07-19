@@ -87,6 +87,7 @@ session_start();
         </a>
     </section>
 
+    <!-- MODAL DESATIVAR -->
     <div class="modal show margemmodal" id="myModal3">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <!-- CONTEÚDO DO MODAL ######################### -->
@@ -113,7 +114,7 @@ session_start();
         </div>
     </div>
 
-
+    <!-- MODAL TERMINAR SESSÃO -->
     <div class="modal show margemmodal" id="myModal2">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <!-- CONTEÚDO DO MODAL ######################### -->
