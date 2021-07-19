@@ -18,7 +18,7 @@ INNER JOIN grupo
 ON temas.id_temas = grupo.temas_id_temas";
 
     if (isset($_GET["procurar"])) {
-        $query = $query . " WHERE temas.nome_tema LIKE ?";
+        $query = $query . " WHERE grupo.nome_grupo LIKE ?";
     }
 
     if (mysqli_stmt_prepare($stmt, $query)) {
