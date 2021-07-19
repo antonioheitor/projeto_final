@@ -111,6 +111,7 @@ if (isset($_SESSION["role"])) {
         <?php
         $stmt = mysqli_stmt_init($link);
 
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
         $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, post_id_post, users.nome_users FROM comentarios
 INNER JOIN users
 ON users_id_users = users.id_users
@@ -143,7 +144,7 @@ ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON posts.users_id_users = users.id_users
 WHERE users_has_grupo.users_id_users = ?
-ORDER BY posts.data_criacao_post DESC;";
+ORDER BY posts.data_criacao_post DESC";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -220,10 +221,14 @@ WHERE users_id_users = ?;";*/
                                     <i class="fas fa-reply fa-rotate-180 fa-2x"></i>
                                 </div>
                                 <div class="col-10 col-sm-11 pl-0">
-                                    <h6 class="col-10 mt-2"><?=$nome_user ?></h6>
+                                    <h6 class="col-10 mt-2">Maria Renato</h6>
                                 </div>
                             </div>
-                            <p class="ml-3"><?= $texto_comentario ?> </p>
+                            <p class="ml-3">Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está
+                                classificado como
+                                o 6º
+                                melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!
+                            </p>
                         </div>
                     </div>
 
