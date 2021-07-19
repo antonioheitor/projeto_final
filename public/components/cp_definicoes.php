@@ -211,7 +211,7 @@ session_start();
                                     while (mysqli_stmt_fetch($stmt)) {
                                         echo " <option value=\"$id_sede_grupo\" selected>$nome_sede</option>";
                                     }
-                                    echo "<option value='' selected>Nenhum</option>";
+                                    echo "<option value='NULL' selected>Nenhum</option>";
                                 } else {
                                     echo "ERRORRRRR: " . mysqli_error($link);
                                 }

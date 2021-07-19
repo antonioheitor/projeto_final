@@ -5,10 +5,6 @@ if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
 }
 
-?>
-
-
-<?php
 require_once "../connections/connection.php";
 
 $target_dir = "../../uploads/";
@@ -99,12 +95,10 @@ WHERE temas.id_temas = ?";
     }
 
     $stmt1 = mysqli_stmt_init($link);
-
-    $query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas) VALUES (?,?,?,NOW(),?,?)";
-
+if ($sedes_id_sede_grupo == "NULL") {
+    $query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas) VALUES (?,?,?,NOW(),NULL,?)";
     if (mysqli_stmt_prepare($stmt1, $query1)) {
-        mysqli_stmt_bind_param($stmt1, 'sssii', $nome_tema, $descricao_grupo, $imagem_grupo,
-            $sedes_id_sede_grupo, $temas_id_temas);
+        mysqli_stmt_bind_param($stmt1, 'sssi', $nome_tema, $descricao_grupo, $imagem_grupo, $temas_id_temas);
 
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt1)) {
@@ -112,12 +106,8 @@ WHERE temas.id_temas = ?";
             header("Location: ../perfil.php");
         } else {
             // Acção de erro
-            echo $nome_tema;
-            echo $descricao_grupo;
-            echo $imagem_grupo;
-            echo $sedes_id_sede_grupo;
-            echo $temas_id_temas;
-            echo "Error:" . mysqli_stmt_error($stmt1);
+            echo "oi".$sedes_id_sede_grupo;
+            //  echo "Error:" . mysqli_stmt_error($stmt1);
         }
     } else {
         // Acção de erro
@@ -127,6 +117,32 @@ WHERE temas.id_temas = ?";
     mysqli_stmt_close($stmt);
     mysqli_stmt_close($stmt1);
     mysqli_close($link);
+
+
+} else {$query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas) VALUES (?,?,?,NOW(),?,?)";
+    if (mysqli_stmt_prepare($stmt1, $query1)) {
+        mysqli_stmt_bind_param($stmt1, 'sssii', $nome_tema, $descricao_grupo,  $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
+
+        // Devemos validar também o resultado do execute!
+        if (mysqli_stmt_execute($stmt1)) {
+            // Acção de sucesso
+            header("Location: ../perfil.php");
+        } else {
+            // Acção de erro
+            echo "oi".$sedes_id_sede_grupo;
+            //  echo "Error:" . mysqli_stmt_error($stmt1);
+        }
+    } else {
+        // Acção de erro
+
+        echo "Error:" . mysqli_error($link);
+    }
+    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt1);
+    mysqli_close($link);
+}
+
+
 } else {
     echo "Campos do formulário por preencher";
 }
