@@ -22,9 +22,9 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     if (mysqli_stmt_execute($stmt)) {
 
         // Acção de sucesso
-      header("Location: ../tribo.php?grupo=$grupo_id_grupo");
+      header("Location: ../perfil_tribo.php?grupo=$grupo_id_grupo");
     } else {
-        header("Location: ../tribo.php?grupo=$grupo_id_grupo");
+        header("Location: ../perfil_tribo.php?grupo=$grupo_id_grupo");
     }
 } else {
     // Acção de erro
