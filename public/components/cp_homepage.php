@@ -183,7 +183,7 @@ WHERE users_id_users = ?;";*/
                         <?php
                         if ($imagem_post != null) {
                         ?>
-                        <img class="text-center" src="<?= $imagem_post ?>">
+                        <img class="text-center" src="uploads/<?= $imagem_post ?>"
                         <?php
                         }
                         ?>
