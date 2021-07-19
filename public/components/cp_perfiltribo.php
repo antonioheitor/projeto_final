@@ -78,7 +78,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     </section>
 
     <section class="row justify-content-center align-items-stretch">
-        <img src="uploads/<?= $imagem_grupo ?>" alt="">
+        <img src="uploads/<?= $imagem_grupo ?>" class="img-fluid" alt="">
     </section>
 
     <section class="row justify-content-center mt-2">

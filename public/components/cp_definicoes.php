@@ -37,12 +37,6 @@ session_start();
                 <p class="ml-3 h_definicoes">Alterar perfil</p>
             </div>
         </a>
-        <a href="#" class="text-decoration-none">
-            <div class="row mb-2 pt-4 border-top border-dark">
-                <i class="far fa-2x fa-user"></i>
-                <p class="ml-3 h_definicoes">Informações de Conta</p>
-            </div>
-        </a>
 
         <a href="#" class="text-decoration-none">
             <div class="row mb-2 pt-4 border-top border-dark">
@@ -193,7 +187,7 @@ session_start();
                         <input class="w-50 mx-auto" name="descricao_tribo" type="text" placeholder="Descrição">
                         <p class="text-center mt-4">Escolhe uma imagem</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="img_grupo"
-                               id="customFile1"/>
+                               id="img_grupo"/>
                         <div class="dropdown text-center mt-4">
                             <label>Escolhe uma sede</label>
                             <select class="w-50 mx-auto form-control" name="sedes_id_sede_grupo">
