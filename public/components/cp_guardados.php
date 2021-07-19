@@ -47,7 +47,7 @@ ORDER BY posts.data_criacao_post DESC";
 
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
                     <img src="uploads/<?= $imagem_user ?>"
-                         class="img-fluid rounded-circle p-sm-1 border border-success">
+                         class="img-fluid rounded-circle p-sm-1">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_user ?></h4>
@@ -69,7 +69,7 @@ ORDER BY posts.data_criacao_post DESC";
                 <div class="pt-2">
                     <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
                     <?php if ($imagem_post != null) {
-                        echo "<img class='text-center' src='$imagem_post'>";
+                        echo "<img class='text-center' src='uploads/$imagem_post'>";
                     }
                     ?>
                     <p class="pl-5"><?= $conteudo_post ?></p>
