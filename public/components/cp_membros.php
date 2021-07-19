@@ -11,7 +11,6 @@ if (isset($_GET["grupo"])) {
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
-            <!-- Se fizermos nas definições, provavelmente temos de fazer ?grupo= aqui também, não? Estou kinda confusa :/ -->
             <a id="fechar" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="float-right pt-4 pr-4"><i
                     class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Membros</p>
@@ -66,7 +65,7 @@ if (isset($_GET["grupo"])) {
 
             <div class="row mt-2">
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1 border border-success">
+                    <img src="uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_users ?></h4>
