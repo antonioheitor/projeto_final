@@ -119,6 +119,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                         <th>Sede</th>
                                         <th>Tema</th>
                                         <th>Editar</th>
+                                        <th>Apagar</th>
 
                                     </tr>
                                     </thead>
@@ -136,6 +137,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                         <td><?= $nome_sede ?></td>
                                         <td><?= $nome_tema ?></td>
                                         <td><a href='tribos_edit.php?id=<?= $id_grupo ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                        <td><a href='scripts/sc_delete_tribo.php?id=<?= $id_grupo ?> '><i class="fas fa-times"></i></a></td>
                                     </tr>
 
                                     </tbody>

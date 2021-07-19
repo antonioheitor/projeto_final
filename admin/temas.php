@@ -115,6 +115,7 @@ ON areas_id_areas = id_areas";
                                         <th>Nome do Tema</th>
                                         <th>Área do Tema</th>
                                         <th>Editar</th>
+                                        <th>Apagar</th>
                                     </tr>
                                     </thead>
                                     <?php
@@ -127,6 +128,8 @@ ON areas_id_areas = id_areas";
                                         <td><?= $nome_tema ?></td>
                                         <td><?= $nome_areas ?></td>
                                         <td><a href='temas_edit.php?id=<?= $id_temas ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                        <td><a href='scripts/sc_delete_tema.php?id=<?= $id_temas ?> '><i class="fas fa-times"></i></a></td>
+
                                     </tr>
 
                                     </tbody>

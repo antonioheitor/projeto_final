@@ -232,6 +232,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                         </div>
                                         <button type="submit" class="btn btn-info">Submeter alterações</button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

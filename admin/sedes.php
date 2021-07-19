@@ -113,6 +113,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                         <th>Latitude da Sede</th>
                                         <th>Longitude da Sede</th>
                                         <th>Editar</th>
+                                        <th>Apagar</th>
                                     </tr>
                                     </thead>
                                     <?php
@@ -126,6 +127,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                         <td><?= $latitude_sede ?></td>
                                         <td><?= $longitude_sede ?></td>
                                         <td><a href='sedes_edit.php?id=<?= $id_sede_grupo ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                        <td><a href='scripts/sc_delete_sede.php?id=<?= $id_sede_grupo ?> '><i class="fas fa-times"></i></a></td>
+
                                     </tr>
 
                                     </tbody>

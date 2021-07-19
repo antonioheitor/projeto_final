@@ -117,6 +117,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                             <th>Imagem</th>
                                             <th>Role</th>
                                             <th>Editar</th>
+                                            <th>Apagar</th>
                                         </tr>
                                     </thead>
                                     <?php
@@ -132,6 +133,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                             <td><?= $imagem_user ?></td>
                                             <td><?= $role_plataforma ?></td>
                                             <td><a href='usuarios_edit.php?id=<?= $id_users ?>'><i class="fa fa-edit fa-fw"></a></td>
+                                            <td><a href='scripts/sc_delete_user.php?id=<?= $id_users ?> '><i class="fas fa-times"></i></a></td>
+
                                         </tr>
 
                                     </tbody>
