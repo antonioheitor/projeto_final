@@ -89,9 +89,7 @@ if (isset($_SESSION["role"])) {
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center col-4" type="submit">
-                            Submeter Dados
-                        </button>
+                        <button class="btnlogin w-50 text-center col-4" type="submit">Submeter Dados</button>
                     </div>
                 </form>
                 <!-- CORPO DO MODAL ######################### -->
@@ -380,11 +378,9 @@ WHERE users_id_users = ?;";*/
 
                                 if (mysqli_stmt_prepare($stmt, $query)) {
                                     mysqli_stmt_bind_param($stmt, "i", $id_posts);
-                                    echo $id_posts;
 
                                     mysqli_stmt_execute($stmt);
                                     mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
-echo $texto_comentario;
                                 } else {
                                     echo "ERRORRRRR: " . mysqli_error($link);
                                 }
@@ -398,11 +394,9 @@ echo $texto_comentario;
 
 
     <?php
-
      }
-
     mysqli_stmt_close($stmt);
-mysqli_close($link);
+    mysqli_close($link);
     ?>
 
 

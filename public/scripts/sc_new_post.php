@@ -69,13 +69,6 @@ if ($uploadOk == 0) {
 if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["grupo_id_grupo"]) ) {
     $titulo_post = $_POST['titulopost'];
     $conteudo_post = $_POST['descpost'];
-
-    if ($target_file != null) {
-        $imagem_post = $target_file;
-    } else {
-        $imagem_post = null;
-    }
-    $data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
@@ -106,4 +99,10 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
     mysqli_close($link);
 } else {
     echo "Campos do formulário por preencher";
+}
+
+if ($target_file != null) {
+    $imagem_post = $target_file;
+} else {
+    $imagem_post = null;
 }
