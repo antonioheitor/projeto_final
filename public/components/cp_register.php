@@ -58,11 +58,12 @@
                 </div>
 
                 <div class="form-group rounded">
-                    <input type="password" class="inputs form-control" aria-describedby="password" name="password_user" placeholder="Palavra-Passe" required="required" onkeyup="checkPass(); return false;">
+                    <input type="password" class="inputs form-control" aria-describedby="password" id="password" name="password_user" placeholder="Palavra-Passe" required="required" onkeyup="checkPass(); return false;">
                 </div>
                 <div class="form-group rounded">
-                    <input type="password" class="inputs form-control" aria-describedby="password" name="verify_password" placeholder="Verificação" required="required" onkeyup="checkPass(); return false;">
+                    <input type="password" class="inputs form-control" aria-describedby="password" id="password_confirm" name="verify_password" placeholder="Verificação" required="required" onkeyup="checkPass(); return false;">
                 </div>
+                <span id="confirmMessage" class="confirmMessage"></span>
                 <div class="form-group rounded">
                     <input type="text" class="inputs inputdescricao" aria-describedby="description" name="descricao_users" placeholder="Descrição">
                 </div>
