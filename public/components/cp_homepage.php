@@ -147,7 +147,7 @@ WHERE users_id_users = ?;";*/
                 <div class="row mt-1">
 
                     <div class="col-2 col-md-2 col-lg-1 my-auto">
-                        <img src="../uploads/<?= $imagem_user ?>"
+                        <img src="uploads/<?= $imagem_user ?>"
                              class="img-fluid rounded-circle p-sm-1 border border-success">
                     </div>
                     <div class="col-8 col-sm-8 position-relative">
