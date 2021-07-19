@@ -10,7 +10,6 @@ $id_grupo = $_GET["grupo"];
 <main class="container-fluid background">
     <section class="row">
         <div class="col-12 text-center">
-            <!-- Aqui falta o ?grupo= para saber em que tribo estamos por causa de voltar para trás -->
             <a id="fechar" href="perfil_tribo.php?grupo=<?= $id_grupo ?>" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Definições</p>
             <p class="pt-5 pb-1 d-md-none h_pequeno">Definições</p>
@@ -18,7 +17,6 @@ $id_grupo = $_GET["grupo"];
     </section>
 
     <section class="col-12 mt-5 ml-2">
-        <!-- Aqui falta o ?grupo= para saber em que tribo estamos por causa dos membros de cada tribo -->
         <a href="membros.php?grupo=<?= $id_grupo ?>" class="text-decoration-none">
             <div class="row mt-5">
                 <i class="fas fa-users fa-2x"></i>
@@ -47,8 +45,6 @@ $id_grupo = $_GET["grupo"];
             </div>
         </a>
 
-        <!-- Sq aqui conseguimos fazer um script para apagar as mensagens. Ou será que não dá porque não podemos apagar da base
-         de dados porque não podemos apagar para todos? -->
         <a href="#" class="text-decoration-none" data-target="#myModal4" data-toggle="modal">
             <div class="row mb-2 pt-4 border-top border-dark">
                 <i class="fas fa-trash-alt fa-2x"></i>
@@ -63,8 +59,7 @@ $id_grupo = $_GET["grupo"];
             </div>
         </a>
 
-        <!-- Aqui também deve ser preciso, não? -->
-        <a href="perfil%20tribo.php" class="text-decoration-none">
+        <a href="scripts/sc_sair_tribo.php?tribo=<?=$id_grupo?>" class="text-decoration-none">
             <div class="row mb-2 py-4 border-top border-dark">
                 <i class="fas fa-sign-out-alt fa-2x"></i>
                 <p class="ml-3 h_definicoes">Sair da tribo</p>

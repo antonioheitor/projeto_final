@@ -14,17 +14,18 @@ if (isset($_SESSION['id']) && isset($_GET['voto']) && isset($_GET['grupo']) && i
 
     $query = "SELECT id_quinzena FROM quinzenas ORDER BY id_quinzena ASC LIMIT 1";
 
-    $stmt2 = mysqli_stmt_init($link);
-
-    $query2 = "INSERT INTO votos (quinzenas_id_quinzena, grupo_id_grupo, users_id_users, users_id_users1, roles_grupos_id_roles)
-VALUES (?, ?, ?, ?, ?)";
-
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 
-        mysqli_stmt_bind_result($stmt, $quinzena);
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
+
+            mysqli_stmt_bind_result($stmt, $quinzena);
+
+
+            if (!mysqli_stmt_fetch($stmt)) {
+                //header("Location: ../membros.php?tema_tribo=$tema");
+            }
             //Ação de sucesso
 
         } else {
@@ -34,6 +35,12 @@ VALUES (?, ?, ?, ?, ?)";
     } else {
         echo "Error:" . mysqli_error($link);
     }
+
+
+    $stmt2 = mysqli_stmt_init($link);
+
+    $query2 = "INSERT INTO votos (quinzenas_id_quinzena, grupo_id_grupo, users_id_users, users_id_users1, roles_grupos_id_roles)
+VALUES (?, ?, ?, ?, ?)";
 
     if (mysqli_stmt_prepare($stmt2, $query2)) {
 
@@ -52,6 +59,7 @@ VALUES (?, ?, ?, ?, ?)";
     } else {
         echo "Error:" . mysqli_error($link);
     }
+    mysqli_stmt_close($stmt);
     mysqli_stmt_close($stmt2);
 
 

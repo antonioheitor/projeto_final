@@ -178,13 +178,13 @@ if (isset($_SESSION["role"])) {
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
+                                        <div class=" pr-4">
                                             Nova Tribo
-                                            <a href="tribos_new.php"><div class="btn btn-dark">Criar</div></a>
 
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            <i class="fas fa-users fa-2x text-gray-300 pr-3"></i>
+                                            <a href="tribos_new.php"><div class="btn btn-dark">Criar</div></a>
                                         </div>
                                     </div>
                                 </div>
@@ -196,13 +196,14 @@ if (isset($_SESSION["role"])) {
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
+                                        <div class=" pr-4">
                                             Novo Tema
-                                            <a href="temas_new.php"><div class="btn btn-dark">Criar</div></a>
 
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <i class="fas fa-atlas fa-2x text-gray-300 pr-4"></i>
+                                            <a href="temas_new.php"><div class="btn btn-dark">Criar</div></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -214,13 +215,14 @@ if (isset($_SESSION["role"])) {
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
+                                        <div class="pr-4">
                                             Nova Sede
-                                            <a href="sedes_new.php"><div class="btn btn-dark">Criar</div></a>
 
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            <i class="fas fa-map-marker-alt fa-2x text-gray-300 pr-4"></i>
+                                            <a href="sedes_new.php"><div class="btn btn-dark">Criar</div></a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -234,7 +236,7 @@ if (isset($_SESSION["role"])) {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
+                                                Aceitar votações</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                         </div>
                                         <div class="col-auto">
@@ -285,38 +287,138 @@ if (isset($_SESSION["role"])) {
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Info Usuários</h6>
                                     <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
                                     </div>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
+
+
+                                <?php
+
+                    require_once "connections/connection.php";
+
+                                $link = new_db_connection();
+
+                                $stmt = mysqli_stmt_init($link);
+
+                                $query = "SELECT COUNT(roles_plataforma_id_roles_plataforma) FROM users WHERE roles_plataforma_id_roles_plataforma = 3;";
+
+
+                                if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                                    if (mysqli_stmt_execute($stmt)) {
+
+                                        mysqli_stmt_bind_result($stmt, $roles_admin );
+
+                                        if (!mysqli_stmt_fetch($stmt)) {
+
+                                            header("Location: users.php");
+
+                                        }
+                                        echo "<div class='pb-4'>
+                                    <section class='btn btn-primary'>
+                                    <p>Quantidade: $roles_admin</p>
+</section>
+                                </div>";
+
+                                    } else {
+
+                                    }
+                                    //mostrar o codigo a apresentar
+                                } else {
+
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                }
+                                mysqli_stmt_close($stmt);
+
+
+
+
+                    $stmt = mysqli_stmt_init($link);
+
+                    $query = "SELECT COUNT(roles_grupos_id_roles) FROM users_has_grupo WHERE roles_grupos_id_roles = 1;";
+
+
+                    if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                       if (mysqli_stmt_execute($stmt)) {
+
+                        mysqli_stmt_bind_result($stmt, $roles_lider );
+
+                        if (!mysqli_stmt_fetch($stmt)) {
+
+                            header("Location: users.php");
+
+                        }
+                           echo "<div class='pb-4'>
+                                    <section class='btn btn-success'>
+                                    <p>Quantidade: $roles_lider</p>
+</section>
+                                </div>";
+
+                    } else {
+
+                       }
+                        //mostrar o codigo a apresentar
+                    } else {
+
+                        echo "ERRORRRRR: " . mysqli_error($link);
+                    }
+                    mysqli_stmt_close($stmt);
+
+
+                     $stmt = mysqli_stmt_init($link);
+
+                                    $query = "SELECT COUNT(roles_grupos_id_roles) FROM users_has_grupo WHERE roles_grupos_id_roles = 6;";
+
+
+                                    if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                                    if (mysqli_stmt_execute($stmt)) {
+
+                                    mysqli_stmt_bind_result($stmt, $roles_membro );
+
+                                    if (!mysqli_stmt_fetch($stmt)) {
+
+                                    header("Location: users.php");
+
+                                    }
+                                    echo "<div class='pb-4'>
+                                        <section class='btn btn-info'>
+                                            <p>Quantidade: $roles_membro</p>
+                                        </section>
+                                    </div>";
+
+                                    } else {
+
+                                    }
+                                    //mostrar o codigo a apresentar
+                                    } else {
+
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                    }
+                                    mysqli_stmt_close($stmt);
+
+                                    ?>
+
+
+                                <!-- Card Body -->
+
+
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
+                                            <i class="fas fa-circle text-primary"></i> Admin
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
+                                            <i class="fas fa-circle text-success"></i> Líderes
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
+                                            <i class="fas fa-circle text-info"></i> Membros
                                         </span>
                                     </div>
                                 </div>
