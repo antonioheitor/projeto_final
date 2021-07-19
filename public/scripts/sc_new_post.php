@@ -1,5 +1,11 @@
 <?php
+require_once "../connections/connection.php";
 session_start();
+
+$target_dir = "../../uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 if (isset($_SESSION["nome"])) {
     $USER_NAME = $_SESSION["nome"];
@@ -16,16 +22,6 @@ if (isset($_SESSION["role"])) {
 
 }
 
-?>
-
-
-<?php
-require_once "../connections/connection.php";
-
-$target_dir = "../uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
@@ -109,4 +105,3 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
 } else {
     echo "Campos do formulário por preencher";
 }
-

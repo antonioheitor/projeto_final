@@ -68,7 +68,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             ?>
             <section class="row mt-4">
                 <article class="col-12">
-                    <img src="<?= $avatar ?>" class="avatar d-none d-md-block">
+                    <img src="uploads/<?= $avatar ?>" class="avatar d-none d-md-block">
                     <div class="row ml-2">
                         <div class="col-10 col-lg-11 border border-dark rounded position-relative msgenviada">
                             <h4 class="pt-3 text-light"><?= $user ?></h4>

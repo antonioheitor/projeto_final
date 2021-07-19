@@ -180,8 +180,11 @@ WHERE users_id_users = ?;";*/
                         <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
 
 
-                        <?php if ($imagem_post != null) {
-                            echo "<img class='text-center' src='$imagem_post'>";
+                        <?php
+                        if ($imagem_post != null) {
+                        ?>
+                        <img class="text-center" src="uploads/<?= $imagem_post ?>"
+                        <?php
                         }
                         ?>
 
