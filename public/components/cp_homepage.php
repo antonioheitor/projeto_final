@@ -284,8 +284,7 @@ WHERE users_id_users = ?;";*/
                         </div>
                         <form method="get" class="text-center" role="form">
                             <div class="row justify-content-center mx-auto mt-4">
-                                <a class="btnlogin w-25 text-decoration-none mx-3"
-                                   href="scripts/sc_deletepost.php?post=<?= $id_posts?>">Apagar</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_deletepost.php?post=<?= $id_posts?>">Apagar</a>
                                 <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
                             </div>
                         </form>
