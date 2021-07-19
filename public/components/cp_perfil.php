@@ -8,15 +8,14 @@ if (isset($_SESSION["id"])) {
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
-$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users
-WHERE users.id_users = ?";
+$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users WHERE users.id_users = ?";
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
 mysqli_stmt_bind_param($stmt, 'i', $user_id);
 mysqli_stmt_execute($stmt);
 
-mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
+mysqli_stmt_bind_result($stmt, $nome, $imagem, $user_id);
 
 ?>
 
@@ -37,7 +36,7 @@ mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
         ?>
         <section class="row no-gutters">
             <article class="col-12 text-center">
-                <img class="rounded-circle perfil" src="<?=$imagem ?>">
+                <img class="rounded-circle perfil" src="<?= $imagem; ?>">
             </article>
         </section>
 
@@ -53,8 +52,8 @@ mysqli_stmt_bind_result($stmt, $nome, $imagem, $id);
 
         $stmt2 = mysqli_stmt_init($link);
         $query2 = "SELECT imagem_grupo, grupo_id_grupo , nome_grupo, temas_id_temas FROM users_has_grupo 
-    INNER JOIN grupo ON grupo_id_grupo = id_grupo  
-WHERE users_id_users = ? ;";
+INNER JOIN grupo ON grupo_id_grupo = id_grupo  
+WHERE users_id_users = ?";
 
 
         if (mysqli_stmt_prepare($stmt2, $query2)) {
