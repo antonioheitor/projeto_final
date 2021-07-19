@@ -20,7 +20,6 @@ WHERE temas_id_temas = ?";
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
-
     mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
 
     if (mysqli_stmt_execute($stmt)) {
@@ -109,7 +108,6 @@ WHERE id_grupo = ?";
 INNER JOIN grupo
 ON grupo_id_grupo = id_grupo
 WHERE users_id_users = ?;";*/
-
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 

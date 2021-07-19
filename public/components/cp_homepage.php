@@ -43,8 +43,8 @@ if (isset($_SESSION["role"])) {
                     </div>
                     <input class="w-50 mx-auto" name="titulopost" type="text">
                     <div class="modal-body text-center">
-                        <label class="text-center">Escreve o post :)</label>
-                        <input class="w-50 mx-auto" name="descpost" type="text">
+                        <p class="text-center">Escreve o post :)</p>
+                        <textarea class="w-50 mx-auto" name="descpost" type="text"></textarea>
                         <p class="text-center mt-4">Selecione imagem</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
                                id="customFile"/>
@@ -111,7 +111,7 @@ if (isset($_SESSION["role"])) {
         <?php
         $stmt = mysqli_stmt_init($link);
 
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.imagem_user, users.nome_users
+        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
 FROM users_has_grupo
 INNER JOIN grupo
 ON grupo.id_grupo = users_has_grupo.grupo_id_grupo
@@ -120,7 +120,7 @@ ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON posts.users_id_users = users.id_users
 WHERE users_has_grupo.users_id_users = ?
-ORDER BY posts.data_criacao_post DESC;";
+ORDER BY posts.data_criacao_post DESC";
 
         /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
         nome_grupo, grupo_id_grupo FROM posts
@@ -135,7 +135,7 @@ WHERE users_id_users = ?;";*/
 
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $users_id_users, $id_grupo, $imagem_user, $nome_user);
+        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $users_id_users, $id_grupo, $iduser, $imagem_user, $nome_user);
 
         } else {
             echo "ERRORRRRR: " . mysqli_error($link);
@@ -163,7 +163,7 @@ WHERE users_id_users = ?;";*/
                                     <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
                                     <?php
 
-                                    if ($id_posts == "1") {
+                                    if ($iduser == $USER_ID) {
                                         ?>
 
                                         <a class="dropdown-item" href="#" data-target="#myModal4<?=$id_posts?>" data-toggle="modal">Apagar</a>
@@ -188,6 +188,23 @@ WHERE users_id_users = ?;";*/
                         <p class="pl-5"><?= $conteudo_post ?></p>
                         <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
+                        </div>
+                    </div>
+                    <div class="row border-top">
+                        <div class="pt-2 col-11">
+                            <div class="row justify-content-end ml-2">
+                                <div class="col-2 col-sm-1 pr-0">
+                                    <i class="fas fa-reply fa-rotate-180 fa-2x"></i>
+                                </div>
+                                <div class="col-10 col-sm-11 pl-0">
+                                    <h6 class="col-10 mt-2">Maria Renato</h6>
+                                </div>
+                            </div>
+                            <p class="ml-3">Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está
+                                classificado como
+                                o 6º
+                                melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!
+                            </p>
                         </div>
                     </div>
 
