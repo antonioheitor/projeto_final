@@ -1,17 +1,10 @@
 <?php
 session_start();
 
-if (isset($_SESSION["nome"])) {
-    $USER_NAME = $_SESSION["nome"];
-}
-
 if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
 }
 
-if (isset($_SESSION["role"])) {
-    $USER_ROLE = $_SESSION["role"];
-}
 ?>
 
 
@@ -19,13 +12,13 @@ if (isset($_SESSION["role"])) {
 require_once "../connections/connection.php";
 
 $target_dir = "../../uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$target_file = $target_dir . basename($_FILES["img_grupo"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    $check = getimagesize($_FILES["img_grupo"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
@@ -42,7 +35,7 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+if ($_FILES["img_grupo"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -59,24 +52,20 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+    if (move_uploaded_file($_FILES["img_grupo"]["tmp_name"], $target_file)) {
+        echo "The file ". htmlspecialchars( basename( $_FILES["img_grupo"]["name"])). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
 
+if (isset($_POST["descricao_tribo"]) && isset($_POST["sedes_id_sede_grupo"]) && isset($_POST["temas_id_temas"])) {
 
-
-if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) && isset($_POST["sedes_id_sede_grupo"]) && isset($_POST["temas_id_temas"]) ) {
-    $nome_grupo = $_POST['nome_tribo'];
     $descricao_grupo = $_POST['descricao_tribo'];
 
     if ($target_file != null) {
         $imagem_grupo = $target_file;
     }
-
-    $data_criacao_grupo = "2021-05-07";
 
     $sedes_id_sede_grupo = $_POST['sedes_id_sede_grupo'];
     $temas_id_temas = $_POST['temas_id_temas'];
@@ -85,13 +74,35 @@ if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) && isset($_P
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas ) VALUES (?,?,?,?,?,?)";
+    $query = "SELECT temas.id_temas, temas.nome_tema FROM temas
+WHERE temas.id_temas = ?";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
-        mysqli_stmt_bind_param($stmt, 'ssssii', $nome_grupo, $descricao_grupo, $imagem_grupo, $data_criacao_grupo , $sedes_id_sede_grupo, $temas_id_temas);
+        mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
 
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
+            // Acção de sucesso
+            mysqli_stmt_execute($stmt);
+
+            mysqli_stmt_bind_result($stmt, $temas_id_temas, $nome_tema);
+        } else {
+            // Acção de erro
+            header("Location: ../perfil.php");
+            echo "Error:" . mysqli_stmt_error($stmt);
+        }
+    }
+
+    $stmt1 = mysqli_stmt_init($link);
+
+    $query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas ) VALUES (?,?,?,NOW(),?,?)";
+
+    if (mysqli_stmt_prepare($stmt1, $query1)) {
+        mysqli_stmt_bind_param($stmt1, 'sssii', $nome_tema, $descricao_grupo, $imagem_grupo,
+            $sedes_id_sede_grupo, $temas_id_temas);
+
+        // Devemos validar também o resultado do execute!
+        if (mysqli_stmt_execute($stmt1)) {
             // Acção de sucesso
             header("Location: ../perfil.php");
         } else {
@@ -101,10 +112,9 @@ if (isset($_POST["nome_tribo"]) && isset($_POST["descricao_tribo"]) && isset($_P
         }
     } else {
         // Acção de erro
-        header("Location: ../definicoes.php");
+
         echo "Error:" . mysqli_error($link);
     }
-    mysqli_stmt_close($stmt);
     mysqli_close($link);
 } else {
     echo "Campos do formulário por preencher";

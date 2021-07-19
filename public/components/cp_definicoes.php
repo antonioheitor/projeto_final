@@ -122,7 +122,7 @@ session_start();
                 <div class="modal-header mx-auto">
                     <h3 class="text-center pt-3">Tem a certeza que deseja terminar sessão?</h3>
                 </div>
-               <form method="get" class="text-center" role="form">
+                <form method="get" class="text-center" role="form">
                     <div class="row justify-content-center mx-auto mt-4">
                         <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_logout.php">Terminar</a>
                         <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
@@ -151,32 +151,26 @@ session_start();
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
+        if (mysqli_stmt_execute($stmt)) {
 
+            mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
 
+            if (!mysqli_stmt_fetch($stmt)) {
+                /* Tinha aqui um header com location para users.php que estava a dar erro porque pronto, a página não existe.
+                Não sei quem pos nem porquê, mas digam quando virem isto please */
+            }
 
-    if (mysqli_stmt_execute($stmt)) {
+            $_SESSION["id_grupo"] = $id_grupo;
 
-    mysqli_stmt_bind_result($stmt, $id_grupo, $nome_grupo, $descricao_grupo, $imagem_grupo, $sedes_id_sede_grupo, $temas_id_temas);
+        } else {
 
-    if (!mysqli_stmt_fetch($stmt)) {
-        /* Tinha aqui um header com location para users.php que estava a dar erro porque pronto, a página não existe.
-        Não sei quem pos nem porquê, mas digam quando virem isto please */
-    }
-
-    $_SESSION["id_grupo"] = $id_grupo;
-
+        }
+        //mostrar o codigo a apresentar
     } else {
 
-    }
-    //mostrar o codigo a apresentar
-    } else {
-
-    echo "ERRORRRRR: " . mysqli_error($link);
+        echo "ERRORRRRR: " . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
-
-
-
     ?>
 
     <!-- Modal da criacao de grupo -->
@@ -190,16 +184,15 @@ session_start();
                     <h2 class="text-center pt-3">Cria a tua tribo</h2>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
-
-
                 <!-- CABEÇALHO DO MODAL ######################### -->
-                <form method="post" role="form" id="new-tribe-form" action="scripts/sc_new_tribo.php" enctype="multipart/form-data">
+                <form method="post" role="form" id="new-tribe-form" action="scripts/sc_new_tribo.php"
+                      enctype="multipart/form-data">
                     <div class="modal-body">
-                        <p class="text-center mt-4">Escolhe um nome e uma descrição</p>
-                        <input class="w-50 mx-auto" name="nome_tribo" type="text" placeholder="Nome">
+                        <p class="text-center mt-4">Escolhe uma descrição</p>
                         <input class="w-50 mx-auto" name="descricao_tribo" type="text" placeholder="Descrição">
                         <p class="text-center mt-4">Escolhe uma imagem</p>
-                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload" id="customFile1"/>
+                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="img_grupo"
+                               id="customFile1"/>
                         <div class="dropdown text-center mt-4">
                             <label>Escolhe uma sede</label>
                             <select class="w-50 mx-auto form-control" name="sedes_id_sede_grupo">
@@ -212,69 +205,42 @@ session_start();
 
                                     mysqli_stmt_execute($stmt);
 
-                                    mysqli_stmt_bind_result($stmt,  $id_sede_grupo, $nome_sede);
-
+                                    mysqli_stmt_bind_result($stmt, $id_sede_grupo, $nome_sede);
 
                                     while (mysqli_stmt_fetch($stmt)) {
-                                        $selected1 = "";
-                                        if ($sedes_id_sede_grupo == $id_sede_grupo) {
-                                            $selected1 = "selected";
-                                        }
-
-                                        echo "<option value='$id_sede_grupo' $selected1>$nome_sede</option>";
+                                        echo " <option value=\"$id_sede_grupo\" selected>$nome_sede</option>";
                                     }
-                                        echo "<option value='outro' $selected1>Nenhum</option>";
-
-
+                                    echo "<option value='' selected>Nenhum</option>";
                                 } else {
-
                                     echo "ERRORRRRR: " . mysqli_error($link);
                                 }
                                 //close connection
-
                                 mysqli_stmt_close($stmt);
-
-
-
                                 ?>
                             </select>
                         </div>
+
                         <div class="dropdown text-center mt-4">
                             <label>Escolhe um tema</label>
                             <select class="w-50 mx-auto form-control" name="temas_id_temas">
                                 <?php
                                 $stmt = mysqli_stmt_init($link);
-
-                                $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema;";
-
+                                $query = "SELECT temas.id_temas, temas.nome_tema, temas.areas_id_areas FROM temas
+ORDER BY nome_tema";
                                 if (mysqli_stmt_prepare($stmt, $query)) {
-
-
                                     mysqli_stmt_execute($stmt);
 
-                                    mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema);
-
+                                    mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $id_area);
 
                                     while (mysqli_stmt_fetch($stmt)) {
-                                        $selected2 = "";
-                                        if ($temas_id_temas == $id_temas) {
-                                            $selected2 = "selected";
-                                        }
-
-                                        echo "<option value='$id_temas' $selected2>$nome_tema</option>";
+                                        echo " <option value=\"$id_temas\" selected>$nome_tema</option>";
                                     }
-
-
                                 } else {
-
                                     echo "ERRORRRRR: " . mysqli_error($link);
                                 }
                                 //close connection
 
                                 mysqli_stmt_close($stmt);
-
-
-
                                 ?>
                             </select>
                         </div>
