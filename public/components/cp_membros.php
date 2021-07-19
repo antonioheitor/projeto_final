@@ -1,8 +1,8 @@
 
 <?php
 
-if (isset($_GET["tema_tribo"])) {
-    $temas_id_temas = $_GET["tema_tribo"];
+if (isset($_GET["grupo"])) {
+    $id_grupo = $_GET["grupo"];
 }
 
 ?>
@@ -12,7 +12,7 @@ if (isset($_GET["tema_tribo"])) {
     <section class="row">
         <div class="col-12 text-center">
             <!-- Se fizermos nas definições, provavelmente temos de fazer ?grupo= aqui também, não? Estou kinda confusa :/ -->
-            <a id="fechar" href="definicoestribo.php" class="float-right pt-4 pr-4"><i
+            <a id="fechar" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="float-right pt-4 pr-4"><i
                     class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Membros</p>
             <p class="pt-5 pb-1 d-md-none h_pequeno">Membros</p>
@@ -39,11 +39,11 @@ if (isset($_GET["tema_tribo"])) {
     INNER JOIN users ON id_users = users_id_users 
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
     INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
- WHERE temas_id_temas = ?";
+ WHERE grupo_id_grupo = ?";
     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-        mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
+        mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
 
         mysqli_stmt_execute($stmt);
 

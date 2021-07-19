@@ -2,14 +2,11 @@
 
 session_start();
 
-if (isset($_SESSION['id']) && isset($_GET["grupo"]) && isset($_GET["tema"]) ) {
+if (isset($_SESSION['id']) && isset($_GET["grupo"])) {
 
     $users_id_users = $_SESSION['id'];
     $grupo_id_grupo = $_GET["grupo"];
     $roles_grupos_id_roles = 6;
-    $id_tema = $_GET["tema"];
-
-
 }
 
 $link = new_db_connection();
@@ -25,12 +22,9 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     if (mysqli_stmt_execute($stmt)) {
 
         // Acção de sucesso
-
-      header("Location: ../perfil_tribo.php?grupo=$id_tema");
+      header("Location: ../tribo.php?grupo=$grupo_id_grupo");
     } else {
-        // Acção de erro
-        //header("Location: ../perfil.php");
-      //  echo "Error:" . mysqli_stmt_error($stmt);
+        header("Location: ../tribo.php?grupo=$grupo_id_grupo");
     }
 } else {
     // Acção de erro

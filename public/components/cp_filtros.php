@@ -12,11 +12,8 @@
     <section class="col-12">
         <div class="row">
 
-
     <?php
-
     require_once "connections/connection.php";
-
 
     $link = new_db_connection();
 

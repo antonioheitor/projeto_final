@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_GET["tema_tribo"])) {
-$temas_id_temas = $_GET["tema_tribo"];
+if (isset($_GET["grupo"])) {
+$id_grupo = $_GET["grupo"];
 }
 
 ?>
@@ -11,7 +11,7 @@ $temas_id_temas = $_GET["tema_tribo"];
     <section class="row">
         <div class="col-12 text-center">
             <!-- Aqui falta o ?grupo= para saber em que tribo estamos por causa de voltar para trás -->
-            <a id="fechar" href="perfil_tribo.php" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
+            <a id="fechar" href="perfil_tribo.php?grupo=<?= $id_grupo ?>" class="float-right pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
             <p class="pt-5 pb-1 d-md-block d-none h">Definições</p>
             <p class="pt-5 pb-1 d-md-none h_pequeno">Definições</p>
         </div>
@@ -19,7 +19,7 @@ $temas_id_temas = $_GET["tema_tribo"];
 
     <section class="col-12 mt-5 ml-2">
         <!-- Aqui falta o ?grupo= para saber em que tribo estamos por causa dos membros de cada tribo -->
-        <a href="membros.php?tema_tribo=<?= $temas_id_temas ?>" class="text-decoration-none">
+        <a href="membros.php?grupo=<?= $id_grupo ?>" class="text-decoration-none">
             <div class="row mt-5">
                 <i class="fas fa-users fa-2x"></i>
                 <p class="ml-3 h_definicoes">Membros</p>
