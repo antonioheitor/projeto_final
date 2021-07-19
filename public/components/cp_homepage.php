@@ -57,20 +57,20 @@ if (isset($_SESSION["role"])) {
 
                                 $link = new_db_connection();
 
-                                $stmt = mysqli_stmt_init($link);
+                                $stmt1 = mysqli_stmt_init($link);
 
-                                $query = "SELECT grupo_id_grupo, id_grupo, nome_grupo FROM users_has_grupo 
+                                $query1 = "SELECT grupo_id_grupo, id_grupo, nome_grupo FROM users_has_grupo 
                                         INNER JOIN grupo
                                         ON grupo_id_grupo = id_grupo 
                                         WHERE users_id_users = ?";
 
-                                if (mysqli_stmt_prepare($stmt, $query)) {
+                                if (mysqli_stmt_prepare($stmt1, $query1)) {
 
-                                    mysqli_stmt_bind_param($stmt, 'i', $_SESSION['id']);
-                                    mysqli_stmt_execute($stmt);
-                                    mysqli_stmt_bind_result($stmt, $grupo_id_grupo, $id_grupo, $nome_grupo);
+                                    mysqli_stmt_bind_param($stmt1, 'i', $_SESSION['id']);
+                                    mysqli_stmt_execute($stmt1);
+                                    mysqli_stmt_bind_result($stmt1, $grupo_id_grupo, $id_grupo, $nome_grupo);
 
-                                    while (mysqli_stmt_fetch($stmt)) {
+                                    while (mysqli_stmt_fetch($stmt1)) {
                                         $selected1 = "";
                                         if ($grupo_id_grupo == $id_grupo) {
                                             $selected1 = "selected";
@@ -82,7 +82,7 @@ if (isset($_SESSION["role"])) {
                                 }
                                 //close connection
 
-                                mysqli_stmt_close($stmt);
+                                mysqli_stmt_close($stmt1);
 
                                 ?>
                             </select>
@@ -109,9 +109,9 @@ if (isset($_SESSION["role"])) {
 
     <section class="row my-4 justify-content-center">
         <?php
-        $stmt = mysqli_stmt_init($link);
+        $stmt2 = mysqli_stmt_init($link);
 
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
+        $query2 = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
 FROM users_has_grupo
 INNER JOIN grupo
 ON grupo.id_grupo = users_has_grupo.grupo_id_grupo
@@ -129,18 +129,18 @@ ON grupo_id_grupo = id_grupo
 WHERE users_id_users = ?;";*/
 
 
-        if (mysqli_stmt_prepare($stmt, $query)) {
+        if (mysqli_stmt_prepare($stmt2, $query2)) {
 
-        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+        mysqli_stmt_bind_param($stmt2, 'i', $USER_ID);
 
-        mysqli_stmt_execute($stmt);
+        mysqli_stmt_execute($stmt2);
 
-        mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $users_id_users, $id_grupo, $iduser, $imagem_user, $nome_user);
+        mysqli_stmt_bind_result($stmt2, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post, $nome_grupo, $users_id_users, $id_grupo, $iduser, $imagem_user, $nome_user);
 
         } else {
             echo "ERRORRRRR: " . mysqli_error($link);
         }
-        while (mysqli_stmt_fetch($stmt))
+        while (mysqli_stmt_fetch($stmt2))
         { ?>
 
             <article class="col-11 borda_post shadow mb-4">
@@ -191,23 +191,6 @@ WHERE users_id_users = ?;";*/
                         <p class="pl-5"><?= $conteudo_post ?></p>
                         <div class="float-right pb-2">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
-                        </div>
-                    </div>
-                    <div class="row border-top">
-                        <div class="pt-2 col-11">
-                            <div class="row justify-content-end ml-2">
-                                <div class="col-2 col-sm-1 pr-0">
-                                    <i class="fas fa-reply fa-rotate-180 fa-2x"></i>
-                                </div>
-                                <div class="col-10 col-sm-11 pl-0">
-                                    <h6 class="col-10 mt-2">Maria Renato</h6>
-                                </div>
-                            </div>
-                            <p class="ml-3">Malta!! Vocês sabiam que o Rob Dyrdek que apresenta o ridiculousness está
-                                classificado como
-                                o 6º
-                                melhor skater de todos os tempos?? Vi uns vídeos dele e realmente ele é muito bom!! Vejam!
-                            </p>
                         </div>
                     </div>
 
@@ -322,12 +305,62 @@ WHERE users_id_users = ?;";*/
             <!-- Fim Modal -->
 
         <?php }
-        mysqli_stmt_close($stmt);
 
+        mysqli_stmt_close($stmt2);
 
-        mysqli_close($link);
         ?>
     </section>
+<?php
+
+
+                    $stmt = mysqli_stmt_init($link);
+
+                                $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post 
+                            FROM comentarios INNER JOIN users 
+                            ON users_id_users = id_users WHERE post_id_post = ?";
+
+
+
+                                if (mysqli_stmt_prepare($stmt, $query)) {
+                                    mysqli_stmt_bind_param($stmt, "i", $id_posts);
+                                    echo $id_posts;
+
+                                    mysqli_stmt_execute($stmt);
+                                    mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
+echo $texto_comentario;
+                                } else {
+                                    echo "ERRORRRRR: " . mysqli_error($link);
+                                }
+
+
+                    while (mysqli_stmt_fetch($stmt)) {
+
+
+?>
+    <div class='row border-top'>
+        <div class='pt-2 col-11'>
+            <div class='row justify-content-end ml-2'>
+                <div class='col-2 col-sm-1 pr-0'>
+                    <i class='fas fa-reply fa-rotate-180 fa-2x'></i>
+                </div>
+                <div class='col-10 col-sm-11 pl-0'>
+                    <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
+                </div>
+            </div>
+            <p class='ml-3'><?=$texto_comentario?>
+            </p>
+        </div>
+    </div>
+
+
+    <?php
+
+     }
+
+    mysqli_stmt_close($stmt);
+mysqli_close($link);
+    ?>
+
 
     <!-- DENUNCIAR -->
     <!-- Button trigger modal -->
