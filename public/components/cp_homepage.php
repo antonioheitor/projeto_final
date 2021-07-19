@@ -178,20 +178,19 @@ WHERE users_id_users = ?;";*/
 
                     <div class="pt-2">
                         <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
-
+                        <p class="pl-5"><?= $conteudo_post ?></p>
 
                         <?php
                         if ($imagem_post != null) {
                         ?>
-                        <img class="text-center" src="uploads/<?= $imagem_post ?>"
+                        <img class="text-center img-fluid" src="uploads/<?= $imagem_post ?>"
                         <?php
                         }
                         ?>
 
-                        <p class="pl-5"><?= $conteudo_post ?></p>
-                        <div class="float-right pb-2">
+                    </div>
+                    <div class="text-right pb-2 col-12">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
-                        </div>
                     </div>
 
                 </div>

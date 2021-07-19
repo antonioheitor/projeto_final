@@ -62,14 +62,14 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 }
 ?>
 
-<main class="container-fluid background pb-5">
-    <section class="row mt-lg-5">
-        <a href="filtros.php" class="m-3 esq"><i class="fas fa-arrow-left fa-2x mt-lg-3"></i></a>
+<main class="container-fluid background">
+    <section class="row">
+        <a href="filtros.php" class="m-3 esq mt-lg-5"><i class="fas fa-arrow-left fa-2x mt-lg-5"></i></a>
         <?php
         if ($check == TRUE) {
             ?>
-            <a id="def" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="m-3 dto mt-lg-3"><i
-                        class="fas fa-cog fa-2x"></i></a>
+            <a id="def" href="definicoestribo.php?grupo=<?= $id_grupo ?>" class="m-3 dto mt-lg-5"><i
+                        class="fas fa-cog fa-2x mt-lg-5"></i></a>
         <?php
         }
 
