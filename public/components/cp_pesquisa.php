@@ -33,7 +33,7 @@ WHERE areas_id_areas = ?";
         while (mysqli_stmt_fetch($stmt)) {
             ?>
                     <div class="col-6 col-md-4 col-lg-3 mb-2">
-                        <a href="perfil_tribo.php?grupo=<?= $id ?>">
+                        <a href="perfil_tribo.php?grupo=<?= $id_grupo ?>">
                             <img src="images/<?=$imagem_grupo ?>" class="img-fluid m-2 redondo shadow">
                             <h4 class="text-center ml-2"><?= $nome_grupo ?></h4>
                         </a>

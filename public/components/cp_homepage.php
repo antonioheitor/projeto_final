@@ -185,10 +185,8 @@ WHERE users_id_users = ?;";*/
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
                                     <?php
-
                                     if ($id_posts == "1") {
                                         ?>
-
                                         <a class="dropdown-item" href="#" data-target="#myModal4<?=$id_posts?>" data-toggle="modal">Apagar</a>
                                         <?php
                                     }

@@ -68,6 +68,7 @@ if (isset($_POST["descricao_tribo"]) && isset($_POST["sedes_id_sede_grupo"]) && 
     }
 
     $sedes_id_sede_grupo = $_POST['sedes_id_sede_grupo'];
+    echo $sedes_id_sede_grupo;
     $temas_id_temas = $_POST['temas_id_temas'];
 
     $link = new_db_connection();
@@ -86,6 +87,10 @@ WHERE temas.id_temas = ?";
             mysqli_stmt_execute($stmt);
 
             mysqli_stmt_bind_result($stmt, $temas_id_temas, $nome_tema);
+
+            while (mysqli_stmt_fetch($stmt)) {
+
+            }
         } else {
             // Acção de erro
             header("Location: ../perfil.php");
@@ -95,7 +100,7 @@ WHERE temas.id_temas = ?";
 
     $stmt1 = mysqli_stmt_init($link);
 
-    $query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas ) VALUES (?,?,?,NOW(),?,?)";
+    $query1 = "INSERT INTO grupo (nome_grupo, descricao_grupo, imagem_grupo, data_criacao_grupo, sedes_id_sede_grupo, temas_id_temas) VALUES (?,?,?,NOW(),?,?)";
 
     if (mysqli_stmt_prepare($stmt1, $query1)) {
         mysqli_stmt_bind_param($stmt1, 'sssii', $nome_tema, $descricao_grupo, $imagem_grupo,
@@ -107,14 +112,20 @@ WHERE temas.id_temas = ?";
             header("Location: ../perfil.php");
         } else {
             // Acção de erro
-            header("Location: ../perfil.php");
-            echo "Error:" . mysqli_stmt_error($stmt);
+            echo $nome_tema;
+            echo $descricao_grupo;
+            echo $imagem_grupo;
+            echo $sedes_id_sede_grupo;
+            echo $temas_id_temas;
+            echo "Error:" . mysqli_stmt_error($stmt1);
         }
     } else {
         // Acção de erro
 
         echo "Error:" . mysqli_error($link);
     }
+    mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt1);
     mysqli_close($link);
 } else {
     echo "Campos do formulário por preencher";
