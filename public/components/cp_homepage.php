@@ -43,8 +43,8 @@ if (isset($_SESSION["role"])) {
                     </div>
                     <input class="w-50 mx-auto" name="titulopost" type="text">
                     <div class="modal-body text-center">
-                        <label class="text-center">Escreve o post :)</label>
-                        <input class="w-50 mx-auto" name="descpost" type="text">
+                        <p class="text-center">Escreve o post :)</p>
+                        <textarea class="w-50 mx-auto" name="descpost" type="text"></textarea>
                         <p class="text-center mt-4">Selecione imagem</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
                                id="customFile"/>
