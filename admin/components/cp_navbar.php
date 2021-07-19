@@ -82,7 +82,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                 <h6 class="collapse-header">opções de edição:</h6>
                 <a class="collapse-item" href="tribos.php">Tribos Criadas</a>
                 <a class="collapse-item" href="temas.php">Temas Existentes</a>
-
+                <a class="collapse-item" href="sedes.php">Sedes Existentes</a>
             </div>
         </div>
     </li>

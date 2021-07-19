@@ -81,7 +81,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading mb-3">
-                                Edição de Tribos
+                                Criação de Tribos
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
