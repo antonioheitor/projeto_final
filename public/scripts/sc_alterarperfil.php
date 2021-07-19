@@ -7,8 +7,6 @@ if (isset($_SESSION["id"])) {
     $id = $_SESSION["id"];
 }
 
-
-
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["imagem"]["name"]);
 $uploadOk = 1;
