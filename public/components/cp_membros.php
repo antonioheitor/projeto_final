@@ -45,6 +45,7 @@ if (isset($_SESSION['id'])){
 
         if (!mysqli_stmt_fetch($stmt)) {
         }
+
     } else {
         echo "ERRORRRRR: " . mysqli_error($link);
     }
