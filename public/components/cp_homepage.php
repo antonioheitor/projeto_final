@@ -229,7 +229,7 @@ WHERE users_id_users = ?;";*/
                                         <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
                                     </div>
                                 </div>
-                                <p class='ml-3'><?=$texto_comentario?>
+                                <p class='ml-3 mt-2'><?=$texto_comentario?>
                                 </p>
                             </div>
 
@@ -246,45 +246,7 @@ WHERE users_id_users = ?;";*/
 
                 </article>
 
-                <div class="modal show margemmodal" id="comentario<?= $id_posts ?>">
 
-                    <div class="modal-dialog modal-lg modal-dialog-centered">
-
-                        <!-- CONTEÚDO DO MODAL ######################### -->
-                        <div class="modal-content bg-white text-dark bordermodal">
-
-                            <!-- CABEÇALHO DO MODAL ######################### -->
-                            <div class="modal-header mx-auto">
-                                <h3 class="text-center pt-3">Comenta</h3>
-                                <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                            </div>
-                            <form method="post">
-                                <div class="modal-body text-center">
-                                    <textarea class="w-50" name="descpost" type="text"></textarea>
-                                </div>
-                                <p class="text-center mt-4">Selecione imagem</p>
-                                <input type="file" class="form-control w-50 mx-auto bg-light border-0 mb-4 " name="fileToUpload" id="customFile"/>
-                                <div class="row justify-content-center">
-                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
-                                        Submeter
-                                    </button>
-                                </div>
-                            </form>
-                            <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                            <!-- CORPO DO MODAL ######################### -->
-                            <div class="modal-body mx-auto text-center bgdark">
-                            </div>
-                            <!-- RODAPÉ DO MODAL ######################### -->
-                            <div class="modal-footer">
-                                <p class="small mx-auto">Hi-Tribe</p>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
             </section>
 
 
@@ -300,7 +262,8 @@ WHERE users_id_users = ?;";*/
                             <h3 class="text-center pt-3">Comenta</h3>
                             <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                         </div>
-                        <form method="post" action="scripts/sc_new_comment.php?post=<?= $id_posts?>">
+                        <form method="post" role="form" id="post-form2"
+                              enctype="multipart/form-data" action="scripts/sc_new_comment.php?post=<?= $id_posts?>">
                             <div class="modal-body text-center">
                                 <textarea class="w-50" name="descpost" type="text"></textarea>
                             </div>
