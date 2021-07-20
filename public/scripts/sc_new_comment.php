@@ -77,7 +77,7 @@ if (isset($_POST["descpost"])) {
 
     $texto_comentario = $_POST["descpost"];
 
-    if ($target_file != null) {
+    if ($target_file != "../../uploads/") {
         $imagem_comentario = $target_file;
     }
 
@@ -96,14 +96,17 @@ if (isset($_POST["descpost"])) {
             // Acção de sucesso
             header("Location: ../homepage.php");
         } else {
-
+echo "<br>texto".$texto_comentario;
+echo "<br>imagem".$imagem_comentario;
+echo "<br>id".$USER_ID;
+echo "<br>post".$ID_POST;
             // Acção de erro
-            header("Location: ../homepage.php");
-            echo "Error:" . mysqli_stmt_error($stmt);
+            //header("Location: ../homepage.php");
+            echo "Errorr:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        header("Location: ../perfil.php");
+        //header("Location: ../perfil.php");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
