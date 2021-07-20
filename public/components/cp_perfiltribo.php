@@ -171,6 +171,8 @@ ORDER BY posts.id_posts DESC";
             mysqli_stmt_execute($stmt);
 
             mysqli_stmt_bind_result($stmt, $id_user, $nome_user, $imagem_user, $roles, $id_grupo, $nome_grupo, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post);
+
+            mysqli_stmt_store_result($stmt);
             while (mysqli_stmt_fetch($stmt)) {
 
                 ?>
@@ -244,7 +246,59 @@ ORDER BY posts.id_posts DESC";
                     <div class="text-right pb-2 col-12">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
+
+                     <?php      $stmt1 = mysqli_stmt_init($link);
+
+                     $query1 = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post
+                    FROM comentarios INNER JOIN users
+                    ON users_id_users = id_users WHERE post_id_post = ?";
+
+
+
+                     if (mysqli_stmt_prepare($stmt1, $query1)) {
+                         mysqli_stmt_bind_param($stmt1, "i", $id_posts);
+
+                         mysqli_stmt_execute($stmt1);
+                         mysqli_stmt_bind_result($stmt1, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
+                     } else {
+                         echo "ERRORRRRR: " . mysqli_error($link);
+                     }
+
+
+                     while (mysqli_stmt_fetch($stmt1)) {
+
+
+                         ?>
+                         <div class='row border-top'>
+                            <div class='pt-2 col-11'>
+                                <div class='row justify-content-end ml-2'>
+                                    <div class='col-2 col-sm-1 pr-0'>
+                                        <i class='fas fa-reply fa-rotate-180 fa-2x'></i>
+                                    </div>
+                                    <div class='col-10 col-sm-11 pl-0'>
+                                        <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
+                                    </div>
+                                </div>
+                                <p class='ml-3 mt-2'><?=$texto_comentario?>
+                                </p>
+                            </div>
+
+                        </div>
+
+
+
+                         <?php
+                     }
+                     mysqli_stmt_close($stmt1); ?>
                 </article>
+
+
+
+
+
+
+
+
 
                 <div class="modal show margemmodal" id="comentario<?= $id_posts ?>">
 
