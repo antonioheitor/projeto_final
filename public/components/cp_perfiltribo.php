@@ -153,21 +153,24 @@ WHERE grupo.id_grupo = ?";
 
 
         $stmt = mysqli_stmt_init($link);
-        $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
-INNER JOIN grupo
-ON grupo.id_grupo = posts.grupo_id_grupo
+        $query = "SELECT users.id_users, users.nome_users, users.imagem_user, roles_grupos_id_roles, grupo.id_grupo, grupo.nome_grupo, posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post FROM users_has_grupo 
 INNER JOIN users
-ON users.id_users = posts.users_id_users
-WHERE id_grupo = ?";
+ON users.id_users = users_has_grupo.users_id_users 
+INNER JOIN grupo 
+ON grupo.id_grupo = users_has_grupo.grupo_id_grupo 
+INNER JOIN roles_grupos 
+ON roles_grupos.id_roles = users_has_grupo.roles_grupos_id_roles
+INNER JOIN posts
+ON posts.grupo_id_grupo = users_has_grupo.grupo_id_grupo AND posts.users_id_users = users.id_users
+WHERE grupo.id_grupo = ?
+ORDER BY posts.id_posts DESC";
 
         if (mysqli_stmt_prepare($stmt, $query)) {
 
             mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
             mysqli_stmt_execute($stmt);
 
-            mysqli_stmt_bind_result($stmt, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post,
-                $nome_grupo, $id_grupo, $nome_user, $id_user, $imagem_user);
-
+            mysqli_stmt_bind_result($stmt, $id_user, $nome_user, $imagem_user, $roles, $id_grupo, $nome_grupo, $id_posts, $titulo_post, $conteudo_post, $imagem_post, $data_criacao_post);
             while (mysqli_stmt_fetch($stmt)) {
 
                 ?>
@@ -175,7 +178,25 @@ WHERE id_grupo = ?";
                 <article class="col-11 borda_post shadow">
                     <div class="row mt-1">
                         <div class="col-2 col-md-2 col-lg-1 my-auto">
-                            <img src="uploads/<?= $imagem_user; ?>" class="img-fluid rounded-circle p-sm-1">
+                            <?php
+                            switch ($roles) {
+                                case 1:
+                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-success\">";
+                                    break;
+                                case 3:
+                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-danger\">";
+                                    break;
+                                case 4:
+                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-warning\">";
+                                    break;
+                                case 6:
+                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1\">";
+                                    break;
+                            }
+                            /*Aqui quando formos por os dados da BD direitos, temos de ter cuidado com os cases porque provavelmente os números vão mudar*/
+
+                            ?>
+                            <!-- <img src="uploads/<?= $imagem_user; ?>" class="img-fluid rounded-circle p-sm-1"> -->
                         </div>
                         <div class="col-8 col-sm-8 position-relative">
                             <h4 class="pt-3"><?= $nome_user; ?></h4>
