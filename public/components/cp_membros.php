@@ -26,11 +26,6 @@ if (isset($_SESSION['id'])){
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         Não te esqueças de votar.
     </div>
-    <section class="row justify-content-center pt-3">
-        <form class="col-11">
-            <input type="text" id="procura" name="procura" placeholder="Pesquisa por um membro" class="shadow-sm">
-        </form>
-    </section>
 
     <?php
     require_once "connections/connection.php";
