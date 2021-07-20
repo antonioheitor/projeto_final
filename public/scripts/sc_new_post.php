@@ -1,12 +1,6 @@
 <?php
 require_once "../connections/connection.php";
 session_start();
-
-$target_dir = "../../uploads/";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
 if (isset($_SESSION["nome"])) {
     $USER_NAME = $_SESSION["nome"];
 
@@ -21,6 +15,12 @@ if (isset($_SESSION["role"])) {
     $USER_ROLE = $_SESSION["role"];
 
 }
+
+$target_dir = "../../uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
 
 
 // Check if image file is a actual image or fake image
@@ -69,6 +69,11 @@ if ($uploadOk == 0) {
 if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["grupo_id_grupo"]) ) {
     $titulo_post = $_POST['titulopost'];
     $conteudo_post = $_POST['descpost'];
+
+    if ($target_file != null) {
+        $imagem_post = $target_file;
+    }
+    $data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
@@ -99,10 +104,4 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
     mysqli_close($link);
 } else {
     echo "Campos do formulário por preencher";
-}
-
-if ($target_file != null) {
-    $imagem_post = $target_file;
-} else {
-    $imagem_post = null;
 }

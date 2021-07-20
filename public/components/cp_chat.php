@@ -90,7 +90,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                 <div class="col-10 col-md-11 pl-4">
                     <form class="py-2" method="post" role="form" id="chat" action="scripts/sc_chat.php?sms=<?= $grupo_id_grupo ?>">
                         <div class="row ml-2">
-                            <input type="text" id="sms" name="sms" placeholder="Mensagem..." class="col-11">
+                            <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem..." class="col-11">
                             <button type="submit" class="col-1 btn btn-outline-none p-0"><i class="far fa-paper-plane
 fa-1x"></i></button>
                         </div>
@@ -123,7 +123,7 @@ fa-1x"></i></button>
                                id="fotomsg"/>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btnlogin w-50 text-center" data-dismiss="modal" type="button">
+                        <button class="btnlogin w-50 text-center" type="submit">
                             Enviar
                         </button>
                     </div>
