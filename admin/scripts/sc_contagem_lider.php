@@ -32,16 +32,17 @@ if (isset($_SESSION['id']) && isset($_GET['grupo'])) {
 
 
 
+
     $stmt1 = mysqli_stmt_init($link);
 
     $query1 ="SELECT votos.users_id_users1, votos.grupo_id_grupo, users.nome_users,
-COUNT(votos.users_id_users1)
+COUNT(votos.users_id_users1) AS contagem
 FROM votos
 INNER JOIN users
 ON users.id_users = votos.users_id_users1
 WHERE votos.roles_grupos_id_roles = 1 AND votos.quinzenas_id_quinzena = ? AND votos.grupo_id_grupo = ?
 GROUP BY votos.users_id_users1
-ORDER BY votos.users_id_users DESC LIMIT 1";
+ORDER BY contagem DESC LIMIT 1";
 
     if (mysqli_stmt_prepare($stmt1, $query1)) {
 
@@ -56,22 +57,17 @@ ORDER BY votos.users_id_users DESC LIMIT 1";
                 $role = 1;
                 header("Location: sc_submeter_votos_lider.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
             }
-
             if ($contagem == '') {
                 header("Location: ../../admin/votacoes.php");
             }
 
         } else {
             //Ação de erro
-
         }
     } else {
     }
     mysqli_stmt_close($stmt1);
-
 }
-
-
 //1 296 000 segundos em 15 dias
 
 
