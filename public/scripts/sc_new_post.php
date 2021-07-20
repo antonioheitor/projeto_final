@@ -42,7 +42,7 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 5000000) {
+if ($_FILES["fileToUpload"]["size"] > 50000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -77,6 +77,8 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
     if ($imagem_post == "../../uploads/") {
         $imagem_post = null;
     }
+
+
     $data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
@@ -96,12 +98,12 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
             header("Location: ../homepage.php");
         } else {
             // Acção de erro
-            header("Location: ../homepage.php");
+           // header("Location: ../homepage.php");
             echo "Error:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        header("Location: ../perfil.php");
+      //  header("Location: ../perfil.php");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
