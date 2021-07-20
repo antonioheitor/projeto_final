@@ -51,22 +51,22 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["img_grupo"]["tmp_name"], $target_file)) {
-        list($width, $height) = getimagesize($target_file);
+    //if (move_uploaded_file($_FILES["img_grupo"]["tmp_name"], $target_file)) {
+        //list($width, $height) = getimagesize($target_file);
 
-        if ($width > $height) {
-            if ($width > $height * 2) {
-                $uploadOk = 1;
-                echo $uploadOk;
-            }
-        } else {
-            $uploadOk = 0;
-            echo "Sorry, the image must be 4:3";
-        }
-        echo "The file " . htmlspecialchars(basename($_FILES["img_grupo"]["name"])) . " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
+        //if ($width > $height) {
+            //if ($width > $height * 2) {
+                //$uploadOk = 1;
+                //echo $uploadOk;
+            //}
+        //} else {
+            //$uploadOk = 0;
+            //echo "Sorry, the image must be 4:3";
+        //}
+        //echo "The file " . htmlspecialchars(basename($_FILES["img_grupo"]["name"])) . " has been uploaded.";
+    //} else {
+        //echo "Sorry, there was an error uploading your file.";
+    //}
 }
 
 if ($uploadOk == 1) {

@@ -20,13 +20,13 @@ if (isset($_SESSION['id']) && isset($_GET['post'])) {
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             //Ação de sucesso
-            header("Location: ../guardados.php");
+            header("Location: ../homepage.php?msg=4#homepagealerta");
         } else {
             //Ação de erro
-            echo "Error:" . mysqli_error($link);
+            header("Location: ../homepage.php?msg=5#homepagealerta");
         }
     } else {
-        echo "Error:" . mysqli_error($link);
+        header("Location: ../homepage.php?msg=5#homepagealerta");
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);

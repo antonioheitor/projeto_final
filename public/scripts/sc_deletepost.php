@@ -23,9 +23,9 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
 //QUERY1
 if (mysqli_stmt_prepare($stmt1, $query1)) {
-    mysqli_stmt_bind_param($stmt, 'i', $post);
+    mysqli_stmt_bind_param($stmt1, 'i', $post);
 
-    if (mysqli_stmt_execute($stmt)) {
+    if (mysqli_stmt_execute($stmt1)) {
 
 
         //QUERY 2
@@ -34,32 +34,32 @@ if (mysqli_stmt_prepare($stmt1, $query1)) {
             //Devemos validar também o resultado do execute!
             if (mysqli_stmt_execute($stmt2)) {
                 //Ação de sucesso
-                header("Location: ../homepage.php");
+                header("Location: ../homepage.php?msg=1#homepagealerta");
             } else {
                 //Ação de erro
-                echo "Error6:" . mysqli_error($link);
+                header("Location: ../homepage.php?msg=0#homepagealerta");
             }
         } else {
-            echo "Error5:" . mysqli_error($link);
+            header("Location: ../homepage.php?msg=0#homepagealerta");
         }
         mysqli_stmt_close($stmt2);
 
 
     } else {
         //Ação de erro
-        echo "Error4:" . mysqli_error($link);
+        header("Location: ../homepage.php?msg=0#homepagealerta");
     }
 } else {
-    echo "Error3:" . mysqli_error($link);
+    header("Location: ../homepage.php?msg=0#homepagealerta");
 }
 mysqli_stmt_close($stmt1);
 
     } else {
         //Ação de erro
-        echo "Error1:" . mysqli_error($link);
+        header("Location: ../homepage.php?msg=0#homepagealerta");
     }
 } else {
-    echo "Error2:" . mysqli_error($link);
+    header("Location: ../homepage.php?msg=0#homepagealerta");
 }
 
 mysqli_stmt_close($stmt);

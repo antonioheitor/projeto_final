@@ -97,11 +97,8 @@ if ( isset($_POST["mensagem"]) ) {
             // Acção de sucesso
             header("Location: ../chat.php?chat=$grupo_id_grupo");
         } else {
-            echo "<br>mensagem:".$mensagem."<br>";
-            echo "imagem:".$imagem_chat;
-            echo "<br>grupo:".$_GET["chat"];
-            echo "<br>user:".$id;
 
+            header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
             // Acção de erro
 
 
@@ -109,7 +106,7 @@ if ( isset($_POST["mensagem"]) ) {
         }
     } else {
         // Acção de erro
-
+        header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
