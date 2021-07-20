@@ -153,13 +153,6 @@ WHERE grupo.id_grupo = ?";
 
 
         $stmt = mysqli_stmt_init($link);
-        /*$query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts
-INNER JOIN grupo
-ON grupo.id_grupo = posts.grupo_id_grupo
-INNER JOIN users
-ON users.id_users = posts.users_id_users
-WHERE id_grupo = ?";*/
-
         $query = "SELECT users.id_users, users.nome_users, users.imagem_user, roles_grupos_id_roles, grupo.id_grupo, grupo.nome_grupo, posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post FROM users_has_grupo 
 INNER JOIN users
 ON users.id_users = users_has_grupo.users_id_users 
