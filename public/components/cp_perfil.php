@@ -72,7 +72,7 @@ WHERE users_id_users = ?";
 
                     </div>
                     </a>
-                    <a href="chat.php?chat=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Ver Tribo</a>
+                    <a href="perfil_tribo.php?grupo=<?= $grupo_id_grupo ?>" class="cor text-decoration-none">Ver Tribo</a>
                 </article>
         <?php
             }

@@ -11,7 +11,6 @@ if (isset($_GET["grupo"])) {
 $check = FALSE;
 
 $link = new_db_connection();
-
 $stmt = mysqli_stmt_init($link);
 
 $query = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo FROM users_has_grupo
@@ -32,13 +31,12 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     } else {
         echo "ERRORRRRR: " . mysqli_error($link);
     }
-
     mysqli_stmt_close($stmt);
 }
 
 
-$stmt = mysqli_stmt_init($link);
 
+$stmt = mysqli_stmt_init($link);
 $query = "SELECT id_grupo, nome_grupo, descricao_grupo, imagem_grupo, sedes_id_sede_grupo
 FROM grupo
 WHERE id_grupo = ?";
@@ -60,6 +58,8 @@ if (mysqli_stmt_prepare($stmt, $query)) {
     }
     mysqli_stmt_close($stmt);
 }
+
+
 ?>
 
 <main class="container-fluid background">
@@ -142,7 +142,10 @@ WHERE grupo.id_grupo = ?";
         </section>
 
     <?php
-    } else{
+    }
+
+    if ($check == TRUE) {
+
         ?>
 
     <span>

@@ -17,6 +17,8 @@ if(isset($_POST["submit"])) {
     }
 }
 
+
+
 // Check if file already exists
 if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
@@ -63,6 +65,10 @@ if ($uploadOk = 1) {
         $descricao_users = $_POST['descricao_users'];
         $imagem_user =  $target_file  ;
         $roles_plataforma_id_roles_plataforma = 4;
+
+
+
+
 
         $link = new_db_connection();
 

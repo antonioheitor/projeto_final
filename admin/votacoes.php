@@ -116,8 +116,8 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
                                     <div class="pb-3">
                                         <section><?= $nome_grupo?></section>
-                                        <a class="btn btn-success" href="#">Líder</a>
-                                        <a class="btn btn-danger" href="#">Mestre</a>
+                                        <a class="btn btn-success" href="scripts/sc_contagem_lider.php">Líder</a>
+                                        <a class="btn btn-danger" href="scripts/sc_contagem_mestre.php">Mestre</a>
 
                                     </div>
                                 <?php

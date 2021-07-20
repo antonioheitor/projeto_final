@@ -35,6 +35,7 @@ if (isset($_SESSION['id']) && isset($_GET['voto']) && isset($_GET['grupo']) && i
     } else {
         echo "Error:" . mysqli_error($link);
     }
+    mysqli_stmt_close($stmt);
 
 
     $stmt2 = mysqli_stmt_init($link);
@@ -51,15 +52,14 @@ VALUES (?, ?, ?, ?, ?)";
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt2)) {
             //Ação de sucesso
-            header("Location: ../membros.php?tema_tribo=$tema");
+            header("Location: ../membros.php?grupo=$grupo");
         } else {
             //Ação de erro
-            echo "Error:" . mysqli_error($link);
+            echo "Error 1:" . mysqli_error($link);
         }
     } else {
-        echo "Error:" . mysqli_error($link);
+        echo "Error 2:" . mysqli_error($link);
     }
-    mysqli_stmt_close($stmt);
     mysqli_stmt_close($stmt2);
 
 
