@@ -91,8 +91,7 @@ ORDER BY posts.data_criacao_post DESC";
             <div class="row mt-1">
 
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="uploads/<?= $imagem_user ?>"
-                         class="img-fluid rounded-circle p-sm-1">
+                    <img src="uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_user ?></h4>
@@ -101,8 +100,7 @@ ORDER BY posts.data_criacao_post DESC";
                 <div class="col-2 col-lg-3 text-right my-auto">
                     <div class="dropdown show">
                         <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Remover</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
@@ -113,11 +111,12 @@ ORDER BY posts.data_criacao_post DESC";
 
                 <div class="pt-2">
                     <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
+                    <p class="pl-5"><?= $conteudo_post ?></p>
+                    
                     <?php if ($imagem_post != null) {
                         echo "<img class='text-center' src='uploads/$imagem_post'>";
                     }
                     ?>
-                    <p class="pl-5"><?= $conteudo_post ?></p>
                 </div>
 
             </div>
