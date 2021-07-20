@@ -85,9 +85,8 @@ if ($uploadOk == 1) {
         $link = new_db_connection();
 
         $stmt = mysqli_stmt_init($link);
-
         $query = "SELECT temas.id_temas, temas.nome_tema FROM temas
-WHERE temas.id_temas = ?";
+        WHERE temas.id_temas = ?";
 
         if (mysqli_stmt_prepare($stmt, $query)) {
             mysqli_stmt_bind_param($stmt, 'i', $temas_id_temas);
@@ -129,9 +128,6 @@ WHERE temas.id_temas = ?";
 
                 echo "Error:" . mysqli_error($link);
             }
-            mysqli_stmt_close($stmt);
-            mysqli_stmt_close($stmt1);
-            mysqli_close($link);
 
 
         } else {
@@ -153,12 +149,55 @@ WHERE temas.id_temas = ?";
 
                 echo "Error:" . mysqli_error($link);
             }
-            mysqli_stmt_close($stmt);
-            mysqli_stmt_close($stmt1);
-            mysqli_close($link);
         }
     }else {
         echo "Campos do formulário por preencher";
     }
+
+    $stmt2 = mysqli_stmt_init($link);
+    $query2 = "SELECT id_grupo FROM grupo WHERE nome_grupo = ?";
+    if (mysqli_stmt_prepare($stmt2, $query2)) {
+        mysqli_stmt_bind_param($stmt2, 's', $nome_tema);
+
+        // Devemos validar também o resultado do execute!
+        if (mysqli_stmt_execute($stmt2)) {
+            // Acção de sucesso
+            mysqli_stmt_execute($stmt2);
+
+            mysqli_stmt_bind_result($stmt2, $id_grupo);
+
+            while (mysqli_stmt_fetch($stmt2)) {
+
+            }
+        } else {
+            // Acção de erro
+            header("Location: ../perfil_tribo.php?tribo=$id_grupo");
+            echo "Error:" . mysqli_stmt_error($stmt2);
+        }
+    }
+
+    $stmt3 = mysqli_stmt_init($link);
+    $query3 = "INSERT INTO users_has_grupo (users_id_users, grupo_id_grupo, roles_grupos_id_roles) VALUES (?, ?, 1)";
+
+    if (mysqli_stmt_prepare($stmt3, $query3)) {
+        mysqli_stmt_bind_param($stmt3, 'ii', $USER_ID, $id_grupo);
+
+        // Devemos validar também o resultado do execute!
+        if (mysqli_stmt_execute($stmt3)) {
+            // Acção de sucesso
+            header("Location: ../perfil_tribo.php?tribo=$id_grupo");
+        } else {
+            // Acção de erro
+            echo "Error:" . mysqli_error($link);
+        }
+    } else {
+        // Acção de erro
+        echo "Error:" . mysqli_error($link);
+    }
+    mysqli_stmt_close($stmt3);
+    mysqli_stmt_close($stmt2);
+    mysqli_stmt_close($stmt1);
+    mysqli_stmt_close($stmt);
+    mysqli_close($link);
 }
 

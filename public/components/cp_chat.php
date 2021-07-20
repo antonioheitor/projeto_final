@@ -51,7 +51,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
         </div>
     </section>
 
-    <section class="mb-5 pb-md-4">
+    <section class="mb-4">
     <?php
     while (mysqli_stmt_fetch($stmt2)) {
 
