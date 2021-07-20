@@ -40,7 +40,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Main
+        Usuários
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -67,7 +67,7 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Addons
+        Mais opções
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
@@ -75,12 +75,12 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
            aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Editor</span>
+            <span>Explorar</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">opções de edição:</h6>
-                <a class="collapse-item" href="tribos.php">Tribos Criadas</a>
+                <h6 class="collapse-header">explorar:</h6>
+                <a class="collapse-item" href="tribos.php">Tribos Existentes</a>
                 <a class="collapse-item" href="temas.php">Temas Existentes</a>
                 <a class="collapse-item" href="sedes.php">Sedes Existentes</a>
             </div>
