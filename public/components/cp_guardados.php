@@ -31,7 +31,52 @@ ORDER BY posts.data_criacao_post DESC";
             <p class="pt-5 pb-1 d-md-none h_pequeno">Os teus guardados</p>
         </div>
     </section>
+    <section id="guardadosalterar">
+        <div class="container">
+            <h2 class="text-center"></h2>
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <?php
+                    if (isset($_GET["msg"])) {
+                        $msg_show = true;
+                        switch ($_GET["msg"]) {
+                            case 0:
+                                $message = "Guardado eliminado com sucesso!";
+                                $class="alert-success
+                                 ";
+                                break;
+                            case 1:
+                                $message = "Erro ao eliminar guardado.";
+                                $class="alert-danger";
+                                break;
+                            case 2:
+                                $message = "ocorreu um erro no login";
+                                $class="alert-warning";
+                                break;
+                            case 3:
+                                $message = "login efectuado com sucesso";
+                                $class="alert-success";
+                                break;
+                            default:
+                                $msg_show = false;
+                        }
 
+                        echo "<div class=\"alert $class alert-dismissible fade show\" role=\"alert\">
+" . $message . "
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+                        if ($msg_show) {
+                            echo '<script>window.onload=function (){$(\'.alert\').alert();}</script>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+
+        </div>
+    </section>
     <section class="row my-4 justify-content-center ">
         <?php
         if (mysqli_stmt_prepare($stmt, $query)) {

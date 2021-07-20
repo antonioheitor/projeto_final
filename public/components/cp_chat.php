@@ -112,6 +112,51 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                 <div class="col-10 col-md-11 pl-4">
                     <form class="py-2" method="post" enctype="multipart/form-data" role="form" id="chat" action="scripts/sc_chat.php?chat=<?=$grupo_id_grupo?>">
                         <div class="row ml-2">
+                            <section id="chatalerta">
+                                <div class="container">
+                                    <h2 class="text-center"></h2>
+                                    <div class="row">
+                                        <div class="col-lg-12 mx-auto">
+                                            <?php
+                                            if (isset($_GET["msg"])) {
+                                                $msg_show = true;
+                                                switch ($_GET["msg"]) {
+                                                    case 0:
+                                                        $message = "Ocorreu um erro com a imagem!";
+                                                        $class="alert-danger
+                                 ";
+                                                        break;
+                                                    case 1:
+                                                        $message = "Update realizado com sucesso!";
+                                                        $class="alert-success";
+                                                        break;
+                                                    case 2:
+                                                        $message = "ocorreu um erro no login";
+                                                        $class="alert-warning";
+                                                        break;
+                                                    case 3:
+                                                        $message = "login efectuado com sucesso";
+                                                        $class="alert-success";
+                                                        break;
+                                                    default:
+                                                        $msg_show = false;
+                                                }
+
+                                                echo "<div class=\"alert $class alert-dismissible fade show\" role=\"alert\">
+" . $message . "
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+                                                if ($msg_show) {
+                                                    echo '<script>window.onload=function (){$(\'.alert\').alert();}</script>';
+                                                }
+                                            }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                             <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem..." class="col-11">
                             <button type="submit" class="ml-xl-5 btn btn-outline-none p-0"><i class="far fa-paper-plane fa-1x pl-1"></i></button>
                         </div>
