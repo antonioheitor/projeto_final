@@ -15,7 +15,7 @@ if (isset($_SESSION["role"])) {
 ?>
 
 
-<main class="container-fluid mt-lg-5 pt-2">
+<main class="container-fluid ">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
         <div class="col-11 shadow-sm borda_post rounded-pill py-3">
             <h8 class="text-secondary">Escreve algo...</h8>
@@ -105,7 +105,7 @@ if (isset($_SESSION["role"])) {
     <!-- Fim Modal -->
 
 
-    <section class="row my-4 justify-content-center">
+    <section>
         <?php
         $stmt2 = mysqli_stmt_init($link);
 

@@ -241,7 +241,7 @@ if (isset($_SESSION["role"])) {
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                            <a href="votacoes.php"><div class="btn btn-dark">Criar</div></a>
+                                            <a href="votacoes.php"><div class="btn btn-dark">Aceitar</div></a>
 
                                         </div>
                                     </div>
