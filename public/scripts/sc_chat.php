@@ -64,19 +64,24 @@ if ($uploadOk == 0) {
 
 
 
-if (!isset($_POST["mensagem"]) || ($_POST["mensagem"] == "")  ) {
-    $mensagem = "";
-    $imagem_chat = $target_file;
+if ( isset($_POST["mensagem"]) ) {
+    $mensagem = $_POST['mensagem'];
+    if ($target_file == "../../uploads/") {
+        $imagem_chat = null;
+
+    } else {
+        $imagem_chat = $target_file;
+
+    }
 
 } else {
-    $mensagem = $_POST['mensagem'];
-    if ($target_file != null) {
+    $mensagem = null;
+    $imagem_chat = $target_file;
 
-        $imagem_chat = $target_file;
-    } else {
-        $imagem_chat = null;
-    }
+
 }
+
+
     $link = new_db_connection();
 
     $stmt = mysqli_stmt_init($link);
@@ -91,10 +96,9 @@ if (!isset($_POST["mensagem"]) || ($_POST["mensagem"] == "")  ) {
             // Acção de sucesso
             header("Location: ../chat.php?chat=$grupo_id_grupo");
         } else {
-            echo "mensagem:".$mensagem;
+            echo "<br>mensagem:".$mensagem."<br>";
             echo "imagem:".$imagem_chat;
-            echo $grupo_id_grupo;
-            echo $id;
+
             // Acção de erro
 
 

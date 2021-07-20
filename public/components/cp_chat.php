@@ -24,7 +24,7 @@ if (mysqli_stmt_prepare($stmt1, $query1)) {
 mysqli_stmt_close($stmt1);
 
 $stmt2 = mysqli_stmt_init($link);
-$query2 = "SELECT mensagens.mensagem_chat, mensagens.data_msg, grupo.id_grupo, users.nome_users, users.imagem_user, users.id_users FROM mensagens
+$query2 = "SELECT mensagens.mensagem_chat, mensagens.imagem_chat, mensagens.data_msg, grupo.id_grupo, users.nome_users, users.imagem_user, users.id_users FROM mensagens
 INNER JOIN users 
 ON users.id_users = mensagens.users_id_users
 INNER JOIN grupo
@@ -37,7 +37,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
 
     mysqli_stmt_execute($stmt2);
 
-    mysqli_stmt_bind_result($stmt2, $mensagem, $data, $grupo_id_grupo, $user, $avatar, $id_user);
+    mysqli_stmt_bind_result($stmt2, $mensagem,$imagem_chat, $data, $grupo_id_grupo, $user, $avatar, $id_user);
 }
 
 ?>
@@ -54,13 +54,20 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
     <section class="mb-5 pb-md-4">
     <?php
     while (mysqli_stmt_fetch($stmt2)) {
+
         ?>
         <?php
         if ($id_user == $_SESSION['id']) {
             ?>
             <article class="d-flex justify-content-end mt-4">
                 <div class="mensagem border border-dark rounded bg-light">
-                    <p><?= $mensagem ?></p>
+                    <?php if ($mensagem != null) { ?>
+                        <p class="text-light"><?= $mensagem ?></p>
+                    <?php } else { ?>
+
+                        <img class= "img-fluid" src="uploads/<?= $imagem_chat ?>">
+
+                    <?php  }?>
                 </div>
             </article>
             <?php
@@ -72,7 +79,14 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                     <div class="row ml-2">
                         <div class="col-10 col-lg-11 border border-dark rounded position-relative msgenviada">
                             <h4 class="pt-3 text-light"><?= $user ?></h4>
+
+                            <?php if ($mensagem != null) { ?>
                             <p class="text-light"><?= $mensagem ?></p>
+                <?php } else { ?>
+
+                                <img src="uploads/<?= $imagem_chat ?>">
+
+                          <?php  }?>
                         </div>
                     </div>
 
