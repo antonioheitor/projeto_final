@@ -34,7 +34,7 @@ if (isset($_GET["grupo"])) {
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, nome_role, grupo_id_grupo  FROM users_has_grupo 
+    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, id_roles, nome_role, grupo_id_grupo  FROM users_has_grupo 
     INNER JOIN users ON id_users = users_id_users 
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
     INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
@@ -47,7 +47,7 @@ if (isset($_GET["grupo"])) {
         mysqli_stmt_execute($stmt);
 
         mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles,
-            $nome_role, $id_grupo);
+           $id_role, $nome_role, $id_grupo);
 
 
     } else {
@@ -65,7 +65,23 @@ if (isset($_GET["grupo"])) {
 
             <div class="row mt-2">
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1">
+                    <?php
+                    switch ($id_role) {
+                        case 1:
+                            echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-success\">";
+                            break;
+                        case 3:
+                            echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-danger\">";
+                            break;
+                        case 4:
+                            echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-warning\">";
+                            break;
+                        case 6:
+                            echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1\">";
+                            break;
+                    }
+
+                    ?>
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_users ?></h4>
