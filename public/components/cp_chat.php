@@ -84,7 +84,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                             <p class="text-light"><?= $mensagem ?></p>
                 <?php } else { ?>
 
-                                <img src="uploads/<?= $imagem_chat ?>">
+                                <img src="uploads/<?= $imagem_chat ?>" class="img-fluid">
 
                           <?php  }?>
                         </div>
@@ -105,14 +105,13 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                     <form class="py-2" method="post" role="form" id="chat" action="scripts/sc_chat.php?sms=<?= $grupo_id_grupo ?>">
                         <div class="row ml-2">
                             <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem..." class="col-11">
-                            <button type="submit" class="col-1 btn btn-outline-none p-0"><i class="far fa-paper-plane
-fa-1x"></i></button>
+                            <button type="submit" class="ml-xl-5 btn btn-outline-none p-0"><i class="far fa-paper-plane fa-1x pl-1"></i></button>
                         </div>
                     </form>
                 </div>
                 <div class="col-2 col-md-1 my-auto text-center">
-                    <i class="fas fa-plus-circle fa-1x pt-2 mx-1" data-toggle="modal" data-target="#modal"></i>
-                    <i class="fas fa-microphone fa-1x pt-2 mx-1"></i>
+                    <i class="fas fa-plus-circle fa-1x pt-2 mr-xl-5" data-toggle="modal" data-target="#modal"></i>
+                    <i class="fas fa-microphone fa-1x pt-2 mx-xl-2"></i>
                 </div>
             </div>
 
@@ -126,13 +125,13 @@ fa-1x"></i></button>
             <!-- CONTEÚDO DO MODAL ######################### -->
             <div class="modal-content bg-white text-dark bordermodal">
                 <!-- CABEÇALHO DO MODAL ######################### -->
-                <div class="modal-header">
+                <div class="modal-header mx-auto">
+                    <h3 class="text-center pt-3">Seleciona imagem</h3>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
                 <form method="post" role="form" id="post-form" action="scripts/sc_chat.php"
                       enctype="multipart/form-data">
                     <div class="modal-body text-center">
-                        <p class="text-center mt-4">Selecione imagem</p>
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fotomsg"
                                id="fotomsg"/>
                     </div>

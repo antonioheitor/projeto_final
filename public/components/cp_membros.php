@@ -1,7 +1,12 @@
 <?php
+session_start();
 
 if (isset($_GET["grupo"])) {
     $id_grupo = $_GET["grupo"];
+}
+
+if (isset($_SESSION['id'])){
+    $USER = $_SESSION['id'];
 }
 
 ?>
@@ -32,32 +37,47 @@ if (isset($_GET["grupo"])) {
     $link = new_db_connection();
 
     $stmt = mysqli_stmt_init($link);
+    $query = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users_has_grupo.roles_grupos_id_roles FROM users_has_grupo
+            WHERE users_has_grupo.roles_grupos_id_roles = 1 AND users_has_grupo.grupo_id_grupo = ?";
 
-    $query = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, id_roles, nome_role, grupo_id_grupo  FROM users_has_grupo 
-    INNER JOIN users ON id_users = users_id_users 
-    INNER JOIN grupo ON id_grupo = grupo_id_grupo 
-    INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
- WHERE grupo_id_grupo = ?";
     if (mysqli_stmt_prepare($stmt, $query)) {
-
 
         mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
 
         mysqli_stmt_execute($stmt);
 
-        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles,
-           $id_role, $nome_role, $id_grupo);
+        mysqli_stmt_bind_result($stmt, $lider, $id_grupo, $role);
 
-
+        if (!mysqli_stmt_fetch($stmt)) {
+            header("Location: membros.php?grupo=$id_grupo");
+        }
     } else {
-
         echo "ERRORRRRR: " . mysqli_error($link);
     }
-    ?>
+    mysqli_stmt_close($stmt);
 
-    <?php
 
-    while (mysqli_stmt_fetch($stmt)) {
+    $stmt1 = mysqli_stmt_init($link);
+    $query1 = "SELECT users_id_users, nome_users, imagem_user, temas_id_temas, roles_grupos_id_roles, id_roles, nome_role, grupo_id_grupo  FROM users_has_grupo 
+            INNER JOIN users ON id_users = users_id_users 
+            INNER JOIN grupo ON id_grupo = grupo_id_grupo 
+            INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
+            WHERE grupo_id_grupo = ?";
+
+    if (mysqli_stmt_prepare($stmt1, $query1)) {
+
+        mysqli_stmt_bind_param($stmt1, 'i', $id_grupo);
+
+        mysqli_stmt_execute($stmt1);
+
+        mysqli_stmt_bind_result($stmt1, $id_users, $nome_users, $imagem_user, $temas_id_temas, $roles_grupos_id_roles,
+           $id_role, $nome_role, $id_grupo);
+    } else {
+        echo "ERRORRRRR: " . mysqli_error($link);
+    }
+
+
+    while (mysqli_stmt_fetch($stmt1)) {
     ?>
     <section class="row my-4 justify-content-center">
         <article class="col-11">
@@ -93,7 +113,12 @@ if (isset($_GET["grupo"])) {
                             <button type="button" class="btn btn-secondary dropdown-toggle shadow-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#" data-target="#myModal1<?= $id_users ?>" data-toggle="modal">Votar</a>
-                                <a class="dropdown-item" href="#" data-target="#myModal2<?=$id_users?>" data-toggle="modal">Apagar membro</a>
+
+                                <?php
+                                if ($USER == $lider && $USER != $id_users) {
+                                echo "<a class='dropdown-item' href='#' data-target='#myModal2$id_users' data-toggle='modal'>Apagar membro</a>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -176,7 +201,7 @@ if (isset($_GET["grupo"])) {
         <!-- Fim Modal -->
 <?php
 }
-mysqli_stmt_close($stmt);
+mysqli_stmt_close($stmt1);
 mysqli_close($link);
 ?>
 </main>
