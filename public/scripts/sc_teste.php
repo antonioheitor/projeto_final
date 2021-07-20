@@ -31,7 +31,7 @@ if (file_exists($img_hash)) {
 }
 
 // Check file size
-if ($img_hash > 5000000) {
+if ($_FILES["teste"]["name"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
