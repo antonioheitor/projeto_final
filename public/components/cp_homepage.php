@@ -17,7 +17,7 @@ if (isset($_SESSION["role"])) {
 
 <main class="container-fluid ">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
-        <div class="col-11 shadow-sm borda_post rounded-pill py-3">
+        <div class="col-11 shadow-sm borda_post rounded-pill mt-5 py-3">
             <h8 class="text-secondary">Escreve algo...</h8>
         </div>
     </section>
@@ -138,6 +138,8 @@ WHERE users_id_users = ?;";*/
         } else {
             echo "ERRORRRRR: " . mysqli_error($link);
         }
+
+        mysqli_stmt_store_result($stmt2);
         while (mysqli_stmt_fetch($stmt2))
 
         { ?>
@@ -194,21 +196,54 @@ WHERE users_id_users = ?;";*/
                     <div class="text-right pb-2 col-12">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
-                    <div class='row border-top'>
-                        <div class='pt-2 col-11'>
-                            <div class='row justify-content-end ml-2'>
-                                <div class='col-2 col-sm-1 pr-0'>
-                                    <i class='fas fa-reply fa-rotate-180 fa-2x'></i>
+
+              <?php      $stmt = mysqli_stmt_init($link);
+
+                    $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post
+                    FROM comentarios INNER JOIN users
+                    ON users_id_users = id_users WHERE post_id_post = ?";
+
+
+
+                    if (mysqli_stmt_prepare($stmt, $query)) {
+                    mysqli_stmt_bind_param($stmt, "i", $id_posts);
+
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
+                    } else {
+                    echo "ERRORRRRR: " . mysqli_error($link);
+                    }
+
+
+                    while (mysqli_stmt_fetch($stmt)) {
+
+
+                    ?>
+                        <div class='row border-top'>
+                            <div class='pt-2 col-11'>
+                                <div class='row justify-content-end ml-2'>
+                                    <div class='col-2 col-sm-1 pr-0'>
+                                        <i class='fas fa-reply fa-rotate-180 fa-2x'></i>
+                                    </div>
+                                    <div class='col-10 col-sm-11 pl-0'>
+                                        <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
+                                    </div>
                                 </div>
-                                <div class='col-10 col-sm-11 pl-0'>
-                                    <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
-                                </div>
+                                <p class='ml-3'><?=$texto_comentario?>
+                                </p>
                             </div>
-                            <p class='ml-3'><?=$texto_comentario?>
-                            </p>
+
                         </div>
 
-                    </div>
+
+
+                    <?php
+     }
+    mysqli_stmt_close($stmt); ?>
+
+
+
+
                 </article>
 
                 <div class="modal show margemmodal" id="comentario<?= $id_posts ?>">
@@ -368,34 +403,7 @@ WHERE users_id_users = ?;";*/
 <?php
 
 
-                    $stmt = mysqli_stmt_init($link);
 
-                                $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post 
-                            FROM comentarios INNER JOIN users 
-                            ON users_id_users = id_users WHERE post_id_post = ?";
-
-
-
-                                if (mysqli_stmt_prepare($stmt, $query)) {
-                                    mysqli_stmt_bind_param($stmt, "i", $id_posts);
-
-                                    mysqli_stmt_execute($stmt);
-                                    mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
-                                } else {
-                                    echo "ERRORRRRR: " . mysqli_error($link);
-                                }
-
-
-                    while (mysqli_stmt_fetch($stmt)) {
-
-
-?>
-
-
-
-    <?php
-     }
-    mysqli_stmt_close($stmt);
     mysqli_close($link);
     ?>
 
