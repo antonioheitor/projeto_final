@@ -232,9 +232,9 @@ if (isset($_SESSION["role"])) {
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
+                                        <div class=" px-4">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Aceitar votações</div>
+                                                Votações</div>
 <?php
 require_once "connections/connection.php";
 
@@ -274,7 +274,7 @@ require_once "connections/connection.php";
 
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            <i class="fas pr-4 fa-comments fa-2x text-gray-300"></i>
                                             <a href="votacoes.php"><div class="btn btn-dark">Aceitar</div></a>
 
                                         </div>
