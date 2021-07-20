@@ -215,6 +215,7 @@ if (isset($_SESSION["role"])) {
                                         <th>Sede</th>
                                         <th>Tema</th>
                                         <th>Editar</th>
+
                                         <th>Apagar</th>
 
                                     </tr>

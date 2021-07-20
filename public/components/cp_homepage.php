@@ -206,6 +206,7 @@ WHERE users_id_users = ?;";*/
                             <p class='ml-3'><?=$texto_comentario?>
                             </p>
                         </div>
+
                     </div>
                 </article>
 
