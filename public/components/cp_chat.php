@@ -38,7 +38,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
     mysqli_stmt_execute($stmt2);
 
     mysqli_stmt_bind_result($stmt2, $mensagem,$imagem_chat, $data, $grupo_id_grupo, $user, $avatar, $id_user);
-}
+
 
 ?>
 
@@ -92,17 +92,13 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
 
                 </article>
             </section>
-            <?php
-        }
-    }
 
-    ?>
     </section>
     <section class="row fixed-bottom bg-light mt-md-5">
         <div class="col-12">
             <div class="row">
                 <div class="col-10 col-md-11 pl-4">
-                    <form class="py-2" method="post" role="form" id="chat" action="scripts/sc_chat.php?sms=<?= $grupo_id_grupo ?>">
+                    <form class="py-2" method="post" enctype="multipart/form-data" role="form" id="chat" action="scripts/sc_chat.php?chat=<?=$grupo_id_grupo?>">
                         <div class="row ml-2">
                             <input type="text" id="mensagem" name="mensagem" placeholder="Mensagem..." class="col-11">
                             <button type="submit" class="ml-xl-5 btn btn-outline-none p-0"><i class="far fa-paper-plane fa-1x pl-1"></i></button>
@@ -129,7 +125,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                     <h3 class="text-center pt-3">Seleciona imagem</h3>
                     <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                 </div>
-                <form method="post" role="form" id="post-form" action="scripts/sc_chat.php"
+                <form method="post" role="form" id="post-form" action="scripts/sc_chat.php?chat=<?=$grupo_id_grupo?>"
                       enctype="multipart/form-data">
                     <div class="modal-body text-center">
                         <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fotomsg"
@@ -153,5 +149,14 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             </div>
         </div>
     </div>
+    <?php
+    }
+    }
+    mysqli_stmt_close($stmt2);
+    }
+
+    mysqli_close($link);
+
+    ?>
 
 </main>

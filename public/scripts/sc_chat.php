@@ -7,9 +7,10 @@ $target_file = $target_dir . basename($_FILES["fotomsg"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
+echo "echo do isset:".$_GET["chat"];
+if (isset($_GET["chat"])) {
+    $grupo_id_grupo = $_GET["chat"];
 
-if (isset($_GET["sms"])) {
-    $grupo_id_grupo = $_GET["sms"];
 }
 
 if (isset($_SESSION['id'])) {
@@ -98,6 +99,8 @@ if ( isset($_POST["mensagem"]) ) {
         } else {
             echo "<br>mensagem:".$mensagem."<br>";
             echo "imagem:".$imagem_chat;
+            echo "<br>grupo:".$_GET["chat"];
+            echo "<br>user:".$id;
 
             // Acção de erro
 
