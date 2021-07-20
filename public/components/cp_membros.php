@@ -1,4 +1,3 @@
-
 <?php
 
 if (isset($_GET["grupo"])) {
@@ -20,7 +19,7 @@ if (isset($_GET["grupo"])) {
 
     <div class="alert alert-danger">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        Não te esqueças de votar eheh
+        Não te esqueças de votar.
     </div>
     <section class="row justify-content-center pt-3">
         <form class="col-11">
@@ -80,6 +79,7 @@ if (isset($_GET["grupo"])) {
                             echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1\">";
                             break;
                     }
+                    /*Aqui quando formos por os dados da BD direitos, temos de ter cuidado com os cases porque provavelmente os números vão mudar*/
 
                     ?>
                 </div>
