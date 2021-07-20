@@ -285,8 +285,7 @@ WHERE id_grupo = ?";
                                 <textarea class="w-50" name="descpost" type="text"></textarea>
                             </div>
                             <p class="text-center mt-1">Selecione imagem</p>
-                            <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
-                                   id="customFile"/>
+                            <input type="file" class="form-control w-50 mx-auto bg-light border-0 mb-4" name="fileToUpload" id="customFile"/>
                             <div class="row justify-content-center mt-4">
                                 <button class="btnlogin w-50 text-center" type="submit">Submeter</button>
                             </div>
