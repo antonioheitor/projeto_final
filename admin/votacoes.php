@@ -73,15 +73,14 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Edição da Lista de Tribos</h1>
-                <p class="mb-4">Aqui pode-se encontrar todas as informações acerca das tribos registadas.</p>
+                <h1 class="h3 mb-2 text-gray-800">Contagem das votações</h1>
 
                 <!-- DataTales Example -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Edição de Tribos
+                            <div class="panel-heading mb-4">
+                                Painel de Tribos
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -115,9 +114,11 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
                                 while (mysqli_stmt_fetch($stmt)) {
                                 ?>
 
-                                    <div >
+                                    <div class="pb-3">
                                         <section><?= $nome_grupo?></section>
-                                        <a class="btn btn-primary" href="../public/scripts/sc_contagem_votacao.php?id=<?= $id_grupo?>">Fazer contagem</a>
+                                        <a class="btn btn-success" href="#">Líder</a>
+                                        <a class="btn btn-danger" href="#">Mestre</a>
+
                                     </div>
                                 <?php
                     }
