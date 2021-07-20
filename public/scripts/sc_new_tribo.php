@@ -162,7 +162,6 @@ if ($uploadOk == 1) {
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt2)) {
             // Acção de sucesso
-            mysqli_stmt_execute($stmt2);
 
             mysqli_stmt_bind_result($stmt2, $id_grupo);
 
@@ -171,7 +170,7 @@ if ($uploadOk == 1) {
             }
         } else {
             // Acção de erro
-            header("Location: ../perfil_tribo.php?tribo=$id_grupo");
+            header("Location: ../perfil_tribo.php?grupo=$id_grupo");
             echo "Error:" . mysqli_stmt_error($stmt2);
         }
     }
@@ -185,7 +184,7 @@ if ($uploadOk == 1) {
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt3)) {
             // Acção de sucesso
-            header("Location: ../perfil_tribo.php?tribo=$id_grupo");
+            header("Location: ../perfil_tribo.php?grupo=$id_grupo");
         } else {
             // Acção de erro
             echo "Error:" . mysqli_error($link);
