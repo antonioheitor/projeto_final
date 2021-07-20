@@ -94,7 +94,19 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             </section>
 
     </section>
+
+
+    <?php
+    }
+    }
+    mysqli_stmt_close($stmt2);
+    }
+
+    mysqli_close($link);
+
+    ?>
     <section class="row fixed-bottom bg-light mt-md-5">
+        <br>
         <div class="col-12">
             <div class="row">
                 <div class="col-10 col-md-11 pl-4">
@@ -113,6 +125,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
 
         </div>
     </section>
+
 
 
     <!-- ADD FOTO -->
@@ -149,14 +162,6 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             </div>
         </div>
     </div>
-    <?php
-    }
-    }
-    mysqli_stmt_close($stmt2);
-    }
 
-    mysqli_close($link);
-
-    ?>
 
 </main>
