@@ -210,12 +210,9 @@ WHERE users_id_users = ?;";*/
                             <div class="dropdown show">
 
                                 <div class="btn-group dropleft">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false"></button>
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>"
-                                           data-toggle="modal">Guardar</a>
+                                        <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
                                         <?php
 
                                         if ($USER_ID == $iduser) {
@@ -250,8 +247,8 @@ WHERE users_id_users = ?;";*/
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
 
-              <?php      $stmt = mysqli_stmt_init($link);
-
+              <?php
+                    $stmt = mysqli_stmt_init($link);
                     $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post
                     FROM comentarios INNER JOIN users
                     ON users_id_users = id_users WHERE post_id_post = ?";
@@ -282,17 +279,16 @@ WHERE users_id_users = ?;";*/
                                         <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
                                     </div>
                                 </div>
-                                <p class='ml-3 mt-2'><?=$texto_comentario?>
+                                <p class='ml-3 mt-2 ml-5'><?=$texto_comentario?>
                                 </p>
                             </div>
 
                         </div>
 
-
-
                     <?php
-     }
-    mysqli_stmt_close($stmt); ?>
+                    }
+                    mysqli_stmt_close($stmt);
+                    ?>
 
 
 
