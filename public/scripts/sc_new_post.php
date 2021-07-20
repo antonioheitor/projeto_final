@@ -95,16 +95,16 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             // Acção de sucesso
-            header("Location: ../homepage.php");
+            header("Location: ../homepage.php?msg=2#homepagealerta");
         } else {
             // Acção de erro
            // header("Location: ../homepage.php");
-            echo "Error:" . mysqli_stmt_error($stmt);
+            header("Location: ../homepage.php?msg=3#homepagealerta");
         }
     } else {
         // Acção de erro
       //  header("Location: ../perfil.php");
-        echo "Error:" . mysqli_error($link);
+        header("Location: ../homepage.php?msg=3#homepagealerta");
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);

@@ -17,8 +17,6 @@ if(isset($_POST["submit"])) {
     }
 }
 
-
-
 // Check if file already exists
 if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
@@ -66,14 +64,9 @@ if ($uploadOk = 1) {
         $imagem_user =  $target_file  ;
         $roles_plataforma_id_roles_plataforma = 4;
 
-
-
-
-
         $link = new_db_connection();
 
         $stmt = mysqli_stmt_init($link);
-
         $query = "INSERT INTO users (nome_users, email_users, password_hash, descricao_users, imagem_user, roles_plataforma_id_roles_plataforma ) VALUES (?,?,?,?,?,?)";
 
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -90,7 +83,7 @@ if ($uploadOk = 1) {
             }
         } else {
             // Acção de erro
-            echo "<p>erro2</p>";
+            //echo "erro2";
             header("Location: ../register.php?msg=0#login");
             echo "Error:" . mysqli_error($link);
         }
@@ -100,5 +93,3 @@ if ($uploadOk = 1) {
         echo "Campos do formulário por preencher";
     }
 }
-
-

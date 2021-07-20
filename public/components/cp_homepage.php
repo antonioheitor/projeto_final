@@ -21,6 +21,59 @@ if (isset($_SESSION["role"])) {
             <h8 class="text-secondary">Escreve algo...</h8>
         </div>
     </section>
+    <section id="homepagealerta">
+        <div class="container">
+            <h2 class="text-center"></h2>
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <?php
+                    if (isset($_GET["msg"])) {
+                        $msg_show = true;
+                        switch ($_GET["msg"]) {
+                            case 0:
+                                $message = "Erro ao apagar post.";
+                                $class="alert-danger";
+                                break;
+                            case 1:
+                                $message = "Post apagado com sucesso!";
+                                $class="alert-success";
+                                break;
+                            case 2:
+                                $message = "Post criado com sucesso!";
+                                $class="alert-success";
+                                break;
+                            case 3:
+                                $message = "Erro na criação do post.";
+                                $class="alert-danger";
+                                break;
+                            case 4:
+                                $message = "Post guardado com sucesso!";
+                                $class="alert-success";
+                                break;
+                            case 5:
+                                $message = "Erro em guardar post :/";
+                                $class="alert-danger";
+                                break;
+                            default:
+                                $msg_show = false;
+                        }
+
+                        echo "<div class=\"alert $class alert-dismissible fade show\" role=\"alert\">
+" . $message . "
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+                        if ($msg_show) {
+                            echo '<script>window.onload=function (){$(\'.alert\').alert();}</script>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
     <!-- POSTS -->
     <!-- Button trigger modal -->
@@ -157,12 +210,9 @@ WHERE users_id_users = ?;";*/
                             <div class="dropdown show">
 
                                 <div class="btn-group dropleft">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                            data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false"></button>
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>"
-                                           data-toggle="modal">Guardar</a>
+                                        <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Guardar</a>
                                         <?php
 
                                         if ($USER_ID == $iduser) {
@@ -197,8 +247,8 @@ WHERE users_id_users = ?;";*/
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
 
-              <?php      $stmt = mysqli_stmt_init($link);
-
+              <?php
+                    $stmt = mysqli_stmt_init($link);
                     $query = "SELECT id_comentario, texto_comentario, imagem_comentario, users_id_users, nome_users, post_id_post
                     FROM comentarios INNER JOIN users
                     ON users_id_users = id_users WHERE post_id_post = ?";
@@ -229,17 +279,16 @@ WHERE users_id_users = ?;";*/
                                         <h6 class='col-10 mt-2'><?=$nomee_comentario?></h6>
                                     </div>
                                 </div>
-                                <p class='ml-3 mt-2'><?=$texto_comentario?>
+                                <p class='ml-3 mt-2 ml-5'><?=$texto_comentario?>
                                 </p>
                             </div>
 
                         </div>
 
-
-
                     <?php
-     }
-    mysqli_stmt_close($stmt); ?>
+                    }
+                    mysqli_stmt_close($stmt);
+                    ?>
 
 
 

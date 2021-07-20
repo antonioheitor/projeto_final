@@ -31,7 +31,52 @@ ORDER BY posts.data_criacao_post DESC";
             <p class="pt-5 pb-1 d-md-none h_pequeno">Os teus guardados</p>
         </div>
     </section>
+    <section id="guardadosalterar">
+        <div class="container">
+            <h2 class="text-center"></h2>
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
+                    <?php
+                    if (isset($_GET["msg"])) {
+                        $msg_show = true;
+                        switch ($_GET["msg"]) {
+                            case 0:
+                                $message = "Guardado eliminado com sucesso!";
+                                $class="alert-success
+                                 ";
+                                break;
+                            case 1:
+                                $message = "Erro ao eliminar guardado.";
+                                $class="alert-danger";
+                                break;
+                            case 2:
+                                $message = "ocorreu um erro no login";
+                                $class="alert-warning";
+                                break;
+                            case 3:
+                                $message = "login efectuado com sucesso";
+                                $class="alert-success";
+                                break;
+                            default:
+                                $msg_show = false;
+                        }
 
+                        echo "<div class=\"alert $class alert-dismissible fade show\" role=\"alert\">
+" . $message . "
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+                        if ($msg_show) {
+                            echo '<script>window.onload=function (){$(\'.alert\').alert();}</script>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+
+        </div>
+    </section>
     <section class="row my-4 justify-content-center ">
         <?php
         if (mysqli_stmt_prepare($stmt, $query)) {
@@ -46,8 +91,7 @@ ORDER BY posts.data_criacao_post DESC";
             <div class="row mt-1">
 
                 <div class="col-2 col-md-2 col-lg-1 my-auto">
-                    <img src="uploads/<?= $imagem_user ?>"
-                         class="img-fluid rounded-circle p-sm-1">
+                    <img src="uploads/<?= $imagem_user ?>" class="img-fluid rounded-circle p-sm-1">
                 </div>
                 <div class="col-8 col-sm-8 position-relative">
                     <h4 class="pt-3"><?= $nome_user ?></h4>
@@ -56,8 +100,7 @@ ORDER BY posts.data_criacao_post DESC";
                 <div class="col-2 col-lg-3 text-right my-auto">
                     <div class="dropdown show">
                         <div class="btn-group dropleft">
-                            <button type="button" class="btn btn-secondary dropdown-toggle"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="#" data-target="#myModal3<?=$id_posts?>" data-toggle="modal">Remover</a>
                                 <a class="dropdown-item" href="#" data-target="#myModal5" data-toggle="modal">Denunciar</a>
@@ -68,11 +111,12 @@ ORDER BY posts.data_criacao_post DESC";
 
                 <div class="pt-2">
                     <p class="font-weight-bold pl-5"><?= $titulo_post ?></p>
+                    <p class="pl-5"><?= $conteudo_post ?></p>
+
                     <?php if ($imagem_post != null) {
                         echo "<img class='text-center' src='uploads/$imagem_post'>";
                     }
                     ?>
-                    <p class="pl-5"><?= $conteudo_post ?></p>
                 </div>
 
             </div>

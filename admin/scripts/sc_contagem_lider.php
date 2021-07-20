@@ -34,7 +34,6 @@ if (isset($_SESSION['id']) && isset($_GET['grupo'])) {
 
 
     $stmt1 = mysqli_stmt_init($link);
-
     $query1 ="SELECT votos.users_id_users1, votos.grupo_id_grupo, users.nome_users,
 COUNT(votos.users_id_users1) AS contagem
 FROM votos
@@ -43,6 +42,8 @@ ON users.id_users = votos.users_id_users1
 WHERE votos.roles_grupos_id_roles = 1 AND votos.quinzenas_id_quinzena = ? AND votos.grupo_id_grupo = ?
 GROUP BY votos.users_id_users1
 ORDER BY contagem DESC LIMIT 1";
+
+
 
     if (mysqli_stmt_prepare($stmt1, $query1)) {
 
@@ -55,11 +56,12 @@ ORDER BY contagem DESC LIMIT 1";
 
             while (mysqli_stmt_fetch($stmt1)) {
                 $role = 1;
-                header("Location: sc_submeter_votos_lider.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
+              header("Location: sc_submeter_votos_lider.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
             }
 
         } else {
             //Ação de erro
+
         }
     } else {
     }

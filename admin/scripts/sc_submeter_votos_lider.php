@@ -71,7 +71,6 @@ if (isset($_SESSION['id']) && (isset($_GET['id']) && (isset($_GET['id'] )!= ''))
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 
-        echo $role;
 
         mysqli_stmt_bind_param($stmt, 'iii', $role, $id_user, $id_grupo);
 

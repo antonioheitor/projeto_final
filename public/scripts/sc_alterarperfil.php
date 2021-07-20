@@ -83,11 +83,10 @@ if ($target_file != null) {
             if (!mysqli_stmt_execute($stmt)) {
                 echo "Error:" . mysqli_stmt_error($stmt);
             }
-            header("Location: ../perfil.php");
-            /* close statement */
+            header("Location: ../perfil.php?msg=1#alterarperfil");            /* close statement */
             mysqli_stmt_close($stmt);
         } else {
-            echo("Error description: " . mysqli_error($link));
+            header ("Location: ../perfil.php?msg=0#alterarperfil");
         }
         /* close connection */
         mysqli_close($link);
@@ -117,11 +116,11 @@ if ($target_file != null) {
             if (!mysqli_stmt_execute($stmt)) {
                 echo "Error:" . mysqli_stmt_error($stmt);
             }
-            header("Location: ../perfil.php");
+            header("Location: ../perfil.php?msg=1#alterarperfil");
             /* close statement */
             mysqli_stmt_close($stmt);
         } else {
-            echo("Error description: " . mysqli_error($link));
+            header ("Location: ../perfil.php?msg=0#alterarperfil");
         }
         /* close connection */
         mysqli_close($link);
