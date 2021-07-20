@@ -34,13 +34,15 @@ if (isset($_SESSION['id']) && isset($_GET['grupo'])) {
     $stmt1 = mysqli_stmt_init($link);
 
     $query1 ="SELECT votos.users_id_users1, votos.grupo_id_grupo, users.nome_users,
-COUNT(votos.users_id_users1)
+COUNT(votos.users_id_users1) AS contagem
 FROM votos
 INNER JOIN users
 ON users.id_users = votos.users_id_users1
 WHERE votos.roles_grupos_id_roles = 4 AND votos.quinzenas_id_quinzena = ? AND votos.grupo_id_grupo = ?
 GROUP BY votos.users_id_users1
-ORDER BY votos.users_id_users DESC LIMIT 1";
+ORDER BY contagem DESC LIMIT 1";
+
+    //somehow não está a ordenar DESC;
 
     if (mysqli_stmt_prepare($stmt1, $query1)) {
 
@@ -49,11 +51,12 @@ ORDER BY votos.users_id_users DESC LIMIT 1";
         //Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt1)) {
             //Ação de sucesso
-            mysqli_stmt_bind_result($stmt1, $user_id,  $id_grupo, $user_name, $contagem);
+            mysqli_stmt_bind_result($stmt1, $user_id, $votos,  $id_grupo, $user_name, $contagem);
 
             while (mysqli_stmt_fetch($stmt1)) {
                 $role = 4;
-                header("Location: sc_submeter_votos_mestre.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
+             //   header("Location: sc_submeter_votos_mestre
+                //.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
             }
 
             if ($contagem == '') {
