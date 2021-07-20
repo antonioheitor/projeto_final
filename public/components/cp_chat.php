@@ -62,7 +62,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             <article class="d-flex justify-content-end mt-4">
                 <div class="mensagem border border-dark rounded bg-light">
                     <?php if ($mensagem != null) { ?>
-                        <p class="text-light"><?= $mensagem ?></p>
+                        <p class="text-dark"><?= $mensagem ?></p>
                     <?php } else { ?>
 
                         <img class= "img-fluid" src="uploads/<?= $imagem_chat ?>">
