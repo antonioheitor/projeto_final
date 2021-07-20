@@ -1,6 +1,5 @@
-
 <?php
-$procura = "";
+
 if (isset($_GET["grupo"])) {
     $id_grupo = $_GET["grupo"];
 }
@@ -20,14 +19,17 @@ if (isset($_GET["grupo"])) {
 
     <div class="alert alert-danger">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        Não te esqueças de votar
+        Não te esqueças de votar.
     </div>
-
+    <section class="row justify-content-center pt-3">
+        <form class="col-11">
+            <input type="text" id="procura" name="procura" placeholder="Pesquisa por um membro" class="shadow-sm">
+        </form>
+    </section>
 
     <?php
     require_once "connections/connection.php";
     $link = new_db_connection();
-
 
     $stmt = mysqli_stmt_init($link);
 
@@ -36,11 +38,10 @@ if (isset($_GET["grupo"])) {
     INNER JOIN grupo ON id_grupo = grupo_id_grupo 
     INNER JOIN roles_grupos ON id_roles = roles_grupos_id_roles
  WHERE grupo_id_grupo = ?";
-
     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-            mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
+        mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
 
         mysqli_stmt_execute($stmt);
 
@@ -78,6 +79,7 @@ if (isset($_GET["grupo"])) {
                             echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1\">";
                             break;
                     }
+                    /*Aqui quando formos por os dados da BD direitos, temos de ter cuidado com os cases porque provavelmente os números vão mudar*/
 
                     ?>
                 </div>

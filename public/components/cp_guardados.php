@@ -73,51 +73,10 @@ ORDER BY posts.data_criacao_post DESC";
                     }
                     ?>
                     <p class="pl-5"><?= $conteudo_post ?></p>
-                    <div class="float-right pb-2">
-                        <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
-                    </div>
                 </div>
 
             </div>
         </article>
-
-            <!-- COMENTÁRIOS -->
-            <!-- Button trigger modal -->
-            <div class="modal show margemmodal" id="comentario<?=$id_posts?>">
-
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-
-                    <!-- CONTEÚDO DO MODAL ######################### -->
-                    <div class="modal-content bg-white text-dark bordermodal">
-
-                        <!-- CABEÇALHO DO MODAL ######################### -->
-                        <div class="modal-header mx-auto">
-                            <h3 class="text-center pt-3">Comenta</h3>
-                            <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
-                        </div>
-                        <form method="post">
-                            <div class="modal-body text-center">
-                                <textarea class="w-50" name="descpost" type="text"></textarea>
-                            </div>
-                            <p class="text-center mt-1">Selecione imagem</p>
-                            <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
-                                   id="customFile"/>
-                            <div class="row justify-content-center mt-4">
-                                <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">Submeter</button>
-                            </div>
-                        </form>
-                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                        <!-- CORPO DO MODAL ######################### -->
-                        <div class="modal-body mx-auto text-center bgdark">
-                        </div>
-                        <!-- RODAPÉ DO MODAL ######################### -->
-                        <div class="modal-footer">
-                            <p class="small mx-auto">Hi-Tribe</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- REMOVER -->
             <!-- Button trigger modal -->
