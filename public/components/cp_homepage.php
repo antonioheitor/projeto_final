@@ -153,6 +153,7 @@ WHERE users_id_users = ?;";*/
                         </div>
                         <div class="col-2 col-lg-3 text-right my-auto">
                             <div class="dropdown show">
+                                <?= $imagem_post ?>
                                 <div class="btn-group dropleft">
                                     <button type="button" class="btn btn-secondary dropdown-toggle"
                                             data-toggle="dropdown"
@@ -182,11 +183,11 @@ WHERE users_id_users = ?;";*/
                         <p class="pl-5"><?= $conteudo_post ?></p>
 
                         <?php
-                        if ($imagem_post != null) {
+                       if (($imagem_post != null) ) {
                             ?>
                             <img class="text-center img-fluid" src="uploads/<?= $imagem_post ?>"
                             <?php
-                        }
+                       }
                         ?>
 
                     </div>
