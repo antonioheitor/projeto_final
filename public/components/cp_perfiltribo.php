@@ -150,7 +150,7 @@ WHERE grupo.id_grupo = ?";
 
     <span>
         <?php
-        }
+
 
         $stmt = mysqli_stmt_init($link);
         $query = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, grupo.id_grupo, users.nome_users, users.id_users, users.imagem_user FROM posts 
@@ -385,6 +385,8 @@ WHERE id_grupo = ?";
 
         ?>
     </span>
+
+    <?php }?>
 
 
     <!-- DENUNCIAR -->
