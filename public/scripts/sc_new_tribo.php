@@ -52,7 +52,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["img_grupo"]["tmp_name"], $target_file)) {
-        list($width, $height) = getimagesize($target_file);
+        list($width, $height) = getimagesize($_FILES["img_grupo"]["tmp_name"]);
 
         if ($width > $height) {
             if ($width > $height * 2) {

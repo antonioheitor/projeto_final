@@ -59,10 +59,6 @@ ORDER BY contagem DESC LIMIT 1";
                 //.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
             }
 
-            if ($contagem == '') {
-                header("Location: ../../admin/votacoes.php");
-            }
-
         } else {
             //Ação de erro
 

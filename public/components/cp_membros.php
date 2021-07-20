@@ -44,7 +44,6 @@ if (isset($_SESSION['id'])){
         mysqli_stmt_bind_result($stmt, $lider, $id_grupo, $role);
 
         if (!mysqli_stmt_fetch($stmt)) {
-            header("Location: membros.php?grupo=$id_grupo");
         }
     } else {
         echo "ERRORRRRR: " . mysqli_error($link);
