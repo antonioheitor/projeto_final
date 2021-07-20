@@ -228,8 +228,6 @@ if (isset($_SESSION["role"])) {
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -237,7 +235,43 @@ if (isset($_SESSION["role"])) {
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Aceitar votações</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+<?php
+require_once "connections/connection.php";
+
+
+                        $link = new_db_connection();
+
+                        $stmt = mysqli_stmt_init($link);
+
+                        $query = "SELECT COUNT(id_grupo) FROM grupo;";
+
+
+                        if (mysqli_stmt_prepare($stmt, $query)) {
+
+
+                        if (mysqli_stmt_execute($stmt)) {
+
+                        mysqli_stmt_bind_result($stmt, $contagem_grupo );
+
+                        if (!mysqli_stmt_fetch($stmt)) {
+
+                        header("Location: users.php");
+
+                        }
+                        echo "<div class='h5 mb-0 font-weight-bold text-gray-800'>$contagem_grupo</div>";
+
+                        } else {
+
+                        }
+                        //mostrar o codigo a apresentar
+                        } else {
+
+                        echo "ERRORRRRR: " . mysqli_error($link);
+                        }
+                        mysqli_stmt_close($stmt);
+
+                        ?>
+
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -299,9 +333,7 @@ if (isset($_SESSION["role"])) {
 
                                 <?php
 
-                    require_once "connections/connection.php";
 
-                                $link = new_db_connection();
 
                                 $stmt = mysqli_stmt_init($link);
 
