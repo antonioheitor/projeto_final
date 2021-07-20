@@ -62,18 +62,15 @@ if (isset($_SESSION["role"]) && ($_SESSION["role"] == 4) || ($_SESSION["role"] =
         <div id="content">
 
             <!-- Topbar -->
-            <?php
 
-            include_once "components/cp_navbar_topo.php";
-
-            ?>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 d-block static-top shadow"></nav>
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Contagem das votações</h1>
+                <h1 class="h3 mb-2 text-gray-800 mt-5">Contagem das votações</h1>
 
                 <!-- DataTales Example -->
                 <div class="row">
