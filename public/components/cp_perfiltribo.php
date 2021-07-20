@@ -181,22 +181,22 @@ ORDER BY posts.id_posts DESC";
                             <?php
                             switch ($roles) {
                                 case 1:
-                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-success\">";
+                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-success'>";
                                     break;
                                 case 3:
-                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-danger\">";
+                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-danger'>";
                                     break;
                                 case 4:
-                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1 border border-warning\">";
+                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-warning'>";
                                     break;
                                 case 6:
-                                    echo "<img src=\"uploads/$imagem_user\" class=\"img-fluid rounded-circle p-sm-1\">";
+                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1'>";
                                     break;
                             }
                             /*Aqui quando formos por os dados da BD direitos, temos de ter cuidado com os cases porque provavelmente os números vão mudar*/
 
                             ?>
-                            <!-- <img src="uploads/<?= $imagem_user; ?>" class="img-fluid rounded-circle p-sm-1"> -->
+                            <!-- <img src="uploads/$imagem_user;" class="img-fluid rounded-circle p-sm-1"> -->
                         </div>
                         <div class="col-8 col-sm-8 position-relative">
                             <h4 class="pt-3"><?= $nome_user; ?></h4>
