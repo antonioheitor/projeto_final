@@ -11,11 +11,6 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
-
-$target_file = $target_dir . $img_hash;
-
-
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
@@ -69,12 +64,14 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
         $imagem_post = $target_file;
     }
 
+    $img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+    $target_file = $target_dir . $img_hash;
+
     if ($imagem_post == "../../uploads/") {
         $imagem_post = null;
     }
 
-
-    $data_criacao_post = "2021-07-18";
+    //$data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
