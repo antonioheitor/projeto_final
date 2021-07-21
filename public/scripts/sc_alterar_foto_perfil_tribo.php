@@ -65,13 +65,8 @@ if ($uploadOk == 0) {
 }
 
 
-
 if ($target_file != null) {
-// UPDATE NOME
-    if ((isset($_POST["descricao_grupo"])) && (isset($_POST["sedes_id_sede_grupo"]))) {
-        $descricao_grupo = $_POST["descricao_grupo"];
         $imagem = $target_file;
-        $sedes_id_sede_grupo = $_POST["sedes_id_sede_grupo"];
 
         // Create a new DB connection
         $link = new_db_connection();
@@ -79,42 +74,10 @@ if ($target_file != null) {
         /* create a prepared statement */
         $stmt = mysqli_stmt_init($link);
 
-        $query = "UPDATE grupo SET descricao_grupo = ?, imagem_grupo = ?, sedes_id_sede_grupo = ? WHERE id_grupo = ?";
+        $query = "UPDATE grupo SET imagem_grupo = ? WHERE id_grupo = ?";
         if (mysqli_stmt_prepare($stmt, $query)) {
             /* Bind paramenters */
-            mysqli_stmt_bind_param($stmt, "ssii", $descricao_grupo, $imagem, $sedes_id_sede_grupo, $id);
-            /* execute the prepared statement */
-            if (!mysqli_stmt_execute($stmt)) {
-                echo "Error:" . mysqli_stmt_error($stmt);
-            }
-            header("Location: ../perfil_tribo.php?grupo=$id&msg=1#alertaperfiltribo");
-            /* close statement */
-            mysqli_stmt_close($stmt);
-        } else {
-            header("Location: ../perfil_tribo.php?grupo=$id&msg=0#alertaperfiltribo");
-        }
-    /* close connection */
-    mysqli_close($link);
-} else {
-        echo "FALTAM VALORES";
-    }
-} else {
-
-    if ((isset($_POST["descricao_grupo"]) && (isset($_POST["sedes_id_sede_grupo"])) &&  ($_POST["descricao_grupo"] != ""))) {
-        $descricao_grupo = $_POST["descricao_grupo"];
-        $sedes_id_sede_grupo = $_POST["sedes_id_sede_grupo"];
-
-
-        // Create a new DB connection
-        $link = new_db_connection();
-
-        /* create a prepared statement */
-        $stmt = mysqli_stmt_init($link);
-
-        $query = "UPDATE grupo SET descricao_grupo = ?, sedes_id_sede_grupo = ? WHERE id_grupo = ?";
-        if (mysqli_stmt_prepare($stmt, $query)) {
-            /* Bind paramenters */
-            mysqli_stmt_bind_param($stmt, "sii", $descricao_grupo, $sedes_id_sede_grupo, $id);
+            mysqli_stmt_bind_param($stmt, "si", $imagem, $id);
             /* execute the prepared statement */
             if (!mysqli_stmt_execute($stmt)) {
                 echo "Error:" . mysqli_stmt_error($stmt);
@@ -129,6 +92,4 @@ if ($target_file != null) {
         mysqli_close($link);
     } else {
         echo "FALTAM VALORES";
-    }
-
 }

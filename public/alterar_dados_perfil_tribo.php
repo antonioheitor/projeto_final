@@ -7,7 +7,7 @@
 <body>
 
 <!-- Page Content-->
-<?php include_once "components/cp_alterarperfil_tribo.php"; ?>
+<?php include_once "components/cp_alterar_dados_perfil_tribo.php"; ?>
 
 <?php include_once "helpers/help_scripts.php"; ?>
 
