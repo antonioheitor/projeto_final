@@ -55,7 +55,6 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao, $avatar);
             <p>Alterar foto de perfil</p>
             <div class="form-group rounded bg-light py-3">
                 <input type="file" class="form-control w-50 border-0 bg-light" name="imagem" id="customFile">
-                <input type="text" class="form-control w-50 border-0 bg-light" name="avatar" value="<?=$avatar?>">
             </div>
             <div class="row justify-content-center mt-3">
                 <button class="btnlogin py-3 text-center col-4" type="submit">Alterar Dados</button>
