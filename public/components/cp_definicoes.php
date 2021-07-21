@@ -33,7 +33,7 @@ session_start();
         </a>
         <a href="alterarperfil.php" class="text-decoration-none">
             <div class="row mb-2 pt-4 border-top border-dark">
-                <i class="far fa-2x fa-user"></i>
+                <i class="fa-2x fas fa-user-edit"></i>
                 <p class="ml-3 h_definicoes">Alterar perfil</p>
             </div>
         </a>
