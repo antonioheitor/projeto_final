@@ -31,10 +31,17 @@ session_start();
                 <p class="ml-3 h_definicoes">Criar Tribo</p>
             </div>
         </a>
-        <a href="alterarperfil.php" class="text-decoration-none">
+        <a href="alterar_dados_perfil.php" class="text-decoration-none">
             <div class="row mb-2 pt-4 border-top border-dark">
                 <i class="fa-2x fas fa-user-edit"></i>
-                <p class="ml-3 h_definicoes">Alterar perfil</p>
+                <p class="ml-3 h_definicoes">Alterar dados perfil</p>
+            </div>
+        </a>
+
+        <a href="alterar_foto_perfil.php" class="text-decoration-none">
+            <div class="row mb-2 pt-4 border-top border-dark">
+                <i class="fa-2x far fa-images"></i>
+                <p class="ml-3 h_definicoes">Alterar foto perfil</p>
             </div>
         </a>
 
