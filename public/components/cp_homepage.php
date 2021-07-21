@@ -298,7 +298,7 @@ ORDER BY posts.id_post DESC";
                     mysqli_stmt_bind_param($stmt, "i", $id_posts);
 
                     mysqli_stmt_execute($stmt);
-                    mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts );
+                    mysqli_stmt_bind_result($stmt, $id_comentario, $texto_comentario, $imagem_comentario, $users_id_users, $nomee_comentario, $id_posts);
                     } else {
                     echo "ERRORRRRR: " . mysqli_error($link);
                     }
