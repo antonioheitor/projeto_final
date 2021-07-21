@@ -164,7 +164,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                     </form>
                 </div>
                 <div class="col-2 col-md-1 my-auto text-center">
-                    <i class="fas fa-plus-circle fa-1x pt-2 mr-xl-5" data-toggle="modal" data-target="#modal"></i>
+                    <i class="fas fa-plus-circle fa-1x pt-2 mr-4" data-toggle="modal" data-target="#modal"></i>
                     <i class="fas fa-microphone fa-1x pt-2 mx-xl-2"></i>
                 </div>
             </div>
