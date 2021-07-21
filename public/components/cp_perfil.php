@@ -19,7 +19,7 @@ mysqli_stmt_bind_result($stmt, $nome, $img, $user_id, $descricao);
 
 ?>
 
-<main class="container-fluid">
+<main class="container-fluid mb-5 pb-3 mb-lg-0">
 
     <section class="row mt-lg-5 pt-lg-5">
         <article class="col-12 pt-3">

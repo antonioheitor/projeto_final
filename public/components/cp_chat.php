@@ -61,9 +61,10 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
             ?>
             <article class="d-flex justify-content-end mt-4">
                 <div class="mensagem border border-dark rounded bg-light">
-                    <?php if ($mensagem != null) { ?>
+                    <?php if ($mensagem != null || $mensagem == '') { ?>
                         <p class="text-dark"><?= $mensagem ?></p>
-                    <?php } else { ?>
+                    <?php
+                    } else { ?>
 
                         <img class= "img-fluid" src="uploads/<?= $imagem_chat ?>">
 
@@ -80,7 +81,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                         <div class="col-10 col-lg-11 border border-dark rounded position-relative msgenviada">
                             <h4 class="pt-3 text-light"><?= $user ?></h4>
 
-                            <?php if ($mensagem != null) { ?>
+                            <?php if ($mensagem != null || $mensagem == '') { ?>
                             <p class="text-light"><?= $mensagem ?></p>
                 <?php } else { ?>
 
@@ -131,7 +132,7 @@ if (mysqli_stmt_prepare($stmt2, $query2)) {
                                                         $class="alert-success";
                                                         break;
                                                     case 2:
-                                                        $message = "ocorreu um erro no login";
+                                                        $message = "Por favor escreva algo";
                                                         $class="alert-warning";
                                                         break;
                                                     case 3:

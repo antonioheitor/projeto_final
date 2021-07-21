@@ -10,12 +10,12 @@ $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
 
-$query = "SELECT users_has_posts.users_id_users, users_has_posts.posts_id_posts, users.nome_users, users.imagem_user, posts.users_id_users, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo
+$query = "SELECT users_has_posts.users_id_users, users_has_posts.posts_id_post, users.nome_users, users.imagem_user, posts.users_id_users, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo
 FROM posts
 INNER JOIN users
 ON posts.users_id_users = users.id_users
 INNER JOIN users_has_posts
-ON users_has_posts.posts_id_posts = posts.id_post
+ON users_has_posts.posts_id_post = posts.id_post
 INNER JOIN grupo
 ON posts.grupo_id_grupo = grupo.id_grupo
 WHERE users_has_posts.users_id_users = ?

@@ -34,8 +34,6 @@ WHERE users_has_grupo.users_id_users = ?";
 
         if (mysqli_stmt_execute($stmt)) {
 
-            mysqli_stmt_bind_result($stmt, $USER_ID);
-
             while (mysqli_stmt_fetch($stmt)) {
                 $check = TRUE;
             };
@@ -210,7 +208,7 @@ WHERE users_has_grupo.users_id_users = ?";
         <?php
         $stmt2 = mysqli_stmt_init($link);
 
-        $query2 = "SELECT posts.id_posts, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
+        $query2 = "SELECT posts.id_post, posts.titulo_post, posts.conteudo_post, posts.imagem_post, posts.data_criacao_post, grupo.nome_grupo, users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users.id_users, users.imagem_user, users.nome_users
 FROM users_has_grupo
 INNER JOIN grupo
 ON grupo.id_grupo = users_has_grupo.grupo_id_grupo
@@ -220,13 +218,6 @@ INNER JOIN users
 ON posts.users_id_users = users.id_users
 WHERE users_has_grupo.users_id_users = ?
 ORDER BY posts.data_criacao_post DESC";
-
-        /*$query = "SELECT id_posts, titulo_post, conteudo_post, imagem_post, data_criacao_post, users_id_users,
-        nome_grupo, grupo_id_grupo FROM posts
-INNER JOIN grupo
-ON grupo_id_grupo = id_grupo
-WHERE users_id_users = ?;";*/
-
 
         if (mysqli_stmt_prepare($stmt2, $query2)) {
 
