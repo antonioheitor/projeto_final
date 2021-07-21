@@ -15,7 +15,7 @@ FROM posts
 INNER JOIN users
 ON posts.users_id_users = users.id_users
 INNER JOIN users_has_posts
-ON users_has_posts.posts_id_posts = posts.id_posts
+ON users_has_posts.posts_id_posts = posts.id_post
 INNER JOIN grupo
 ON posts.grupo_id_grupo = grupo.id_grupo
 WHERE users_has_posts.users_id_users = ?
