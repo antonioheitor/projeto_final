@@ -1,9 +1,36 @@
 <?php
-
+session_start();
 if (isset($_GET["grupo"])) {
 $id_grupo = $_GET["grupo"];
 }
 
+if (isset($_SESSION['id'])){
+    $USER = $_SESSION['id'];
+}
+
+require_once "connections/connection.php";
+
+$link = new_db_connection();
+$stmt = mysqli_stmt_init($link);
+
+$query = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo, users_has_grupo.roles_grupos_id_roles FROM users_has_grupo
+            WHERE users_has_grupo.roles_grupos_id_roles = 1 AND users_has_grupo.grupo_id_grupo = ?";
+
+if (mysqli_stmt_prepare($stmt, $query)) {
+
+    mysqli_stmt_bind_param($stmt, 'i', $id_grupo);
+
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_bind_result($stmt, $lider, $id_grupo, $role);
+
+    if (!mysqli_stmt_fetch($stmt)) {
+    }
+
+} else {
+    echo "ERRORRRRR: " . mysqli_error($link);
+}
+mysqli_stmt_close($stmt);
 ?>
 
 
@@ -23,6 +50,16 @@ $id_grupo = $_GET["grupo"];
                 <p class="ml-3 h_definicoes">Membros</p>
             </div>
         </a>
+        <?php if ($USER == $lider) {
+            echo "<a href = 'alterarperfil_tribo.php?grupo=$id_grupo' class='text-decoration-none' >
+            <div class='row mt-5' >
+                <i class='fas fa-users fa-2x'></i>
+                <p class='ml-3 h_definicoes'>Alterar Tribo </p>
+            </div>
+        </a>";
+        }
+        ?>
+
 
         <a href="#" class="text-decoration-none" data-target="#myModal1" data-toggle="modal">
             <div class="row mb-2 pt-4 border-top border-dark">
