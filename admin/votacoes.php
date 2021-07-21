@@ -210,6 +210,9 @@ if (isset($_SESSION["role"])) {
                     mysqli_stmt_close($stmt);
 ?>
 
+                                <div class="py-3">
+                                    <a class="btn btn-primary" href="scripts/sc_apagarquinzena.php">Apagar Quinzena</a>
+                                </div>
                             </div>
                         </div>
                     </div>
