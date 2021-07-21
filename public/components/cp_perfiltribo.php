@@ -288,7 +288,7 @@ ORDER BY posts.id_posts DESC";
                                 }
                                 ?>
                             </div>
-                             <div class="col-2 col-lg-3 text-right my-auto">
+                             <div class="text-right my-auto">
                                 <div class="dropdown show">
 
                                     <div class="btn-group dropleft">
