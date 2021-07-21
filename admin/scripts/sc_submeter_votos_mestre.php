@@ -51,7 +51,6 @@ if (isset($_SESSION['id']) && (isset($_GET['id']) && (isset($_GET['id'] )!= ''))
 
         mysqli_stmt_bind_param($stmt, 'iii',  $id_grupo, $users, $role);
 
-        echo $role;
         //Devemos validar também o resultado do execute!
         if (!mysqli_stmt_execute($stmt)) {
             echo "Error: " . mysqli_stmt_error($stmt);

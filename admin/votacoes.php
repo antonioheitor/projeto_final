@@ -202,8 +202,8 @@ if (isset($_SESSION["role"])) {
                                     <div class="pb-3">
                                         <section><?= $nome_grupo?></section>
                                         <a class="btn btn-success" href="scripts/sc_contagem_lider.php?grupo=<?=$id_grupo?>">Líder</a>
-                                        <a class="btn btn-danger" href="scripts/sc_contagem_mestre.php?grupo=<?=$id_grupo?>">Mestre</a>
-
+                                        <a class="btn btn-warning" href="scripts/sc_contagem_mestre.php?grupo=<?=$id_grupo?>">Mestre</a>
+                                        <a class="btn btn-danger" href="scripts/sc_contagem_anciao.php?grupo=<?=$id_grupo?>">Ancião</a>
                                     </div>
                                 <?php
                     }
