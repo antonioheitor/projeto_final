@@ -6,6 +6,12 @@ if (isset($_SESSION["id"])) {
     $id = $_SESSION["id"];
 }
 
+if(isset ($_POST["avatar"])) {
+    echo $_POST["avatar"];
+
+
+}
+
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["imagem"]["name"]);
 $uploadOk = 1;
@@ -87,10 +93,10 @@ if ($target_file != null) {
             if (!mysqli_stmt_execute($stmt)) {
                 echo "Error:" . mysqli_stmt_error($stmt);
             }
-            header("Location: ../perfil.php?msg=1#alterarperfil");            /* close statement */
+          //  header("Location: ../perfil.php?msg=1#alterarperfil");            /* close statement */
             mysqli_stmt_close($stmt);
         } else {
-            header ("Location: ../perfil.php?msg=0#alterarperfil");
+           // header ("Location: ../perfil.php?msg=0#alterarperfil");
         }
         /* close connection */
         mysqli_close($link);
@@ -103,7 +109,7 @@ if ($target_file != null) {
         $nome = $_POST["nome_user"];
         $email = $_POST["email_user"];
         $descricao = $_POST["descricao_users"];
-        $imagem = $avatar;
+        $imagem = $_POST["avatar"];
 
 
         // Create a new DB connection
@@ -112,19 +118,19 @@ if ($target_file != null) {
         /* create a prepared statement */
         $stmt = mysqli_stmt_init($link);
 
-        $query = "UPDATE users SET nome_users = ?, email_users = ?, descricao_users = ? WHERE id_users = ?";
+        $query = "UPDATE users SET nome_users = ?, email_users = ?, descricao_users = ?, imagem_user = ? WHERE id_users = ?";
         if (mysqli_stmt_prepare($stmt, $query)) {
             /* Bind paramenters */
-            mysqli_stmt_bind_param($stmt, "sssi", $nome, $email, $descricao, $id);
+            mysqli_stmt_bind_param($stmt, "ssssi", $nome, $email, $descricao, $imagem, $id);
             /* execute the prepared statement */
             if (!mysqli_stmt_execute($stmt)) {
                 echo "Error:" . mysqli_stmt_error($stmt);
             }
-            header("Location: ../perfil.php?msg=1#alterarperfil");
+          //  header("Location: ../perfil.php?msg=1#alterarperfil");
             /* close statement */
             mysqli_stmt_close($stmt);
         } else {
-            header ("Location: ../perfil.php?msg=0#alterarperfil");
+          //  header ("Location: ../perfil.php?msg=0#alterarperfil");
         }
         /* close connection */
         mysqli_close($link);
