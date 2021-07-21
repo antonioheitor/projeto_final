@@ -1,17 +1,20 @@
 <?php
-require_once("../connections/connection.php");
+
 session_start();
 
 if (isset($_GET["grupo"])) {
     $id = $_GET["grupo"];
 }
 
-if ((isset($_POST["descricao_grupo"]) && (isset($_POST["sedes_id_sede_grupo"])))) {
+require_once("../connections/connection.php");
+$link = new_db_connection();
+
+if ((isset($_POST["descricao_grupo"]) && (isset($_POST["sedes_id_sede_grupo"])) && ($_POST["descricao_grupo"] != "") )) {
     $descricao_grupo = $_POST["descricao_grupo"];
     $sedes_id_sede_grupo = $_POST["sedes_id_sede_grupo"];
 
     // Create a new DB connection
-    $link = new_db_connection();
+
 
     /* create a prepared statement */
     $stmt = mysqli_stmt_init($link);

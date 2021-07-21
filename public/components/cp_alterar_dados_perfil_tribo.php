@@ -41,8 +41,7 @@ mysqli_stmt_close($stmt);
         </div>
     </section>
 
-        <form method="post" role="form" id="form" action="scripts/sc_alterar_dados_perfil.php?grupo=<?= $id ?>"
-              enctype="multipart/form-data">
+        <form method="post" role="form" id="alterar-form" action="scripts/sc_alterar_dados_perfil_tribo.php?grupo=<?=$id?>">
             <div class="form-group rounded">
                 <p>Descrição Tribo</p>
                 <input type="text" aria-describedby="name" name="descricao_grupo" value="<?=$descricao_grupo ?>">
