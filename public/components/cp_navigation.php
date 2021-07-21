@@ -40,7 +40,7 @@ if (!isset($_SESSION["id"])) {
     <ul class="navbar-nav">
         <?php
         if (isset($_SESSION['id'])) {
-            if ($_SESSION['role'] == "3") {
+            if ($_SESSION['role'] == "1") {
                 echo "<li class='mx-3'><a class='nav-link' href='../admin/index.php'>Admin</a></li>";
             }
         }

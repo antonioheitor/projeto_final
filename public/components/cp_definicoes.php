@@ -14,7 +14,7 @@ session_start();
     <section class="col-12 mt-5 ml-2">
         <?php
         if (isset($_SESSION['id'])) {
-            if ($_SESSION['role'] == "3") {
+            if ($_SESSION['role'] == "1") {
                 echo "<a href='../admin/index.php' class='text-decoration-none'>
                         <div class='row mt-5'>
                             <i class='fas fa-user-shield fa-2x'></i>
