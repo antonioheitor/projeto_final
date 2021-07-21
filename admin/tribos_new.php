@@ -232,16 +232,13 @@ if (isset($_SESSION["role"])) {
                                             <?php
 
                                             $stmt = mysqli_stmt_init($link);
-
-                                            $query = "SELECT id_temas, nome_tema FROM temas ORDER BY nome_tema";
-
-
+                                            $query = "SELECT temas.id_temas, temas.nome_tema, temas.areas_id_areas FROM temas
+                                        WHERE temas.id_temas NOT IN (SELECT grupo.temas_id_temas FROM grupo)
+                                        ORDER BY nome_tema;";
                                             if (mysqli_stmt_prepare($stmt, $query)) {
-
-
                                                 mysqli_stmt_execute($stmt);
 
-                                                mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema);
+                                                mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $id_area);
 
 
                                                 while (mysqli_stmt_fetch($stmt)) {

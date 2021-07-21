@@ -219,7 +219,6 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Descrição</th>
-
                                         <th>Role</th>
                                         <th>Editar</th>
                                         <th>Apagar</th>
@@ -283,7 +282,6 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Descrição</th>
-                                        <th>Imagem</th>
                                         <th>Role</th>
                                         <th>Editar</th>
                                         <th>Apagar</th>
@@ -299,7 +297,6 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                                         <td><?= $nome_users ?></td>
                                         <td><?= $email_users ?></td>
                                         <td><?= $descricao_users ?></td>
-                                        <td><?= $imagem_user ?></td>
                                         <td><?= $role_plataforma ?></td>
                                         <td><a href='usuarios_edit.php?id=<?= $id_users ?>'><i class="fa fa-edit fa-fw"></a></td>
                                         <td><a href='scripts/sc_delete_user.php?id=<?= $id_users ?> '><i class="fas fa-times"></i></a></td>

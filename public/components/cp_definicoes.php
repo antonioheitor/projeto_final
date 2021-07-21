@@ -228,10 +228,8 @@ session_start();
                                 <?php
                                 $stmt = mysqli_stmt_init($link);
                                 $query = "SELECT temas.id_temas, temas.nome_tema, temas.areas_id_areas FROM temas
-
-WHERE temas.id_temas NOT IN (SELECT grupo.temas_id_temas FROM grupo)
-
-ORDER BY nome_tema;";
+                                        WHERE temas.id_temas NOT IN (SELECT grupo.temas_id_temas FROM grupo)
+                                        ORDER BY nome_tema;";
                                 if (mysqli_stmt_prepare($stmt, $query)) {
                                     mysqli_stmt_execute($stmt);
 
