@@ -1,4 +1,5 @@
 <?php
+require_once "connections/connection.php";
 
 if (isset($_SESSION["nome"])) {
     $USER_NAME = $_SESSION["nome"];
@@ -15,12 +16,46 @@ if (isset($_SESSION["role"])) {
 ?>
 
 
-<main class="container-fluid ">
-    <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
-        <div class="col-11 shadow-sm borda_post rounded-pill mt-lg-5 py-3">
-            <h8 class="text-secondary">Escreve algo...</h8>
-        </div>
-    </section>
+<main class="container-fluid">
+
+    <?php
+
+    $check = FALSE;
+
+    $link = new_db_connection();
+    $stmt = mysqli_stmt_init($link);
+
+    $query = "SELECT users_has_grupo.users_id_users, users_has_grupo.grupo_id_grupo FROM users_has_grupo
+WHERE users_has_grupo.users_id_users = ?";
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+
+        mysqli_stmt_bind_param($stmt, 'i', $USER_ID);
+
+        if (mysqli_stmt_execute($stmt)) {
+
+            mysqli_stmt_bind_result($stmt, $USER_ID);
+
+            while (mysqli_stmt_fetch($stmt)) {
+                $check = TRUE;
+            };
+            //mostrar o codigo a apresentar
+        } else {
+            echo "ERRORRRRR: " . mysqli_error($link);
+        }
+        mysqli_stmt_close($stmt);
+    }
+    if ($check == TRUE) {
+        ?>
+        <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
+            <div class="col-11 shadow-sm borda_post rounded-pill mt-lg-5 py-3">
+                <h8 class="text-secondary">Escreve algo...</h8>
+            </div>
+        </section>
+    <?php
+    }
+    ?>
+
     <section id="homepagealerta">
         <div class="container">
             <h2 class="text-center"></h2>
@@ -122,9 +157,6 @@ if (isset($_SESSION["role"])) {
                             <select class="form-control" name="grupo_id_grupo">
                                 <?php
 
-                                require_once "connections/connection.php";
-
-                                $link = new_db_connection();
 
                                 $stmt1 = mysqli_stmt_init($link);
 
