@@ -126,6 +126,44 @@ WHERE grupo.id_grupo = ?";
                 </div>
             </div>
         </section>
+        <section id="alertaperfiltribo">
+            <div class="container">
+                <h2 class="text-center"></h2>
+                <div class="row">
+                    <div class="col-lg-12 mx-auto">
+                        <?php
+                        if (isset($_GET["msg"])) {
+                            $msg_show = true;
+                            switch ($_GET["msg"]) {
+                                case 0:
+                                    $message = "Ocorreu um erro no update!";
+                                    $class="alert-danger
+                                 ";
+                                    break;
+                                case 1:
+                                    $message = "Update realizado com sucesso!";
+                                    $class="alert-success";
+                                    break;
+                                default:
+                                    $msg_show = false;
+                            }
+
+                            echo "<div class=\"alert $class alert-dismissible fade show\" role=\"alert\">
+" . $message . "
+  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+    <span aria-hidden=\"true\">&times;</span>
+  </button>
+</div>";
+                            if ($msg_show) {
+                                echo '<script>window.onload=function (){$(\'.alert\').alert();}</script>';
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+
+            </div>
+        </section>
         <?php
     }
 

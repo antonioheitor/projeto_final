@@ -51,10 +51,10 @@ mysqli_stmt_close($stmt);
             </div>
         </a>
         <?php if ($USER == $lider) {
-            echo "<a href = 'alterarperfil_tribo.php?grupo=$id_grupo' class='text-decoration-none' >
-            <div class='row mt-5' >
-                <i class='fas fa-users fa-2x'></i>
-                <p class='ml-3 h_definicoes'>Alterar Tribo </p>
+            echo "<a href='alterarperfil_tribo.php?grupo=$id_grupo' class='text-decoration-none' >
+            <div class='row  mb-2 pt-4 border-top border-dark' >
+                <i class='fas fa-edit fa-2x'></i>
+                <p class='ml-3 h_definicoes'>Alterar Tribo</p>
             </div>
         </a>";
         }
