@@ -318,8 +318,15 @@ ORDER BY posts.id_posts DESC";
                                 </div>
                                 <p class='ml-3 mt-2'><?=$texto_comentario?>
                                 </p>
+                                <?php
+                                if (($imagem_comentario != null) ) {
+                                    ?>
+                                    <img class="text-center img-fluid" src="uploads/<?=$imagem_comentario?>"
+                                    <?php
+                                }
+                                ?>
                             </div>
-                             <div class="col-2 col-lg-3 text-right my-auto">
+                             <div class="text-right my-auto">
                                 <div class="dropdown show">
 
                                     <div class="btn-group dropleft">
@@ -339,6 +346,38 @@ ORDER BY posts.id_posts DESC";
                                 </div>
                             </div>
                         </div>
+                         <!-- APAGAR COMENTÁRIO -->
+            <!-- Button trigger modal -->
+            <div class="modal show margemmodal" id="myModal6<?=$id_comentario?>">
+
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
+                        </div>
+                        <form method="get" class="text-center" role="form">
+                            <div class="row justify-content-center mx-auto mt-4">
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_apagar_comentario.php?comentario=<?= $id_comentario?>">Apagar</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                         <!-- Fim Modal -->
                          <?php
                      }
                      mysqli_stmt_close($stmt1); ?>
@@ -488,39 +527,6 @@ ORDER BY posts.id_posts DESC";
                     </div>
                 </div>
             </div>
-
-                <!-- APAGAR COMENTÁRIO -->
-            <!-- Button trigger modal -->
-            <div class="modal show margemmodal" id="myModal6<?=$id_comentario?>">
-
-                <div class="modal-dialog modal-lg modal-dialog-centered">
-
-                    <!-- CONTEÚDO DO MODAL ######################### -->
-                    <div class="modal-content bg-white text-dark bordermodal">
-
-                        <!-- CABEÇALHO DO MODAL ######################### -->
-                        <div class="modal-header mx-auto">
-                            <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
-                        </div>
-                        <form method="get" class="text-center" role="form">
-                            <div class="row justify-content-center mx-auto mt-4">
-                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_apagar_comentario.php?comentario=<?= $id_comentario?>">Apagar</a>
-                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
-                            </div>
-                        </form>
-                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
-
-                        <!-- CORPO DO MODAL ######################### -->
-                        <div class="modal-body mx-auto text-center bgdark">
-                        </div>
-                        <!-- RODAPÉ DO MODAL ######################### -->
-                        <div class="modal-footer">
-                            <p class="small mx-auto">Hi-Tribe</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <!-- Fim Modal -->
 
             <?php
             }
