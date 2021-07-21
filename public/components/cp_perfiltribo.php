@@ -232,8 +232,6 @@ ORDER BY posts.id_post DESC";
                                     echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1'>";
                                     break;
                             }
-                            /*Aqui quando formos por os dados da BD direitos, temos de ter cuidado com os cases porque provavelmente os números vão mudar*/
-
                             ?>
                             <!-- <img src="uploads/$imagem_user;" class="img-fluid rounded-circle p-sm-1"> -->
                         </div>
