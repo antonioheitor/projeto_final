@@ -282,23 +282,30 @@ ORDER BY posts.id_posts DESC";
                                 <p class='ml-3 mt-2'><?=$texto_comentario?>
                                 </p>
                             </div>
+                             <div class="col-2 col-lg-3 text-right my-auto">
+                                <div class="dropdown show">
 
+                                    <div class="btn-group dropleft">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <?php
+                                            if ($id == $users_id_users) {
+                                                ?>
+                                                <a class="dropdown-item" href="#" data-target="#myModal6<?=$id_comentario?>" data-toggle="modal">Apagar</a>
+                                                <?php
+                                            }
+                                            ?>
+                                            <a class="dropdown-item" href="#" data-target="#myModal5"
+                                               data-toggle="modal">Denunciar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
-
                          <?php
                      }
                      mysqli_stmt_close($stmt1); ?>
                 </article>
-
-
-
-
-
-
-
-
 
                 <div class="modal show margemmodal" id="comentario<?= $id_posts ?>">
 
@@ -312,7 +319,7 @@ ORDER BY posts.id_posts DESC";
                                 <h3 class="text-center pt-3">Comenta</h3>
                                 <button class="close ptt" data-dismiss="modal" type="button">&times;</button>
                             </div>
-                            <form method="post">
+                            <form method="post" role="form" id="post-form2" enctype="multipart/form-data" action="scripts/sc_new_comment.php?post=<?= $id_posts?>">
                                 <div class="modal-body text-center">
                                     <textarea class="w-50" name="descpost" type="text"></textarea>
                                 </div>
@@ -321,9 +328,7 @@ ORDER BY posts.id_posts DESC";
                                        name="fileToUpload"
                                        id="customFile"/>
                                 <div class="row justify-content-center">
-                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">
-                                        Submeter
-                                    </button>
+                                    <button class="btnlogin w-50 text-center" data-dismiss="modal" type="submit">Submeter</button>
                                 </div>
                             </form>
                             <!-- BOTÃO QUE FECHA O MODAL ######################### -->
@@ -448,8 +453,38 @@ ORDER BY posts.id_posts DESC";
                 </div>
             </div>
 
+                <!-- APAGAR COMENTÁRIO -->
+            <!-- Button trigger modal -->
+            <div class="modal show margemmodal" id="myModal6<?=$id_comentario?>">
 
+                <div class="modal-dialog modal-lg modal-dialog-centered">
 
+                    <!-- CONTEÚDO DO MODAL ######################### -->
+                    <div class="modal-content bg-white text-dark bordermodal">
+
+                        <!-- CABEÇALHO DO MODAL ######################### -->
+                        <div class="modal-header mx-auto">
+                            <h3 class="text-center pt-3">Tem a certeza que deseja apagar?</h3>
+                        </div>
+                        <form method="get" class="text-center" role="form">
+                            <div class="row justify-content-center mx-auto mt-4">
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="scripts/sc_apagar_comentario.php?comentario=<?= $id_comentario?>">Apagar</a>
+                                <a class="btnlogin w-25 text-decoration-none mx-3" href="">Cancelar</a>
+                            </div>
+                        </form>
+                        <!-- BOTÃO QUE FECHA O MODAL ######################### -->
+
+                        <!-- CORPO DO MODAL ######################### -->
+                        <div class="modal-body mx-auto text-center bgdark">
+                        </div>
+                        <!-- RODAPÉ DO MODAL ######################### -->
+                        <div class="modal-footer">
+                            <p class="small mx-auto">Hi-Tribe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- Fim Modal -->
 
             <?php
             }

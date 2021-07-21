@@ -4,26 +4,20 @@ require_once "../connections/connection.php";
 
 if (isset($_SESSION["nome"])) {
     $USER_NAME = $_SESSION["nome"];
-
 }
 
 if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
-
 }
 
 if (isset($_SESSION["role"])) {
     $USER_ROLE = $_SESSION["role"];
-
 }
 
 if (isset($_GET["post"])) {
     $ID_POST = $_GET["post"];
 
 }
-
-
-
 
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -94,29 +88,21 @@ if (isset($_POST["descpost"])) {
         if (mysqli_stmt_execute($stmt)) {
 
             // Acção de sucesso
-            header("Location: ../homepage.php");
+            header("Location: ../homepage.php?msg=8#homepagealerta");
         } else {
 
             // Acção de erro
-            header("Location: ../homepage.php");
+            header("Location: ../homepage.php?msg=9#homepagealerta");
             echo "Errorr:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        header("Location: ../perfil.php");
+        header("Location: ../homepage.php?msg=9#homepagealerta");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
-
-
-
-
-
 } else {
     echo "Campos do formulário por preencher";
 }
-
-
-
 ?>
