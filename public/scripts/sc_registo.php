@@ -69,7 +69,7 @@ if ($uploadOk = 1) {
         $password_hash = password_hash($_POST['password_user'], PASSWORD_DEFAULT);
         $descricao_users = $_POST['descricao_users'];
         $imagem_user =  $target_file  ;
-        $roles_plataforma_id_roles_plataforma = 4;
+        $roles_plataforma_id_roles_plataforma = 2;
 
         $link = new_db_connection();
 
@@ -90,7 +90,6 @@ if ($uploadOk = 1) {
             }
         } else {
             // Acção de erro
-            //echo "erro2";
             header("Location: ../register.php?msg=0#login");
             echo "Error:" . mysqli_error($link);
         }
