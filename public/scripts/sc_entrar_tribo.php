@@ -6,7 +6,7 @@ if (isset($_SESSION['id']) && isset($_GET["grupo"])) {
 
     $users_id_users = $_SESSION['id'];
     $grupo_id_grupo = $_GET["grupo"];
-    $roles_grupos_id_roles = 6;
+    $roles_grupos_id_roles = 4;
 }
 
 $link = new_db_connection();

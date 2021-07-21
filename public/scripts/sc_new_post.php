@@ -5,7 +5,6 @@ session_start();
 if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
 }
-
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -90,13 +89,11 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
             header("Location: ../homepage.php?msg=2#homepagealerta");
         } else {
             // Acção de erro
-           // header("Location: ../homepage.php");
-            header("Location: ../homepage.php?msg=3#homepagealerta");
+           // header("Location: ../homepage.php?msg=3#homepagealerta");
         }
     } else {
         // Acção de erro
-      //  header("Location: ../perfil.php");
-        header("Location: ../homepage.php?msg=3#homepagealerta");
+      //  header("Location: ../homepage.php?msg=3#homepagealerta");
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);

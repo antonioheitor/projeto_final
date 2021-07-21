@@ -33,7 +33,7 @@ ON temas.id_temas = grupo.temas_id_temas";
         mysqli_stmt_bind_result($stmt, $id_temas, $nome_tema, $areas_id_areas, $id_grupo, $img_grupo, $nome_grupo); ?>
         <main class="container-fluid mt-lg-5">
 
-        <div class="galeria row mx-auto my-5 py-5">
+        <div class="galeria row mx-auto my-lg-5 py-5">
 
         <?php   while (mysqli_stmt_fetch($stmt)) { ?>
             <div class="col-6 col-md-4 col-lg-3 mb-2">
