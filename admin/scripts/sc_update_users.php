@@ -20,20 +20,19 @@ if (isset($_POST["username"]) && ($_POST["username"]) != "" && isset($_POST["ema
     $nome_users = $_POST["username"];
     $email_users = $_POST["email"];
     $descricao_users = $_POST["descricao"];
-    $imagem_user = $_POST["imagem"];
     $roles_plataforma_id_roles_plataforma = $_POST["roles_plataforma_id_roles_plataforma"];
 
 
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "UPDATE users SET nome_users = ?, email_users = ?, descricao_users = ?, imagem_user = ?, roles_plataforma_id_roles_plataforma = ?  WHERE id_users = ?";
+    $query = "UPDATE users SET nome_users = ?, email_users = ?, descricao_users = ?, roles_plataforma_id_roles_plataforma = ?  WHERE id_users = ?";
 
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 
 
-        mysqli_stmt_bind_param($stmt, 'ssssii', $nome_users, $email_users, $descricao_users, $imagem_user, $roles_plataforma_id_roles_plataforma, $id_users);
+        mysqli_stmt_bind_param($stmt, 'sssii', $nome_users, $email_users, $descricao_users, $roles_plataforma_id_roles_plataforma, $id_users);
 
         if (!mysqli_stmt_execute($stmt)) {
 

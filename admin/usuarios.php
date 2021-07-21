@@ -182,7 +182,7 @@ if (isset($_SESSION["role"])) {
 
                     //stmt tem de ser diferente nas queries
 
-                    $query = "SELECT id_users, nome_users, email_users, descricao_users, imagem_user, roles_plataforma_id_roles_plataforma, data_user, role_plataforma 
+                    $query = "SELECT id_users, nome_users, email_users, descricao_users, roles_plataforma_id_roles_plataforma, data_user, role_plataforma 
 FROM users 
 INNER JOIN roles_plataforma 
 ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
@@ -199,7 +199,7 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                         }
                         mysqli_stmt_execute($stmt);
 
-                        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $email_users, $descricao_users, $imagem_user, $roles_plataforma_id_roles_plataforma, $data_user, $role_plataforma);
+                        mysqli_stmt_bind_result($stmt, $id_users, $nome_users, $email_users, $descricao_users, $roles_plataforma_id_roles_plataforma, $data_user, $role_plataforma);
 
                     } else {
 
@@ -219,7 +219,7 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Descrição</th>
-                                        <th>Imagem</th>
+
                                         <th>Role</th>
                                         <th>Editar</th>
                                         <th>Apagar</th>
@@ -235,7 +235,6 @@ ON roles_plataforma_id_roles_plataforma = id_roles_plataforma";
                                         <td><?= $nome_users ?></td>
                                         <td><?= $email_users ?></td>
                                         <td><?= $descricao_users ?></td>
-                                        <td><?= $imagem_user ?></td>
                                         <td><?= $role_plataforma ?></td>
                                         <td><a href='usuarios_edit.php?id=<?= $id_users ?>'><i class="fa fa-edit fa-fw"></a></td>
                                         <td><a href='scripts/sc_delete_user.php?id=<?= $id_users ?> '><i class="fas fa-times"></i></a></td>

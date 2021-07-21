@@ -169,13 +169,10 @@ if (isset($_SESSION["role"])) {
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <form role="form" method="post" action="scripts/sc_new_tribo_admin.php">
+                                <form role="form" method="post" action="scripts/sc_new_tribo_admin.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id_grupo">
 
-                                    <div class="form-group">
 
-                                        <input class="form-control" name="nome_tribo" type="text" placeholder="Nome da Tribo" ">
-                                    </div>
                                     <div class="form-group">
 
                                         <input class="form-control" type="text" name="descricao_tribo" placeholder="Descrição da Tribo">
@@ -183,8 +180,8 @@ if (isset($_SESSION["role"])) {
                                     <div class="form-group my-3">
                                         <label>Foto da Tribo</label>
 
-                                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="fileToUpload"
-                                               id="customFile"/>                                    </div>
+                                        <input type="file" class="form-control w-50 mx-auto bg-light border-0" name="img_grupo" id="customFile"/>
+                                    </div>
                                     <div class="form-group">
                                         <label>Sede da Tribo</label>
                                         <select class="form-control" name="sedes_id_sede_grupo">
