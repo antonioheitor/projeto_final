@@ -26,17 +26,13 @@ if (isset($_POST["mensagem"]) && (isset($_POST['mensagem']) != '')) {
         // Devemos validar também o resultado do execute!
         if (mysqli_stmt_execute($stmt)) {
             // Acção de sucesso
-            // header("Location: ../chat.php?chat=$grupo_id_grupo");
+            header("Location: ../chat.php?chat=$grupo_id_grupo");
         } else {
-
-            //header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
-            // Acção de erro
-
-
+            header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
         }
     } else {
         // Acção de erro
-        // header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
+        header("Location: ../chat.php?chat=$grupo_id_grupo&msg=0#chatalerta");
     }
     mysqli_stmt_close($stmt);
 

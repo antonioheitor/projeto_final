@@ -17,7 +17,7 @@ if (isset($_SESSION["role"])) {
 
 <main class="container-fluid ">
     <section class="row justify-content-center mt-lg-4 pt-3" data-target="#myModal" data-toggle="modal">
-        <div class="col-11 shadow-sm borda_post rounded-pill mt-5 py-3">
+        <div class="col-11 shadow-sm borda_post rounded-pill mt-lg-5 py-3">
             <h8 class="text-secondary">Escreve algo...</h8>
         </div>
     </section>
@@ -220,7 +220,8 @@ WHERE users_id_users = ?;";*/
                         </div>
                         <div class="col-8 col-sm-8 position-relative">
                             <h4 class="pt-3"><?= $nome_user; ?></h4>
-                            <p>Tribo de <?= $nome_grupo; ?> * <?= $data_criacao_post; ?></p>
+                            <p><a href="perfil_tribo.php?grupo=<?=$id_grupo?>">Tribo de <?= $nome_grupo; ?></a> * <?=
+                                $data_criacao_post; ?></p>
                         </div>
                         <div class="col-2 col-lg-3 text-right my-auto">
                             <div class="dropdown show">
@@ -259,7 +260,7 @@ WHERE users_id_users = ?;";*/
                         ?>
 
                     </div>
-                    <div class="text-right pb-2 col-12">
+                    <div class="text-right py-2 col-12">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
 

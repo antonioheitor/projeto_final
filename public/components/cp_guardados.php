@@ -114,7 +114,7 @@ ORDER BY posts.data_criacao_post DESC";
                     <p class="pl-5"><?= $conteudo_post ?></p>
 
                     <?php if ($imagem_post != null) {
-                        echo "<img class='text-center' src='uploads/$imagem_post'>";
+                        echo "<img class='text-center img-fluid' src='uploads/$imagem_post'>";
                     }
                     ?>
                 </div>

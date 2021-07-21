@@ -76,7 +76,6 @@ if (mysqli_stmt_prepare($stmt, $query)) {
         ?>
 
     </section>
-kk
     <section class="row justify-content-center align-items-stretch">
         <img src="uploads/<?= $imagem_grupo ?>" class="img-fluid" alt="">
     </section>
@@ -243,7 +242,7 @@ ORDER BY posts.id_posts DESC";
                         ?>
 
                     </div>
-                    <div class="text-right pb-2 col-12">
+                    <div class="text-right py-2 col-12">
                         <i class="fas fa-plus-circle fa-2x" data-target="#comentario<?=$id_posts?>" data-toggle="modal"></i>
                     </div>
 
