@@ -44,7 +44,6 @@ if (isset($_POST["mensagem"]) && (isset($_POST['mensagem']) != '')) {
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
     $img_hash = hash('ripemd160', basename($_FILES["fotomsg"]["name"])) . '.' . $imageFileType;
-
     $target_file = $target_dir . $img_hash;
 
 

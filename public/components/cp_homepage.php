@@ -155,7 +155,6 @@ WHERE users_has_grupo.users_id_users = ?";
                             <select class="form-control" name="grupo_id_grupo">
                                 <?php
 
-
                                 $stmt1 = mysqli_stmt_init($link);
 
                                 $query1 = "SELECT grupo_id_grupo, id_grupo, nome_grupo FROM users_has_grupo 
@@ -217,7 +216,7 @@ ON grupo.id_grupo = posts.grupo_id_grupo
 INNER JOIN users
 ON posts.users_id_users = users.id_users
 WHERE users_has_grupo.users_id_users = ?
-ORDER BY posts.data_criacao_post DESC";
+ORDER BY posts.id_post DESC";
 
         if (mysqli_stmt_prepare($stmt2, $query2)) {
 

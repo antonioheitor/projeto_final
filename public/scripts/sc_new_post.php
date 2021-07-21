@@ -10,6 +10,8 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
+$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+$target_file = $target_dir . $img_hash;
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
@@ -30,7 +32,7 @@ if (file_exists($img_hash)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 50000000) {
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -54,7 +56,6 @@ if ($uploadOk == 0) {
     }
 }
 
-
 if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["grupo_id_grupo"]) ) {
     $titulo_post = $_POST['titulopost'];
     $conteudo_post = $_POST['descpost'];
@@ -63,14 +64,10 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
         $imagem_post = $target_file;
     }
 
-    $img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
-    $target_file = $target_dir . $img_hash;
-
     if ($imagem_post == "../../uploads/") {
         $imagem_post = null;
     }
 
-    //$data_criacao_post = "2021-07-18";
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];
 
@@ -89,11 +86,11 @@ if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["gr
             header("Location: ../homepage.php?msg=2#homepagealerta");
         } else {
             // Acção de erro
-           // header("Location: ../homepage.php?msg=3#homepagealerta");
+            header("Location: ../homepage.php?msg=3#homepagealerta");
         }
     } else {
         // Acção de erro
-      //  header("Location: ../homepage.php?msg=3#homepagealerta");
+        header("Location: ../homepage.php?msg=3#homepagealerta");
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);

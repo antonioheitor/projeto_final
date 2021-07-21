@@ -2,21 +2,12 @@
 session_start();
 require_once "../connections/connection.php";
 
-if (isset($_SESSION["nome"])) {
-    $USER_NAME = $_SESSION["nome"];
-}
-
 if (isset($_SESSION["id"])) {
     $USER_ID = $_SESSION["id"];
 }
 
-if (isset($_SESSION["role"])) {
-    $USER_ROLE = $_SESSION["role"];
-}
-
 if (isset($_GET["post"])) {
     $ID_POST = $_GET["post"];
-
 }
 
 
@@ -25,6 +16,8 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
+$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+$target_file = $target_dir . $img_hash;
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
@@ -45,7 +38,7 @@ if (file_exists($img_hash)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -73,9 +66,11 @@ if (isset($_POST["descpost"])) {
     $texto_comentario = $_POST["descpost"];
 
     if ($target_file != "../../uploads/") {
-        $img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
-        $target_file = $target_dir . $img_hash;
         $imagem_comentario = $target_file;
+    }
+
+    if ($imagem_comentario == "../../uploads/") {
+        $imagem_comentario = null;
     }
 
     $link = new_db_connection();
@@ -96,12 +91,12 @@ if (isset($_POST["descpost"])) {
 
             // Acção de erro
             header("Location: ../homepage.php?msg=9#homepagealerta");
-            echo "Errorr:" . mysqli_stmt_error($stmt);
+            echo "Error: 1" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
         header("Location: ../homepage.php?msg=9#homepagealerta");
-        echo "Error:" . mysqli_error($link);
+        echo "Error: 2" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
     mysqli_close($link);
