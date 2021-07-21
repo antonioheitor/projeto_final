@@ -38,7 +38,7 @@ COUNT(votos.users_id_users1) AS contagem
 FROM votos
 INNER JOIN users
 ON users.id_users = votos.users_id_users1
-WHERE votos.roles_grupos_id_roles = 4 AND votos.quinzenas_id_quinzena = ? AND votos.grupo_id_grupo = ?
+WHERE votos.roles_grupos_id_roles = 2 AND votos.quinzenas_id_quinzena = ? AND votos.grupo_id_grupo = ?
 GROUP BY votos.users_id_users1
 ORDER BY contagem DESC LIMIT 1";
 
@@ -54,7 +54,7 @@ ORDER BY contagem DESC LIMIT 1";
             mysqli_stmt_bind_result($stmt1, $user_id,  $id_grupo, $user_name, $contagem);
 
             while (mysqli_stmt_fetch($stmt1)) {
-                $role = 4;
+                $role = 2;
                 header("Location: sc_submeter_votos_mestre.php?id=$user_id&grupo=$id_grupo&contagem=$contagem&role=$role");
             }
 

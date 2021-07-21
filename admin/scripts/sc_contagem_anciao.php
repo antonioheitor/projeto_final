@@ -44,7 +44,7 @@ ORDER BY contagem DESC LIMIT 2";
 
     $stmt = mysqli_stmt_init($link);
 
-    $query = "UPDATE users_has_grupo SET roles_grupos_id_roles = 6 WHERE grupo_id_grupo = ? AND users_id_users = ? AND roles_grupos_id_roles = 3";
+    $query = "UPDATE users_has_grupo SET roles_grupos_id_roles = 4 WHERE grupo_id_grupo = ? AND users_id_users = ? AND roles_grupos_id_roles = 3";
 
     if (mysqli_stmt_prepare($stmt, $query)) {
 

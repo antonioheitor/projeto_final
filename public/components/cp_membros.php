@@ -140,7 +140,7 @@ if (isset($_SESSION['id'])){
                         <label class="form-check-label" for="flexRadioDefault1">Líder</label>
                     </div>
                     <div class="form-check my-4">
-                        <input class="form-check-input" type="radio" name="role[]" id="role" value="4">
+                        <input class="form-check-input" type="radio" name="role[]" id="role" value="2">
                         <label class="form-check-label" for="flexRadioDefault1">Mestre</label>
                     </div>
                     <div class="row justify-content-center">
