@@ -222,13 +222,13 @@ ORDER BY posts.id_post DESC";
                                 case 1:
                                     echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-success'>";
                                     break;
+                                case 2:
+                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-warning'>";
+                                    break;
                                 case 3:
                                     echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-danger'>";
                                     break;
                                 case 4:
-                                    echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1 border border-warning'>";
-                                    break;
-                                case 6:
                                     echo "<img src='uploads/$imagem_user' class='img-fluid rounded-circle p-sm-1'>";
                                     break;
                             }
