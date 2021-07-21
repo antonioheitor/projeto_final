@@ -10,7 +10,7 @@ if (isset($_SESSION["id"])) {
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
-$query = "SELECT users.nome_users, users.id_users, users.email_users, users.descricao_users FROM users
+$query = "SELECT users.nome_users, users.id_users, users.email_users, users.descricao_users, imagem_user FROM users
 WHERE users.id_users = ?";
 
 if (mysqli_stmt_prepare($stmt, $query)) {
@@ -18,7 +18,7 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 mysqli_stmt_bind_param($stmt, 'i', $id);
 mysqli_stmt_execute($stmt);
 
-mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao);
+mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao, $avatar);
 
 ?>
 
@@ -50,17 +50,15 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao);
             </div> -->
             <div class="form-group rounded">
                 <p>Descrição</p>
-                <input type="text" class="inputs inputdescricao" aria-describedby="description"
-                       name="descricao_users" value="<?=$descricao ?>">
+                <input type="text" class="inputs inputdescricao" aria-describedby="description" name="descricao_users" value="<?=$descricao ?>">
             </div>
-            <div class="form-group rounded bg-light pb-4">
-                <p class="px-3 pt-3">Alterar foto de perfil</p>
-                <input type="file" class="form-control w-50 mx-auto border-0 bg-light" name="imagem"
-                       id="customFile"/>
+            <p>Alterar foto de perfil</p>
+            <div class="form-group rounded bg-light py-3">
+                <input type="file" class="form-control w-50 border-0 bg-light" name="imagem" id="customFile">
+                <input type="text" class="form-control w-50 border-0 bg-light" name="avatar" value="<?=$avatar?>">
             </div>
             <div class="row justify-content-center mt-3">
-                <button class="btnlogin py-3 text-center col-4" type="submit">Alterar
-                    Dados</button>
+                <button class="btnlogin py-3 text-center col-4" type="submit">Alterar Dados</button>
             </div>
 
         </form>

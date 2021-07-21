@@ -8,14 +8,14 @@ if (isset($_SESSION["id"])) {
 $link = new_db_connection();
 
 $stmt = mysqli_stmt_init($link);
-$query = "SELECT users.nome_users, users.imagem_user, users.id_users FROM users WHERE users.id_users = ?";
+$query = "SELECT users.nome_users, users.imagem_user, users.id_users, descricao_users FROM users WHERE users.id_users = ?";
 
 if (mysqli_stmt_prepare($stmt, $query)) {
 
 mysqli_stmt_bind_param($stmt, 'i', $user_id);
 mysqli_stmt_execute($stmt);
 
-mysqli_stmt_bind_result($stmt, $nome, $img, $user_id);
+mysqli_stmt_bind_result($stmt, $nome, $img, $user_id, $descricao);
 
 ?>
 
@@ -42,6 +42,7 @@ mysqli_stmt_bind_result($stmt, $nome, $img, $user_id);
 
         <article class="col-12 text-center mb-5">
             <h1 class="mt-3"><?= $nome ?></h1>
+            <p><?=$descricao?></p>
         </article>
         <section id="alterarperfil">
             <div class="container">

@@ -12,7 +12,6 @@ $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
 $img_hash = hash('ripemd160', basename($_FILES["imagem"]["name"])) . '.'. $imageFileType;
-
 $target_file = $target_dir . $img_hash;
 
 
@@ -103,8 +102,8 @@ if ($target_file != null) {
     if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != ""))) {
         $nome = $_POST["nome_user"];
         $email = $_POST["email_user"];
-
         $descricao = $_POST["descricao_users"];
+        $imagem = $avatar;
 
 
         // Create a new DB connection
