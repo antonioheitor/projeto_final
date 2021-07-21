@@ -9,12 +9,17 @@ if (isset($_SESSION["id"])) {
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["imagem"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+$img_hash = hash('ripemd160', basename($_FILES["imagem"]["name"])) . '.'. $imageFileType;
+
+$target_file = $target_dir . $img_hash;
+
 
 // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["imagem"]["tmp_name"]);
-    if($check !== false) {
+if (isset($_POST["submit"])) {
+    $check = getimagesize($target_file);
+    if ($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
@@ -24,7 +29,7 @@ if(isset($_POST["submit"])) {
 }
 
 // Check if file already exists
-if (file_exists($target_file)) {
+if (file_exists($img_hash)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
@@ -53,7 +58,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["imagem"]["name"])). " has been uploaded.";
+        echo "The file " . htmlspecialchars($img_hash) . " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
@@ -63,7 +68,7 @@ if ($uploadOk == 0) {
 
 if ($target_file != null) {
 // UPDATE NOME
-    if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != "")) && (isset($_SESSION["id"])) && $target_file != null) {
+    if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != "")) && $target_file != null) {
         $nome = $_POST["nome_user"];
         $email = $_POST["email_user"];
         $imagem = $target_file;
@@ -95,7 +100,7 @@ if ($target_file != null) {
     }
 } else {
 
-    if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != "")) && (isset($_SESSION["id"]))) {
+    if ((isset($_POST["nome_user"]) && (isset($_POST["email_user"])) && (isset($_POST["descricao_users"])) && ($_POST["nome_user"] != ""))) {
         $nome = $_POST["nome_user"];
         $email = $_POST["email_user"];
 

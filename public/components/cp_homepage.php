@@ -297,6 +297,13 @@ WHERE users_id_users = ?;";*/
                                 </div>
                                 <p class='ml-3 mt-2 ml-5'><?=$texto_comentario?>
                                 </p>
+                                <?php
+                                if (($imagem_comentario != null) ) {
+                                    ?>
+                                    <img class="text-center img-fluid" src="uploads/<?= $imagem_comentario ?>"
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <div class="col-2 col-lg-3 text-right my-auto">
                                 <div class="dropdown show">

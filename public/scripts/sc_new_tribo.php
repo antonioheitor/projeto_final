@@ -12,10 +12,14 @@ $target_file = $target_dir . basename($_FILES["img_grupo"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
+$img_hash = hash('ripemd160', basename($_FILES["img_grupo"]["name"])) . '.'. $imageFileType;
+
+$target_file = $target_dir . $img_hash;
+
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["img_grupo"]["tmp_name"]);
+    $check = getimagesize($target_file);
     if ($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
@@ -26,11 +30,10 @@ if (isset($_POST["submit"])) {
 }
 
 // Check if file already exists
-if (file_exists($target_file)) {
+if (file_exists($img_hash)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
-
 // Check file size
 if ($_FILES["img_grupo"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
@@ -63,11 +66,12 @@ if ($uploadOk == 0) {
             $uploadOk = 0;
             echo "Sorry, the image must be 4:3";
         }*/
-        echo "The file " . htmlspecialchars(basename($_FILES["img_grupo"]["name"])) . " has been uploaded.";
+        echo "The file " . htmlspecialchars($img_hash) . " has been uploaded.";
     } else {
-        //echo "Sorry, there was an error uploading your file.";
+        echo "Sorry, there was an error uploading your file.";
     }
 }
+
 
 if ($uploadOk == 1) {
     if (isset($_POST["descricao_tribo"]) && isset($_POST["sedes_id_sede_grupo"]) && isset($_POST["temas_id_temas"])) {

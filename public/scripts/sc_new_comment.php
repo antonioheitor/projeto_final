@@ -19,15 +19,20 @@ if (isset($_GET["post"])) {
 
 }
 
+
 $target_dir = "../../uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+
+$target_file = $target_dir . $img_hash;
 
 // Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
+if (isset($_POST["submit"])) {
+    $check = getimagesize($target_file);
+    if ($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
@@ -37,7 +42,7 @@ if(isset($_POST["submit"])) {
 }
 
 // Check if file already exists
-if (file_exists($target_file)) {
+if (file_exists($img_hash)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
@@ -61,7 +66,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
+        echo "The file " . htmlspecialchars($img_hash) . " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
@@ -88,16 +93,16 @@ if (isset($_POST["descpost"])) {
         if (mysqli_stmt_execute($stmt)) {
 
             // Acção de sucesso
-            header("Location: ../homepage.php?msg=8#homepagealerta");
+            //header("Location: ../homepage.php?msg=8#homepagealerta");
         } else {
 
             // Acção de erro
-            header("Location: ../homepage.php?msg=9#homepagealerta");
+            //header("Location: ../homepage.php?msg=9#homepagealerta");
             echo "Errorr:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        header("Location: ../homepage.php?msg=9#homepagealerta");
+        //header("Location: ../homepage.php?msg=9#homepagealerta");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
