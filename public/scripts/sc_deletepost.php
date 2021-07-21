@@ -13,7 +13,7 @@ $stmt2 = mysqli_stmt_init($link);
 
 $query = "DELETE FROM comentarios WHERE post_id_post= ?";
 $query1 = "DELETE FROM users_has_posts WHERE users_has_posts.posts_id_posts = ?";
-$query2 = "DELETE FROM posts WHERE posts.id_posts = ?";
+$query2 = "DELETE FROM posts WHERE posts.id_post = ?";
 
 //QUERY
 if (mysqli_stmt_prepare($stmt, $query)) {
