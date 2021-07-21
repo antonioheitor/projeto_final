@@ -10,8 +10,15 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
-$target_file = $target_dir . $img_hash;
+
+if ($target_file != "../../uploads/") {
+    $img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+    $target_file = $target_dir . $img_hash;
+    $imagem_post = $target_file;
+
+} else {
+    $imagem_post = null;
+}
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
@@ -59,14 +66,6 @@ if ($uploadOk == 0) {
 if (isset($_POST["titulopost"]) && isset($_POST["descpost"]) && isset($_POST["grupo_id_grupo"]) ) {
     $titulo_post = $_POST['titulopost'];
     $conteudo_post = $_POST['descpost'];
-
-    if ($target_file != null) {
-        $imagem_post = $target_file;
-    }
-
-    if ($imagem_post == "../../uploads/") {
-        $imagem_post = null;
-    }
 
     $users_id_users = $USER_ID;
     $grupo_id_grupo = $_POST['grupo_id_grupo'];

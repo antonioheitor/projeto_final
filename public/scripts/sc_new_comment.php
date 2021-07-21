@@ -16,8 +16,15 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-$img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
-$target_file = $target_dir . $img_hash;
+if ($target_file != "../../uploads/") {
+    $img_hash = hash('ripemd160', basename($_FILES["fileToUpload"]["name"])) . '.'. $imageFileType;
+    $target_file = $target_dir . $img_hash;
+    $imagem_comentario = $target_file;
+
+} else {
+    $imagem_comentario = null;
+}
+
 
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit"])) {
@@ -65,13 +72,7 @@ if ($uploadOk == 0) {
 if (isset($_POST["descpost"])) {
     $texto_comentario = $_POST["descpost"];
 
-    if ($target_file != "../../uploads/") {
-        $imagem_comentario = $target_file;
-    }
 
-    if ($imagem_comentario == "../../uploads/") {
-        $imagem_comentario = null;
-    }
 
     $link = new_db_connection();
 
