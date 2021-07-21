@@ -93,16 +93,16 @@ if (isset($_POST["descpost"])) {
         if (mysqli_stmt_execute($stmt)) {
 
             // Acção de sucesso
-            //header("Location: ../homepage.php?msg=8#homepagealerta");
+            header("Location: ../homepage.php?msg=8#homepagealerta");
         } else {
 
             // Acção de erro
-            //header("Location: ../homepage.php?msg=9#homepagealerta");
+            header("Location: ../homepage.php?msg=9#homepagealerta");
             echo "Errorr:" . mysqli_stmt_error($stmt);
         }
     } else {
         // Acção de erro
-        //header("Location: ../homepage.php?msg=9#homepagealerta");
+        header("Location: ../homepage.php?msg=9#homepagealerta");
         echo "Error:" . mysqli_error($link);
     }
     mysqli_stmt_close($stmt);
