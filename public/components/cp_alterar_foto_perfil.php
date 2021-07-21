@@ -24,7 +24,7 @@ mysqli_stmt_bind_result($stmt, $nome,  $id, $email, $descricao, $avatar);
 
 <main class="container-fluid background">
     <section class="row">
-        <a id="fechar" href="perfil.php" class="text-right col-12 pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
+        <a id="fechar" href="definicoes.php" class="text-right col-12 pt-4 pr-4"><i class="fas fa-times fa-2x"></i></a>
         <div class="col-12 text-center">
             <p class="pb-1 d-md-block d-none h">A tua foto de perfil</p>
             <p class="pb-1 d-md-none h_pequeno">A tua foto de perfil</p>

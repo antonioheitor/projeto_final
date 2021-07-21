@@ -28,7 +28,7 @@ session_start();
         <a href="#" class="text-decoration-none" data-target="#myModalgroup" data-toggle="modal">
             <div class="row pt-4 border-top border-dark">
                 <i class="fas fa-plus-circle fa-2x"></i>
-                <p class="ml-3 h_definicoes">Criar Tribo</p>
+                <p class="ml-3 h_definicoes">Criar tribo</p>
             </div>
         </a>
         <a href="alterar_dados_perfil.php" class="text-decoration-none">
